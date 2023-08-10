@@ -1,0 +1,78 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 2021,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"plugins": [
+		"react",
+		"@typescript-eslint",
+		"unused-imports",
+		"react-hooks",
+		"simple-import-sort"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:prettier/recommended",
+		"prettier",
+		"eslint:recommended",
+		"plugin:import/errors",
+		"plugin:import/warnings"
+	],
+	"rules": {
+		"import/no-unresolved": "warn",
+		"react/jsx-curly-brace-presence": ["error"],
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": "off",
+		"unused-imports/no-unused-imports": "error",
+		"@typescript-eslint/ban-ts-comment": "off",
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-empty-function": "off",
+		"@typescript-eslint/no-non-null-assertion": "off",
+		"@typescript-eslint/switch-exhaustiveness-check": "warn",
+		"@typescript-eslint/no-empty-interface": "off",
+		"@typescript-eslint/no-unused-vars": [
+			"warn",
+			{
+				"argsIgnorePattern": "^_",
+				"ignoreRestSiblings": true
+			}
+		],
+		"no-unsafe-optional-chaining": "warn",
+		"react/no-children-prop": "off",
+		"no-constant-condition": "warn",
+		"react-hooks/rules-of-hooks": "error",
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error",
+		"import/order": "off",
+		"sort-imports": "off"
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		},
+		"import/parsers": {
+			"@typescript-eslint/parser": [".ts", ".tsx", ".svg", ".mp4"]
+		},
+		"import/resolver": {
+			"typescript": {
+				"project": "./tsconfig.json"
+			},
+			"node": {
+				"extensions": [".js", ".jsx", ".ts", ".tsx", ".svg"]
+			}
+		}
+	},
+	"globals": {
+		"console": true,
+		"window": true,
+		"alert": true,
+		"document": true
+	}
+}
