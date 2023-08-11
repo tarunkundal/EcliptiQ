@@ -1,10 +1,12 @@
-import { Center } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 import React, { ReactNode, useEffect, useState } from 'react';
 
-import Logo from '../../components/Logo';
 import LoadingSpinner from '../../components/Spinner';
 import supabase from '../../lib/api';
-import { useAuthStore } from '../../store/auth/AuthContextProvider';
+import Logo from '../../assets/logoQ.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../store/auth/auth-slice';
+import { RootState } from '../../store';
 
 interface MyComponentProps {
 	children: ReactNode;
@@ -12,14 +14,14 @@ interface MyComponentProps {
 
 const Auth: React.FC<MyComponentProps> = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true);
-	const { set_user } = useAuthStore();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const authListener = supabase.auth.onAuthStateChange((event, session) => {
 			if (session) {
-				set_user(session.user);
+				dispatch(authActions.set_user(session.user));
 			} else {
-				set_user(null);
+				dispatch(authActions.set_user(null));
 			}
 			setIsLoading(false);
 		});
@@ -33,10 +35,11 @@ const Auth: React.FC<MyComponentProps> = ({ children }) => {
 
 	if (isLoading) {
 		return (
-			<Center h="100vh" w="100vw">
-				<Logo size="2xl" />
+			<Box display="flex" alignItems="center" justifyContent="center" mt="20%">
+				<Image src={Logo} alt="logo" w={20} mr={8} />
+
 				<LoadingSpinner />
-			</Center>
+			</Box>
 		);
 	}
 
