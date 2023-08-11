@@ -4,9 +4,8 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import LoadingSpinner from '../../components/Spinner';
 import supabase from '../../lib/api';
 import Logo from '../../assets/logoQ.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../../store/auth/auth-slice';
-import { RootState } from '../../store';
+import { useDispatch } from 'react-redux';
+import { userActions } from '../../store/user/user-slice';
 
 interface MyComponentProps {
 	children: ReactNode;
@@ -14,14 +13,15 @@ interface MyComponentProps {
 
 const Auth: React.FC<MyComponentProps> = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const authListener = supabase.auth.onAuthStateChange((event, session) => {
 			if (session) {
-				dispatch(authActions.set_user(session.user));
+				dispatch(userActions.setUser(session.user));
 			} else {
-				dispatch(authActions.set_user(null));
+				dispatch(userActions.setUser(null));
 			}
 			setIsLoading(false);
 		});

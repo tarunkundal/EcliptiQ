@@ -11,7 +11,7 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -19,43 +19,49 @@ import sideVideo from '../../assets/loginside.mp4';
 import LoadingSpinner from '../../components/Spinner';
 import Logo from '../../components/Logo';
 import useCustomToast from '../../hooks/useToastHook';
-import supabase from '../../lib/api';
 import Routes from '../../Routes';
 import GoogleLogIn from './GoogleLogin';
+import supabase from '../../lib/api';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const customToast = useCustomToast();
 	const history = useHistory();
+
+	// const dispatch = useDispatch();
+	// const isSuccess = useSelector((state: RootState) => state.auth.isSuccess);
+	// const loading = useSelector((state: RootState) => state.auth.loading);
+	// const error = useSelector((state: RootState) => state.auth.error);
 
 	// login handler
 	const handleLoginHandler = async (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 
-		setIsLoading(true);
+		// dispatch(loginHandler({ email, password }));
+		setLoading(true);
 		const { data, error } = await supabase.auth.signInWithPassword({
 			email,
 			password,
 		});
-		setIsLoading(false);
+		setLoading(false);
 
-		if (!data.user && error) {
-			customToast({
-				title: error.message,
-				status: 'error',
-			});
-			return;
-		}
-		if (data && !error) {
+		if (data.user) {
 			customToast({
 				title: 'Welcome to EcliptiQ',
 				description: 'Login Sucessfully',
 				status: 'success',
 			});
 			history.push('/');
+		}
+		if (error) {
+			customToast({
+				title: error.message,
+				status: 'error',
+			});
+			return;
 		}
 
 		setEmail('');
@@ -143,7 +149,7 @@ const Login = () => {
 						</FormControl>
 
 						<Button w="full" my={4} variant="blue" size="lg" type="submit">
-							{isLoading ? <LoadingSpinner /> : 'Login'}
+							{loading ? <LoadingSpinner /> : 'Login'}
 						</Button>
 						<Text textAlign="center" fontSize="14px" pt={4} borderTop="1px">
 							Don`t have an account yet?
@@ -167,7 +173,7 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default memo(Login);
 
 // client id : 313435338028-vus930n1oruu3b92jjq47bc0g43n15rj.apps.googleusercontent.com
 // client secret : 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
