@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Routes from './Routes';
 import Auth from './Routes/auth/Auth';
 import ProtectedRoutes from './Routes/auth/ProtectedRoutes';
-import HomeDashboard from './Screens/dashboard/HomeDashboard';
+import HomeDashboard from './Screens/dashboard/Dashboard';
 import SignUp from './Screens/SignUp';
 import Login from './Screens/Login';
 
