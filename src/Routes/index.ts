@@ -6,6 +6,7 @@ const Routes = {
 	SETTINGS_PAGE: '/settings',
 	NOTIFICATIONS_PAGE: '/notifications',
 	DASHBOARD: '/',
+	NEWTASK: '/new-task',
 };
 
 export default Routes;

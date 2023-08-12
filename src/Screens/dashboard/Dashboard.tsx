@@ -1,15 +1,17 @@
-import { Heading } from '@chakra-ui/react';
-
-import Logout from '../../Routes/auth/Logout';
-import Header from '../../components/Header';
+import { Box } from '@chakra-ui/react';
+import Header from '../../Header';
 import UserProfileCard from '../../profile/UserProfileCard';
+import Sidebar from '../../sidebar';
 
 const Dashboard = () => {
 	return (
 		<>
 			<Header />
-			<UserProfileCard />
-			<Logout />
+			<Sidebar />
+			{/* main content */}
+			<Box ml={{ base: 0, md: '200px' }} p={4}>
+				<UserProfileCard />
+			</Box>
 		</>
 	);
 };

@@ -1,15 +1,24 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Flex, Stack, Text } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import Routes from '..';
 import useCustomToast from '../../hooks/useToastHook';
 import supabase from '../../lib/api';
+import Modal from '../../components/Modal';
+import { MouseEventHandler, useState } from 'react';
+import LoadingSpinner from '../../components/Spinner';
 
-const Logout = () => {
+const Logout = (props: {
+	onClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> | undefined;
+}) => {
+	const [loading, setLoading] = useState(false);
 	const customToast = useCustomToast();
 	const history = useHistory();
 
 	const logoutHandler = async () => {
+		setLoading(true);
+
 		const { error } = await supabase.auth.signOut();
+		setLoading(false);
 
 		if (error) {
 			customToast({
@@ -22,10 +31,32 @@ const Logout = () => {
 			window.location.reload();
 		}
 	};
+
 	return (
-		<Button variant="red" onClick={logoutHandler}>
-			Log Out
-		</Button>
+		<Modal onClose={props.onClose}>
+			<Stack mt={4} gap={8} rounded="lg" direction={'column'} mx="auto">
+				<Text textAlign="center" fontSize="xl" fontWeight="bold">
+					Are you sure?
+				</Text>
+				<Text fontSize="lg" textAlign="center">
+					You want to Logout
+				</Text>
+				<Flex justifyContent="space-around">
+					<Button w="40%" variant="red" onClick={logoutHandler}>
+						{loading ? (
+							<>
+								{'Logingout  '}+ <LoadingSpinner />
+							</>
+						) : (
+							'Log Out'
+						)}
+					</Button>
+					<Button variant="highlight" w="40%" onClick={props.onClose}>
+						Close
+					</Button>
+				</Flex>
+			</Stack>
+		</Modal>
 	);
 };
 
