@@ -51,7 +51,14 @@ const Logout = (props: {
 							'Log Out'
 						)}
 					</Button>
-					<Button variant="highlight" w="40%" onClick={props.onClose}>
+					<Button
+						variant="outline"
+						colorScheme="red"
+						w="40%"
+						border="2px"
+						borderColor="red"
+						onClick={props.onClose}
+					>
 						Close
 					</Button>
 				</Flex>

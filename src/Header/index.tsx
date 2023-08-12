@@ -22,7 +22,7 @@ import Routes from '../Routes';
 
 const Header = () => {
 	return (
-		<Stack h="44px" bg="gray.600" px="1rem">
+		<Box zIndex={2} h="44px" bg="gray.600" w="100vw" position="fixed" px="1rem">
 			<Flex
 				my="auto"
 				alignItems="center"
@@ -90,7 +90,7 @@ const Header = () => {
 					<SettingMenu />
 				</Flex>
 			</Flex>
-		</Stack>
+		</Box>
 	);
 };
 

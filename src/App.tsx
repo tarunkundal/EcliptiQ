@@ -16,7 +16,7 @@ const App = () => {
 					<Route exact path={Routes.REGISTER} component={SignUp} />
 
 					<ProtectedRoutes>
-						<Route exact path={Routes.DASHBOARD} component={HomeDashboard} />
+						<Route path={Routes.DASHBOARD} component={HomeDashboard} />
 					</ProtectedRoutes>
 				</Switch>
 			</Auth>

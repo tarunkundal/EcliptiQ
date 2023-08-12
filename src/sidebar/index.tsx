@@ -1,21 +1,14 @@
 import { Box, useDisclosure, Flex, Text, Icon } from '@chakra-ui/react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { AiOutlineClose } from 'react-icons/ai';
-import {
-	FiHome,
-	FiTrendingUp,
-	FiCompass,
-	FiStar,
-	FiSettings,
-	FiLogOut,
-	FiPlus,
-} from 'react-icons/fi';
+import { FiHome, FiSettings, FiLogOut, FiPlus, FiUser } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import Logo from '../components/Logo';
 import Logout from '../Routes/auth/Logout';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Routes from '../Routes';
+import UserProfile from '../user/UserProfileCard';
 
 interface LinkItemProps {
 	name: string;
@@ -25,23 +18,24 @@ interface LinkItemProps {
 
 const LinkItems: Array<LinkItemProps> = [
 	{ name: 'Home', icon: FiHome, path: Routes.DASHBOARD },
-	// { name: 'Trending', icon: FiTrendingUp, path: Routes.DASHBOARD },
 	{ name: 'New Task', icon: FiPlus, path: Routes.NEWTASK },
-	// { name: 'Explore', icon: FiCompass },
-	// { name: 'Favourites', icon: FiStar },
-	{ name: 'Settings', icon: FiSettings, path: Routes.SETTINGS_PAGE },
+	{ name: 'Settings', icon: FiSettings, path: Routes.USER_SETTING },
 ];
 
 const Sidebar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [isOpenLogout, setIsOpenLogout] = useState(false);
+	const [isOpenProfile, setIsOpenProfile] = useState(false);
 
 	const closeLogout = () => setIsOpenLogout(false);
 	const openLogout = () => setIsOpenLogout(true);
 
+	const openProfile = () => setIsOpenProfile(true);
+	const closeProfile = () => setIsOpenProfile(false);
 	return (
 		<>
 			{isOpenLogout && <Logout onClose={closeLogout} />}
+			{isOpenProfile && <UserProfile onClose={closeProfile} />}
 
 			<Box>
 				<Box
@@ -58,18 +52,17 @@ const Sidebar = () => {
 
 				<Box
 					width={isOpen ? '200px' : '0'}
+					// w="200px"
 					position="fixed"
 					top="44px"
 					left="0"
-					height="100vh"
+					minH="100vh"
 					bg="gray.50"
 					overflowX="hidden"
 					transition="0.3s"
 					boxShadow="md"
 					color="black"
 				>
-					{/* Sidebar content */}
-
 					<Box mx={2} mb={2}>
 						<Logo size={12} />
 					</Box>
@@ -95,6 +88,18 @@ const Sidebar = () => {
 							</NavLink>
 						);
 					})}
+					<Flex
+						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+						alignItems="center"
+						p={2}
+						my={5}
+						mx={2}
+						rounded="md"
+						onClick={openProfile}
+					>
+						<Icon as={FiUser} mr="4" />
+						Profile
+					</Flex>
 					<hr />
 					<Flex
 						_hover={{ bg: 'gray.100', cursor: 'pointer' }}

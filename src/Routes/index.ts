@@ -3,10 +3,10 @@ const Routes = {
 	REGISTER: '/register',
 	// HOME: 'https://ecliptiq.vercel.app/',
 	PROFILE_PAGE: '/profile',
-	SETTINGS_PAGE: '/settings',
+	USER_SETTING: '/user/settings',
 	NOTIFICATIONS_PAGE: '/notifications',
 	DASHBOARD: '/',
-	NEWTASK: '/new-task',
+	NEWTASK: '/newtask',
 };
 
 export default Routes;
