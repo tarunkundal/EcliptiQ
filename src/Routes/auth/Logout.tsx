@@ -1,13 +1,15 @@
 import { Button, Flex, Stack, Text } from '@chakra-ui/react';
+import { MouseEventHandler, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Routes from '..';
+
+import Modal from '../../components/Modal';
+import LoadingSpinner from '../../components/Spinner';
 import useCustomToast from '../../hooks/useToastHook';
 import supabase from '../../lib/api';
-import Modal from '../../components/Modal';
-import { MouseEventHandler, useState } from 'react';
-import LoadingSpinner from '../../components/Spinner';
+import Routes from '..';
 
 const Logout = (props: {
+	// eslint-disable-next-line no-undef
 	onClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> | undefined;
 }) => {
 	const [loading, setLoading] = useState(false);
@@ -34,7 +36,7 @@ const Logout = (props: {
 
 	return (
 		<Modal onClose={props.onClose}>
-			<Stack mt={4} gap={8} rounded="lg" direction={'column'} mx="auto">
+			<Stack mt={4} gap={8} rounded="lg" direction="column" mx="auto">
 				<Text textAlign="center" fontSize="xl" fontWeight="bold">
 					Are you sure?
 				</Text>

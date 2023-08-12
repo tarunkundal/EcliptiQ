@@ -1,13 +1,14 @@
-import { Box, useDisclosure, Flex, Text, Icon } from '@chakra-ui/react';
-import { RxHamburgerMenu } from 'react-icons/rx';
-import { AiOutlineClose } from 'react-icons/ai';
-import { FiHome, FiSettings, FiLogOut, FiPlus, FiUser } from 'react-icons/fi';
-import { IconType } from 'react-icons';
-import Logo from '../components/Logo';
-import Logout from '../Routes/auth/Logout';
+import { Box, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
+import { IconType } from 'react-icons';
+import { AiOutlineClose } from 'react-icons/ai';
+import { FiHome, FiLogOut, FiPlus, FiSettings, FiUser } from 'react-icons/fi';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import { NavLink } from 'react-router-dom';
+
+import Logo from '../components/Logo';
 import Routes from '../Routes';
+import Logout from '../Routes/auth/Logout';
 import UserProfile from '../user/UserProfileCard';
 
 interface LinkItemProps {
@@ -73,6 +74,7 @@ const Sidebar = () => {
 								style={{ color: 'black' }}
 								to={item.path}
 								activeStyle={{ color: 'violet' }}
+								key={item.name}
 							>
 								<Flex
 									_hover={{ bg: 'gray.100', cursor: 'pointer' }}

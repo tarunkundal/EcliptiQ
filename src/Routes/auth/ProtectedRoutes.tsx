@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import Routes from '..';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import Routes from '..';
 
 interface MyComponentProps {
 	children: ReactNode;

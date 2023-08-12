@@ -1,10 +1,10 @@
 import { Box, Image } from '@chakra-ui/react';
 import React, { ReactNode, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import Logo from '../../assets/logoQ.png';
 import LoadingSpinner from '../../components/Spinner';
 import supabase from '../../lib/api';
-import Logo from '../../assets/logoQ.png';
-import { useDispatch } from 'react-redux';
 import { userActions } from '../../store/user/user-slice';
 
 interface MyComponentProps {

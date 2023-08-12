@@ -4,7 +4,6 @@ import {
 	Input,
 	InputGroup,
 	InputLeftElement,
-	Stack,
 	Text,
 } from '@chakra-ui/react';
 import {
@@ -14,11 +13,12 @@ import {
 	AiOutlineSearch,
 } from 'react-icons/ai';
 import { BsPlusSquare } from 'react-icons/bs';
-import SettingMenu from './SettingMenu';
+import { Link } from 'react-router-dom';
+
+import Routes from '../Routes';
 import Sidebar from '../sidebar';
 import NotificationMenu from './NotificationMenu';
-import { Link } from 'react-router-dom';
-import Routes from '../Routes';
+import SettingMenu from './SettingMenu';
 
 const Header = () => {
 	return (

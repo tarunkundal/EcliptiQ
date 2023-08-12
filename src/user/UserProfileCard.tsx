@@ -1,20 +1,22 @@
 import {
-	Heading,
 	Avatar,
-	Box,
-	Center,
-	Text,
-	Stack,
-	Button,
 	Badge,
+	Box,
+	Button,
+	Center,
+	Heading,
+	Stack,
+	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
+import { MouseEventHandler } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Modal from '../components/Modal';
-import { MouseEvent, MouseEventHandler } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
 import Routes from '../Routes';
 
 const UserProfile = (props: {
+	// eslint-disable-next-line no-undef
 	onClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> | undefined;
 }) => {
 	const history = useHistory();
@@ -31,19 +33,17 @@ const UserProfile = (props: {
 		<Modal onClose={props.onClose}>
 			<Center py={6}>
 				<Box
-					maxW={'350px'}
-					w={'full'}
+					maxW="350px"
+					w="full"
 					bg={useColorModeValue('white', 'gray.900')}
-					rounded={'lg'}
-					textAlign={'center'}
+					rounded="lg"
+					textAlign="center"
 				>
 					<Avatar
-						size={'xl'}
-						src={
-							'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-						}
+						size="xl"
+						src="https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
 						mb={4}
-						pos={'relative'}
+						pos="relative"
 						_after={{
 							content: '""',
 							w: 4,
@@ -56,27 +56,27 @@ const UserProfile = (props: {
 							right: 3,
 						}}
 					/>
-					<Heading fontSize={'2xl'} fontFamily={'body'}>
+					<Heading fontSize="2xl" fontFamily="body">
 						Lindsey James
 					</Heading>
-					<Text fontWeight={600} color={'gray.500'} mb={4}>
+					<Text fontWeight={600} color="gray.500" mb={4}>
 						@lindsey_jam3s
 					</Text>
 					<Text
-						textAlign={'center'}
+						textAlign="center"
 						color={useColorModeValue('gray.700', 'gray.400')}
 						px={3}
 					>
 						Actress, musician, songwriter and artist. PM for work inquires or{' '}
-						<Text color={'blue.400'}>#tag</Text> me in your posts
+						<Text color="blue.400">#tag</Text> me in your posts
 					</Text>
 
-					<Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+					<Stack align="center" justify="center" direction="row" mt={6}>
 						<Badge
 							px={2}
 							py={1}
 							bg={useColorModeValue('gray.50', 'gray.800')}
-							fontWeight={'400'}
+							fontWeight="400"
 						>
 							#art
 						</Badge>
@@ -84,7 +84,7 @@ const UserProfile = (props: {
 							px={2}
 							py={1}
 							bg={useColorModeValue('gray.50', 'gray.800')}
-							fontWeight={'400'}
+							fontWeight="400"
 						>
 							#photography
 						</Badge>
@@ -92,7 +92,7 @@ const UserProfile = (props: {
 							px={2}
 							py={1}
 							bg={useColorModeValue('gray.50', 'gray.800')}
-							fontWeight={'400'}
+							fontWeight="400"
 						>
 							#music
 						</Badge>
@@ -100,7 +100,7 @@ const UserProfile = (props: {
 
 					<Stack
 						mt={8}
-						direction={'row'}
+						direction="row"
 						justifyContent="space-around"
 						spacing={4}
 					>

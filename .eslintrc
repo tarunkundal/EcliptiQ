@@ -9,10 +9,10 @@
 	},
 	"plugins": [
 		"react",
+		"simple-import-sort",
 		"@typescript-eslint",
 		"unused-imports",
-		"react-hooks",
-		"simple-import-sort"
+		"react-hooks"
 	],
 	"extends": [
 		"eslint:recommended",
@@ -30,12 +30,11 @@
 		"react/jsx-curly-brace-presence": ["error"],
 		"react/react-in-jsx-scope": "off",
 		"react/prop-types": "off",
-		"unused-imports/no-unused-imports": "error",
 		"@typescript-eslint/ban-ts-comment": "off",
 		"@typescript-eslint/no-explicit-any": "off",
 		"@typescript-eslint/no-empty-function": "off",
 		"@typescript-eslint/no-non-null-assertion": "off",
-		"@typescript-eslint/switch-exhaustiveness-check": "warn",
+		"@typescript-eslint/switch-exhaustiveness-check": "off",
 		"@typescript-eslint/no-empty-interface": "off",
 		"@typescript-eslint/no-unused-vars": [
 			"warn",
@@ -44,19 +43,21 @@
 				"ignoreRestSiblings": true
 			}
 		],
+		"unused-imports/no-unused-imports": "error",
 		"no-unsafe-optional-chaining": "warn",
 		"react/no-children-prop": "off",
 		"no-constant-condition": "warn",
 		"react-hooks/rules-of-hooks": "error",
-		"simple-import-sort/imports": "error",
-		"simple-import-sort/exports": "error",
 		"import/order": "off",
-		"sort-imports": "off"
+		"sort-imports": "off",
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error"
 	},
 	"settings": {
 		"react": {
 			"version": "detect"
 		},
+		"parserOptions": { "project": "./tsconfig.json" },
 		"import/parsers": {
 			"@typescript-eslint/parser": [".ts", ".tsx", ".svg", ".mp4"]
 		},

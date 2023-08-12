@@ -1,7 +1,6 @@
 import {
 	Avatar,
 	Button,
-	CloseButton,
 	Flex,
 	Input,
 	Stack,
@@ -53,7 +52,7 @@ const UserSetting = () => {
 				</Stack>
 				<Stack>
 					<Text fontWeight="bold">Name</Text>
-					<Input type="email" border="2px" value={'tarun@gmail.com'} />
+					<Input type="email" border="2px" value="tarun@gmail.com" />
 				</Stack>
 				<Stack>
 					<Text fontWeight="bold">User Name</Text>

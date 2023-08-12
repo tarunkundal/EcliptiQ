@@ -16,12 +16,12 @@ import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
 
 import sideVideo from '../../assets/loginside.mp4';
-import LoadingSpinner from '../../components/Spinner';
 import Logo from '../../components/Logo';
+import LoadingSpinner from '../../components/Spinner';
 import useCustomToast from '../../hooks/useToastHook';
+import supabase from '../../lib/api';
 import Routes from '../../Routes';
 import GoogleLogIn from './GoogleLogin';
-import supabase from '../../lib/api';
 
 const Login = () => {
 	const [email, setEmail] = useState('');

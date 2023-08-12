@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface User {}
-
 const userSlice = createSlice({
 	name: 'user',
 	initialState: {

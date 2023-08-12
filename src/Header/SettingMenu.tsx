@@ -1,18 +1,19 @@
 import {
+	Avatar,
+	Flex,
 	Menu,
 	MenuButton,
-	Avatar,
-	MenuList,
 	MenuItem,
-	Flex,
+	MenuList,
 	Text,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { BiPlus, BiLogOut, BiUser } from 'react-icons/bi';
+import { BiLogOut, BiPlus, BiUser } from 'react-icons/bi';
 import { FiSettings } from 'react-icons/fi';
-import Logout from '../Routes/auth/Logout';
 import { Link } from 'react-router-dom';
+
 import Routes from '../Routes';
+import Logout from '../Routes/auth/Logout';
 import UserProfile from '../user/UserProfileCard';
 
 const SettingMenu = () => {

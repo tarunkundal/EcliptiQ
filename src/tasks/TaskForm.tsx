@@ -10,6 +10,7 @@ import {
 import { MouseEventHandler } from 'react';
 
 const TaskForm = (props: {
+	// eslint-disable-next-line no-undef
 	onClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> | undefined;
 }) => {
 	return (
@@ -22,10 +23,10 @@ const TaskForm = (props: {
 			mt={10}
 		>
 			<Heading
-				textAlign={'center'}
+				textAlign="center"
 				color="primary"
 				fontSize={{ base: '2xl', md: '3xl' }}
-				fontWeight={'medium'}
+				fontWeight="medium"
 				paddingBottom={2}
 			>
 				Create Task
@@ -40,11 +41,7 @@ const TaskForm = (props: {
 
 				<FormControl id="Task_Description">
 					<Tooltip m={2} label="Enter your task description">
-						<Input
-							type="text"
-							fontWeight={'medium'}
-							placeholder="Descripition"
-						/>
+						<Input type="text" fontWeight="medium" placeholder="Descripition" />
 					</Tooltip>
 				</FormControl>
 
@@ -56,12 +53,12 @@ const TaskForm = (props: {
 							id="date"
 							placeholder="Due Date"
 							cursor="pointer"
-							fontWeight={'medium'}
+							fontWeight="medium"
 						/>
 					</Tooltip>
 				</FormControl>
 
-				<Stack direction={'row'} pt={4}>
+				<Stack direction="row" pt={4}>
 					<Button w="50%" onClick={props.onClose} variant="red">
 						Cancle
 						{/* {isUpdate ? 'Cancle Update' : 'Cancle'} */}

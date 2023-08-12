@@ -10,8 +10,9 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import React from 'react';
-import Logo from '../assets/logoQ.png';
 import { AiOutlineBell } from 'react-icons/ai';
+
+import Logo from '../assets/logoQ.png';
 
 const NotificationMenu = () => {
 	return (
