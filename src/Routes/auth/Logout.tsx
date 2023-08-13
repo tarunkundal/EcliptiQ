@@ -44,7 +44,7 @@ const Logout = (props: {
 					You want to Logout
 				</Text>
 				<Flex justifyContent="space-around">
-					<Button w="40%" variant="red" onClick={logoutHandler}>
+					<Button rounded="full" w="40%" variant="red" onClick={logoutHandler}>
 						{loading ? (
 							<>
 								{'Logingout  '}+ <LoadingSpinner />
@@ -60,6 +60,7 @@ const Logout = (props: {
 						border="2px"
 						borderColor="red"
 						onClick={props.onClose}
+						rounded="full"
 					>
 						Close
 					</Button>

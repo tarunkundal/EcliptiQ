@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import Routes from '../../Routes';
 import AllTasks from '../../tasks';
 import TaskForm from '../../tasks/TaskForm';
+import CreateTeamForm from '../../teams/CreateTeamForm';
 import UserSetting from '../../user/UserSetting';
 
 const DashboardBody = () => {
@@ -12,6 +13,7 @@ const DashboardBody = () => {
 			<Route exact path={Routes.DASHBOARD} component={AllTasks} />
 			<Route exact path={Routes.USER_SETTING} component={UserSetting} />
 			<Route exact path={Routes.NEWTASK} component={TaskForm} />
+			<CreateTeamForm />
 		</Box>
 	);
 };

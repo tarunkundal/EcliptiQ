@@ -1,7 +1,7 @@
-import { Box, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IconType } from 'react-icons';
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineTeam } from 'react-icons/ai';
 import { FiHome, FiLogOut, FiPlus, FiSettings, FiUser } from 'react-icons/fi';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { NavLink } from 'react-router-dom';
@@ -24,27 +24,26 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 const Sidebar = () => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [isOpenLogout, setIsOpenLogout] = useState(false);
 	const [isOpenProfile, setIsOpenProfile] = useState(false);
+	const [isOpenSidebar, setIsOpenSidebar] = useState(true);
 
 	const closeLogout = () => setIsOpenLogout(false);
 	const openLogout = () => setIsOpenLogout(true);
 
 	const openProfile = () => setIsOpenProfile(true);
 	const closeProfile = () => setIsOpenProfile(false);
+
+	const toggleSidebar = () => setIsOpenSidebar(!isOpenSidebar);
+
 	return (
 		<>
 			{isOpenLogout && <Logout onClose={closeLogout} />}
 			{isOpenProfile && <UserProfile onClose={closeProfile} />}
 
 			<Box>
-				<Box
-					w="max-content"
-					cursor="pointer"
-					onClick={isOpen ? onClose : onOpen}
-				>
-					{isOpen ? (
+				<Box w="max-content" cursor="pointer" onClick={toggleSidebar}>
+					{isOpenSidebar ? (
 						<AiOutlineClose fontSize="22px" color="white" />
 					) : (
 						<RxHamburgerMenu fontSize="22px" color="white" />
@@ -52,8 +51,7 @@ const Sidebar = () => {
 				</Box>
 
 				<Box
-					width={isOpen ? '200px' : '0'}
-					// w="200px"
+					width={isOpenSidebar ? '200px' : '0'}
 					position="fixed"
 					top="44px"
 					left="0"
@@ -102,7 +100,35 @@ const Sidebar = () => {
 						<Icon as={FiUser} mr="4" />
 						Profile
 					</Flex>
+
+					<Flex
+						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+						alignItems="center"
+						p={2}
+						my={5}
+						mx={2}
+						rounded="md"
+						onClick={openProfile}
+					>
+						<Icon as={AiOutlineTeam} mr="4" />
+						Team
+					</Flex>
+
+					<Flex
+						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+						alignItems="center"
+						p={2}
+						my={5}
+						mx={2}
+						rounded="md"
+						onClick={undefined}
+					>
+						<Icon as={AiOutlineTeam} mr="4" />
+						Create Team
+					</Flex>
+
 					<hr />
+
 					<Flex
 						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
 						alignItems="center"

@@ -1,76 +1,86 @@
 import {
 	Button,
-	FormControl,
-	FormLabel,
+	Flex,
 	Heading,
 	Input,
+	Select,
 	Stack,
-	Tooltip,
+	Text,
+	Textarea,
 } from '@chakra-ui/react';
-import { MouseEventHandler } from 'react';
 
-const TaskForm = (props: {
-	// eslint-disable-next-line no-undef
-	onClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> | undefined;
-}) => {
+const TaskForm = () => {
 	return (
 		<Stack
 			spacing={{ base: '2', md: '4' }}
-			border="1px"
+			boxShadow="2xl"
+			rounded="3xl"
 			w={{ base: '90%', md: '70%' }}
 			mx="auto"
 			p="5"
-			mt={10}
+			mt={15}
 		>
-			<Heading
-				textAlign="center"
-				color="primary"
-				fontSize={{ base: '2xl', md: '3xl' }}
-				fontWeight="medium"
-				paddingBottom={2}
-			>
+			<Heading textAlign="center" fontSize="22px" pb={4}>
 				Create Task
 			</Heading>
+			<hr />
 
 			<form>
-				<FormControl id="Task" isRequired>
-					<Tooltip label="Enter your task title">
-						<Input type="text" fontWeight="bold" placeholder="Task Name" />
-					</Tooltip>
-				</FormControl>
+				<Stack gap={6}>
+					<Input border="none" type="text" placeholder="New Task..." />
 
-				<FormControl id="Task_Description">
-					<Tooltip m={2} label="Enter your task description">
-						<Input type="text" fontWeight="medium" placeholder="Descripition" />
-					</Tooltip>
-				</FormControl>
+					<Textarea border="none" placeholder="Add Description..." />
 
-				<FormControl id="Due_Date">
-					<FormLabel>Due Date</FormLabel>
-					<Tooltip label="Select due date for your task">
-						<Input
-							type="date"
-							id="date"
-							placeholder="Due Date"
-							cursor="pointer"
-							fontWeight="medium"
-						/>
-					</Tooltip>
-				</FormControl>
+					<Stack flexDirection="row" justifyContent="space-around">
+						<Stack>
+							<Text fontWeight="semibold" fontSize="14px">
+								Forms
+							</Text>
+							<Select placeholder="Select Form">
+								<option value="backlog">Backlog</option>
+								<option value="todo">Todo</option>
+								<option value="progress">In Progress</option>
+								<option value="done">Done</option>
+							</Select>
+						</Stack>
+						<Stack>
+							<Text fontWeight="semibold" fontSize="14px">
+								Priority
+							</Text>
+							<Select placeholder="Select Priority">
+								<option value="urgent">Urgent</option>
+								<option value="high">High</option>
+								<option value="medium">Medium</option>
+								<option value="low">Low</option>
+							</Select>
+						</Stack>
+						<Stack>
+							<Text fontWeight="semibold" fontSize="14px">
+								Assign to...
+							</Text>
+							<Select placeholder="Select option">
+								<option value="option1">Option 1</option>
+								<option value="option2">Option 2</option>
+								<option value="option3">Option 3</option>
+							</Select>
+						</Stack>
+						<Stack>
+							<Text fontWeight="semibold" fontSize="14px">
+								Due Date
+							</Text>
+							<Input type="date" />
+						</Stack>
+					</Stack>
 
-				<Stack direction="row" pt={4}>
-					<Button w="50%" onClick={props.onClose} variant="red">
-						Cancle
-						{/* {isUpdate ? 'Cancle Update' : 'Cancle'} */}
-					</Button>
-					<Button w="50%" variant="blue" type="submit">
-						{/* {isLoading ? (
-								<Spinner />
-							) : (
-								<> {isUpdate ? 'Update' : 'Add Task'}</>
-							)} */}
-						Add Task
-					</Button>
+					<hr />
+					<Flex justifyContent="space-around">
+						<Button type="submit" w="30%" variant="blue">
+							Create task
+						</Button>
+						<Button variant="red" w="30%">
+							Cancle
+						</Button>
+					</Flex>
 				</Stack>
 			</form>
 		</Stack>
