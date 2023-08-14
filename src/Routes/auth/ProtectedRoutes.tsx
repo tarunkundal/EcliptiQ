@@ -1,17 +1,16 @@
 import React, { ReactNode } from 'react';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { RootState } from '../../store';
+import { useAppSelector } from '../../app/store';
 import Routes from '..';
 
 interface MyComponentProps {
 	children: ReactNode;
 }
 const ProtectedRoutes: React.FC<MyComponentProps> = ({ children }) => {
-	const user = useSelector((state: RootState) => state.user.user);
+	const user = useAppSelector((state) => state.user.user?.id);
 
-	if (user === null) {
+	if (user === undefined) {
 		return <Redirect to={Routes.LOGIN} />;
 	}
 

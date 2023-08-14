@@ -1,9 +1,9 @@
 import { Box, Image, Spinner, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
+import supabase from '../../app/supabase';
 import googleSvg from '../../assets/google.svg';
 import useCustomToast from '../../hooks/useToastHook';
-import supabase from '../../lib/api';
 
 const GoogleLogIn: React.FC = () => {
 	const customToast = useCustomToast();

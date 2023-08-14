@@ -2,10 +2,10 @@ import { Button, Input, Stack, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import Modal from '../components/Modal';
-import useCustomToast from '../hooks/useToastHook';
-import supabase from '../lib/api';
-import { RootState } from '../store';
+import Modal from '../../../components/Modal';
+import useCustomToast from '../../../hooks/useToastHook';
+import { RootState } from '../../../store';
+import supabase from '../../supabase';
 
 const CreateTeamForm = () => {
 	const user = useSelector((state: RootState) => state.user.user);

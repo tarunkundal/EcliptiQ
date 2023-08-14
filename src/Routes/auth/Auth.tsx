@@ -2,10 +2,11 @@ import { Box, Image } from '@chakra-ui/react';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import supabase from '../../app/supabase';
+import { userActions } from '../../app/user/slice';
+import { UserProfile } from '../../app/user/types';
 import Logo from '../../assets/logoQ.png';
 import LoadingSpinner from '../../components/Spinner';
-import supabase from '../../lib/api';
-import { userActions } from '../../store/user/user-slice';
 
 interface MyComponentProps {
 	children: ReactNode;
@@ -13,15 +14,60 @@ interface MyComponentProps {
 
 const Auth: React.FC<MyComponentProps> = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true);
+	// const [isDataInserted, setIsDataInserted] = useState(false);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const authListener = supabase.auth.onAuthStateChange((event, session) => {
 			if (session) {
-				dispatch(userActions.setUser(session.user));
+				const fetchedUser: UserProfile = {
+					id: session.user.id,
+					email: session.user.email,
+					username: session.user?.user_metadata.name,
+					avatar_url: session?.user.user_metadata.avatar_url,
+				};
+
+				dispatch(userActions.setUser({ user: fetchedUser }));
+
+				// // checking weather the user data is already in the profile table or not
+				// if (!isDataInserted) {
+				// 	const checkUserData = async () => {
+				// 		const id = session.user.id;
+				// 		const { data } = await supabase
+				// 			.from('user_profiles')
+				// 			.select('user_id')
+				// 			.eq('user_id', id);
+
+				// 		if (data?.length === 0) {
+				// 			setIsDataInserted(false);
+				// 		} else {
+				// 			setIsDataInserted(true);
+				// 		}
+				// 	};
+				// 	checkUserData();
+				// }
+				// console.log(isDataInserted);
+
+				// // enter data into userprofile table
+				// if (!isDataInserted) {
+				// 	const enterUserData = async () => {
+				// 		const { data, error } = await supabase
+				// 			.from('user_profiles')
+				// 			.insert([
+				// 				{
+				// 					user_id: session.user.id,
+				// 					email: session.user.email,
+				// 					user_name: session.user?.user_metadata.name,
+				// 				},
+				// 			])
+				// 			.select();
+				// 		console.log(data, 'and', error);
+				// 	};
+				// 	enterUserData();
+				// }
 			} else {
-				dispatch(userActions.setUser(null));
+				dispatch(userActions.setUser({ user: null }));
 			}
 			setIsLoading(false);
 		});

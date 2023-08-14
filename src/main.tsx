@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import store from './store';
+import store from './app/store/index';
 import theme from './styles/Theme';
 
 // eslint-disable-next-line import/no-named-as-default-member

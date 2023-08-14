@@ -15,11 +15,11 @@ import { memo, useState } from 'react';
 import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
 
+import supabase from '../../app/supabase';
 import sideVideo from '../../assets/loginside.mp4';
 import Logo from '../../components/Logo';
 import LoadingSpinner from '../../components/Spinner';
 import useCustomToast from '../../hooks/useToastHook';
-import supabase from '../../lib/api';
 import Routes from '../../Routes';
 import GoogleLogIn from './GoogleLogin';
 
@@ -31,16 +31,10 @@ const Login = () => {
 	const customToast = useCustomToast();
 	const history = useHistory();
 
-	// const dispatch = useDispatch();
-	// const isSuccess = useSelector((state: RootState) => state.auth.isSuccess);
-	// const loading = useSelector((state: RootState) => state.auth.loading);
-	// const error = useSelector((state: RootState) => state.auth.error);
-
 	// login handler
 	const handleLoginHandler = async (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 
-		// dispatch(loginHandler({ email, password }));
 		setLoading(true);
 		const { data, error } = await supabase.auth.signInWithPassword({
 			email,

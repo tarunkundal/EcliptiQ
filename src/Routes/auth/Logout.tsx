@@ -2,10 +2,10 @@ import { Button, Flex, Stack, Text } from '@chakra-ui/react';
 import { MouseEventHandler, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import supabase from '../../app/supabase';
 import Modal from '../../components/Modal';
 import LoadingSpinner from '../../components/Spinner';
 import useCustomToast from '../../hooks/useToastHook';
-import supabase from '../../lib/api';
 import Routes from '..';
 
 const Logout = (props: {

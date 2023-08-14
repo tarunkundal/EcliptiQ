@@ -12,8 +12,8 @@ import {
 import { MouseEventHandler } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Modal from '../components/Modal';
-import Routes from '../Routes';
+import Modal from '../../../components/Modal';
+import Routes from '../../../Routes';
 
 const UserProfile = (props: {
 	// eslint-disable-next-line no-undef

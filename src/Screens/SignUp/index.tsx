@@ -12,11 +12,11 @@ import {
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import supabase from '../../app/supabase';
 import sideVideo from '../../assets/signup-side.mp4';
 import Logo from '../../components/Logo';
 import LoadingSpinner from '../../components/Spinner';
 import useCustomToast from '../../hooks/useToastHook';
-import supabase from '../../lib/api';
 import Routes from '../../Routes';
 
 const SignUp = () => {

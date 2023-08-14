@@ -74,6 +74,7 @@
 		"console": true,
 		"window": true,
 		"alert": true,
-		"document": true
+		"document": true,
+		"process": true
 	}
 }
