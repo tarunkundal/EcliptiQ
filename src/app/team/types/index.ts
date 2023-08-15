@@ -1,5 +1,13 @@
+export interface TeamState {
+	teams: TeamTable[];
+}
+
 export interface TeamTable {
 	id: string;
-	team_name: string;
+	name: string;
 	creater_id: string;
+	created_at: string | any;
+}
+export interface SetTeamActionPayload {
+	teams: TeamTable[];
 }

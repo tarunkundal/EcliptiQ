@@ -14,6 +14,7 @@ import { FiHome, FiLogOut, FiPlus, FiSettings, FiUser } from 'react-icons/fi';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
 
+import InvitationForm from '../app/invitation/components/InvitationForm';
 import { useAppSelector } from '../app/store';
 import UserProfile from '../app/user/components/UserProfileCard';
 import Routes from '../Routes';
@@ -40,12 +41,15 @@ const Sidebar: React.FC = () => {
 
 	const [isOpenLogout, setIsOpenLogout] = useState(false);
 	const [isOpenProfile, setIsOpenProfile] = useState(false);
+	const [isOpenInvitation, setIsOpenInvitation] = useState(false);
 
 	const closeLogout = () => setIsOpenLogout(false);
 	const openLogout = () => setIsOpenLogout(true);
 
 	const openProfile = () => setIsOpenProfile(true);
 	const closeProfile = () => setIsOpenProfile(false);
+
+	const closeInvitation = () => setIsOpenInvitation(false);
 
 	const toggleSidebar = () => {
 		setIsOpen(!isOpen);
@@ -55,6 +59,8 @@ const Sidebar: React.FC = () => {
 		<>
 			{isOpenLogout && <Logout onClose={closeLogout} />}
 			{isOpenProfile && <UserProfile onClose={closeProfile} />}
+			{isOpenInvitation && <InvitationForm onClose={closeInvitation} />}
+
 			{!isMediumScreen && (
 				<Flex
 					boxShadow="xl"
@@ -149,9 +155,24 @@ const Sidebar: React.FC = () => {
 					onClick={openProfile}
 				>
 					<Icon as={AiOutlineTeam} mr="4" />
-					Team
+					Your Team
 				</Flex>
 
+				<Link style={{ color: 'initial' }} to={Routes.CREATE_TEAM}>
+					<Flex
+						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+						alignItems="center"
+						p={2}
+						my={5}
+						mx={2}
+						rounded="md"
+					>
+						<Icon as={AiOutlineTeam} mr="4" />
+						Create Team
+					</Flex>
+				</Link>
+
+				{/* invitation form */}
 				<Flex
 					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
 					alignItems="center"
@@ -159,10 +180,10 @@ const Sidebar: React.FC = () => {
 					my={5}
 					mx={2}
 					rounded="md"
-					onClick={undefined}
+					onClick={() => setIsOpenInvitation(true)}
 				>
-					<Icon as={AiOutlineTeam} mr="4" />
-					Create Team
+					<Icon as={FiPlus} mr="4" />
+					Invite People
 				</Flex>
 
 				<hr />

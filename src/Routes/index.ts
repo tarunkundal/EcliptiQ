@@ -5,6 +5,7 @@ const Routes = {
 	USER_SETTING: '/user/settings',
 	DASHBOARD: '/',
 	NEWTASK: '/newtask',
+	CREATE_TEAM: '/create-team',
 };
 
 export default Routes;

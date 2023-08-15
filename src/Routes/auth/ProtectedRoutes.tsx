@@ -8,9 +8,9 @@ interface MyComponentProps {
 	children: ReactNode;
 }
 const ProtectedRoutes: React.FC<MyComponentProps> = ({ children }) => {
-	const user = useAppSelector((state) => state.user.user?.id);
+	const userId = useAppSelector((state) => state.user.user?.id);
 
-	if (user === undefined) {
+	if (userId === undefined) {
 		return <Redirect to={Routes.LOGIN} />;
 	}
 
