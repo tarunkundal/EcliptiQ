@@ -6,6 +6,7 @@ const Routes = {
 	DASHBOARD: '/',
 	NEWTASK: '/newtask',
 	CREATE_TEAM: '/create-team',
+	INVITATIONS: '/all-invitations',
 };
 
 export default Routes;

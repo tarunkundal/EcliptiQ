@@ -10,6 +10,7 @@ export interface InvitationTable {
 	status: string;
 	invited_email: string;
 	invited_by_userId: any;
+	invited_byUser_email: string;
 }
 
 export interface SetInvitationActionPayload {

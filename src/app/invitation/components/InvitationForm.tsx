@@ -51,13 +51,14 @@ const InvitationForm = (props: {
 					team_id: team_Id,
 					invited_email: emailToInvited,
 					invited_by_userId: user_id,
+					invited_byUser_email: user?.email,
 				},
 			])
 			.select();
 
 		if (data !== null && !error) {
 			customToast({
-				title: 'Invititation send successfully.',
+				title: 'Invitation send successfully.',
 				status: 'success',
 			});
 			props.onClose;

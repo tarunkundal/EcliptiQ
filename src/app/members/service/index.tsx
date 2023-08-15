@@ -10,3 +10,13 @@ export const _fetchAllTeamsMembers = async (
 }> => {
 	return await supabase.from('members').select().eq('team_id', team_id);
 };
+
+// // add team member
+// export const _addTeamMember = async (
+// 	team_id: any
+// ): Promise<{
+// 	data: MemberTable[] | null;
+// 	error: any;
+// }> => {
+// 	return await supabase.from('members').select().eq('team_id', team_id);
+// };
