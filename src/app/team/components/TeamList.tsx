@@ -24,7 +24,6 @@ import { useAppSelector } from '../../store';
 const TeamList = () => {
 	const teams = useAppSelector((state) => state.teams.teams);
 	// const members = useAppSelector((state) => state.members.members);
-	console.log(teams);
 
 	return (
 		<Stack w="full">
@@ -55,7 +54,11 @@ const TeamList = () => {
 			<hr />
 			<TableContainer>
 				<Table variant="simple">
-					<TableCaption>Your teams are listed above</TableCaption>
+					<TableCaption>
+						{teams.length >= 1
+							? 'Your teams are listed above'
+							: 'You have no teams.Please create it.'}
+					</TableCaption>
 					<Thead>
 						<Tr>
 							<Th>Name</Th>
@@ -75,7 +78,17 @@ const TeamList = () => {
 										</Flex>
 									</Td>
 									<Td>{team.created_at}</Td>
-									<Td>millimetres (mm)</Td>
+									<Td>
+										<Link
+											to={`/teams/members/${team.id}`}
+											style={{ color: 'white' }}
+										>
+											<Button size="sm" variant="blue">
+												{' '}
+												See Members
+											</Button>
+										</Link>
+									</Td>
 									<Td isNumeric>
 										<Link to={`/teams/${team.id}`} style={{ color: 'white' }}>
 											<Button variant="red" size="sm">

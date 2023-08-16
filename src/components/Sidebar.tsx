@@ -4,22 +4,28 @@ import {
 	CloseButton,
 	Flex,
 	Icon,
+	Image,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	Text,
 	useBreakpointValue,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsMicrosoftTeams } from 'react-icons/bs';
-import { FiHome, FiLogOut, FiPlus, FiSettings, FiUser } from 'react-icons/fi';
+import { FiHome, FiLogOut, FiPlus, FiUser } from 'react-icons/fi';
+import { LuSettings2, LuUser } from 'react-icons/lu';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
 
 import InvitationForm from '../app/invitation/components/InvitationForm';
 import { useAppSelector } from '../app/store';
 import UserProfile from '../app/user/components/UserProfileCard';
+import Logo from '../assets/logoQ.png';
 import Routes from '../Routes';
 import Logout from '../Routes/auth/Logout';
-import Logo from './Logo';
 
 interface LinkItemProps {
 	name: string;
@@ -30,7 +36,6 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
 	{ name: 'Home', icon: FiHome, path: Routes.DASHBOARD },
 	{ name: 'New Task', icon: FiPlus, path: Routes.NEWTASK },
-	{ name: 'Settings', icon: FiSettings, path: Routes.USER_SETTING },
 	{ name: 'Teams', icon: BsMicrosoftTeams, path: Routes.TEAMS },
 ];
 
@@ -82,7 +87,7 @@ const Sidebar: React.FC = () => {
 						<RxHamburgerMenu fontSize="22px" color="black" />
 					</Box>
 					<Box mx={2} mb={2}>
-						<Logo size={12} />
+						<Image src={Logo} boxSize={12} alt="logo" />
 					</Box>
 					<Text fontSize="12px" fontWeight="bold">
 						{user?.username ? user?.username : user?.email}
@@ -102,8 +107,20 @@ const Sidebar: React.FC = () => {
 				zIndex={2}
 			>
 				<Flex justifyContent="space-between" alignItems="center">
-					<Box mx={2} mb={2}>
-						<Logo size={12} />
+					<Box
+						display="flex"
+						justifyContent="space-between"
+						alignItems="center"
+						mx={2}
+						mb={2}
+						w="full"
+					>
+						<Image src={Logo} boxSize={12} alt="logo" />
+						<Avatar
+							name={user?.username ? user.username : user?.email}
+							size="sm"
+							src={user?.avatar_url}
+						/>
 					</Box>
 					<CloseButton
 						display={{ base: 'block', md: 'none' }}
@@ -146,20 +163,6 @@ const Sidebar: React.FC = () => {
 					Profile
 				</Flex>
 
-				{/* <Link style={{ color: 'initial' }} to={Routes.CREATE_TEAM}>
-					<Flex
-						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
-						alignItems="center"
-						p={2}
-						my={5}
-						mx={2}
-						rounded="md"
-					>
-						<Icon as={AiOutlineTeam} mr="4" />
-						Create Team
-					</Flex>
-				</Link> */}
-
 				{/* invitation form */}
 				<Flex
 					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
@@ -175,6 +178,36 @@ const Sidebar: React.FC = () => {
 				</Flex>
 
 				<hr />
+
+				<Flex
+					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+					alignItems="center"
+					p={2}
+					my={5}
+					mx={2}
+					rounded="md"
+				>
+					<Menu>
+						<MenuButton>
+							<Flex alignItems="center">
+								<LuSettings2 />
+								<Text ml={4}>Settings</Text>
+							</Flex>
+						</MenuButton>
+						<MenuList>
+							<Link style={{ color: 'initial' }} to={Routes.USER_SETTING}>
+								<MenuItem icon={<LuUser color="blue" />} command="⌘T">
+									User Profile
+								</MenuItem>
+							</Link>
+							<Link style={{ color: 'initial' }} to={Routes.TEAMS}>
+								<MenuItem icon={<BsMicrosoftTeams color="red" />} command="⌘N">
+									Teams
+								</MenuItem>
+							</Link>
+						</MenuList>
+					</Menu>
+				</Flex>
 
 				<Flex
 					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
@@ -204,8 +237,10 @@ const Sidebar: React.FC = () => {
 								cursor="pointer"
 							/>
 							<Flex direction="column" ml={4} fontSize="14px">
-								<Text fontWeight="bold">{user?.username}</Text>
-								<Text fontSize="12px" w="100px">
+								{/* <Text fontWeight="semibold">
+									{user?.username ? user.username : user?.email}
+								</Text> */}
+								<Text w="100px" fontWeight="semibold">
 									{user?.email}
 								</Text>
 							</Flex>

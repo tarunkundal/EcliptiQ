@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/react';
 import { Route } from 'react-router-dom';
 
 import InvitationAcceptForm from '../../app/invitation/components/InvitationAcceptForm';
+import MembersList from '../../app/members/components/MembersList';
 import AllTasks from '../../app/tasks/components';
 import TaskForm from '../../app/tasks/components/TaskForm';
 import CreateTeamForm from '../../app/team/components/CreateTeamForm';
@@ -20,6 +21,7 @@ const DashboardBody = () => {
 			<Route exact path={Routes.INVITATIONS} component={InvitationAcceptForm} />
 			<Route exact path={Routes.TEAMDETAIL} component={TeamDetailPage} />
 			<Route exact path={Routes.TEAMS} component={TeamList} />
+			<Route exact path={Routes.TEAMSMEMBERS} component={MembersList} />
 		</Box>
 	);
 };

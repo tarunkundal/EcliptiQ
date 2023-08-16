@@ -2,80 +2,60 @@ import {
 	Avatar,
 	Button,
 	Flex,
+	Heading,
 	Input,
 	Stack,
 	Text,
-	Textarea,
-	WrapItem,
 } from '@chakra-ui/react';
 
+import { useAppSelector } from '../../store';
+
 const UserSetting = () => {
+	const user = useAppSelector((state) => state.user.user);
 	return (
-		<Stack
-			px={6}
-			gap={{ base: 2, md: 4 }}
-			py={4}
-			w={{ base: '90%', md: '70%' }}
-			rounded="lg"
-			mx="auto"
-			border="1px"
-			fontSize="15px"
-		>
-			<Flex alignItems="center" justifyContent="space-between">
-				<Text fontWeight="bold">Account</Text>
-				<Text fontWeight="bold">UserName</Text>
+		<Stack p={2} w={{ base: '90%', md: '70%' }} m="auto">
+			<Flex my={4} alignItems="center" justifyContent="space-between">
+				<Stack>
+					<Heading fontWeight="400" fontSize="24px">
+						Profile
+					</Heading>
+					<Text fontSize="14px">Manage your EcliptiQ rofile</Text>
+				</Stack>
+				<Text fontWeight="bold">
+					{user?.username ? user.username : user?.email}
+				</Text>
 			</Flex>
 			<hr />
 
-			<Stack gap={{ base: 2, md: 4 }} w={{ base: 'full', md: '50%' }}>
-				<Stack>
-					<Text fontWeight="bold">Photo</Text>
-					<Flex alignItems="center" justifyContent="space-around">
-						<WrapItem mr={4}>
-							<Avatar name="Tarun Chauhan" size="xl"></Avatar>
-						</WrapItem>
-						<Stack>
-							<Flex justifyContent="space-between">
-								<Button variant="outline" size="sm">
-									{' '}
-									Change Photo
-								</Button>
-								<Button size="sm" variant="red">
-									Remove Photo
-								</Button>
-							</Flex>
-							<Text fontSize="14px">
-								Pick a photo up to 4MB. Your avatar photo will be public.
-							</Text>
-						</Stack>
-					</Flex>
-				</Stack>
-				<Stack>
-					<Text fontWeight="bold">Name</Text>
-					<Input type="email" border="2px" value="tarun@gmail.com" />
-				</Stack>
-				<Stack>
-					<Text fontWeight="bold">User Name</Text>
-					<Input type="text" border="2px" />
-				</Stack>
-				<Stack>
-					<Text fontWeight="bold">Email</Text>
-					<Text>tarunchauhan@gmail.com</Text>
-				</Stack>
-
-				<Stack>
-					<Text fontWeight="bold">Bio</Text>
-					<Textarea
-						border="2px"
-						placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quod"
+			<Stack gap={{ base: 2, md: 4 }} my={4} w={{ base: 'full', md: '50%' }}>
+				<Stack gap={4}>
+					<Text>Profile Avatar</Text>
+					<Avatar
+						name={user?.username ? user.username : user?.email}
+						size="2xl"
+						src={user?.avatar_url}
 					/>
+				</Stack>
+				<Stack gap={-2}>
+					<Text>Email</Text>
+					<Text fontSize="14px" fontWeight="bold">
+						tarunchauhan@gmail.com
+					</Text>
+				</Stack>
+				<Stack>
+					<Text>Name</Text>
+					<Input type="email" placeholder="tarun@gmail.com" />
+				</Stack>
+				<Stack>
+					<Text>User Name</Text>
+					<Input type="text" />
 				</Stack>
 			</Stack>
 			<hr />
-			<Stack>
-				<Text fontWeight="bold">Connected accounts</Text>
+			<Stack my={4} gap={4}>
+				<Text>Connected accounts</Text>
 				<Text fontSize="14px">
-					Log in to EcliptiQ with your Google, Facebook, or Apple account.
+					Log in to EcliptiQ with your Google, or Email Password.
 				</Text>
 				<Text fontSize="14px">
 					You can log in to EcliptiQ with your Google account
@@ -83,7 +63,7 @@ const UserSetting = () => {
 				</Text>
 			</Stack>
 			<hr />
-			<Stack gap={4}>
+			<Stack gap={4} my={4}>
 				<Text fontWeight="bold">Delete account</Text>
 				<Text fontSize="14px">
 					This will immediately delete all of your data including tasks,

@@ -9,6 +9,7 @@ const Routes = {
 	INVITATIONS: '/all-invitations',
 	TEAMDETAIL: '/teams/:id',
 	TEAMS: '/teams',
+	TEAMSMEMBERS: '/teams/members/:id',
 };
 
 export default Routes;
