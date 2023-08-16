@@ -27,3 +27,37 @@ export const _updateInvitation = async ({
 		.update({ status: status })
 		.eq('id', invitationId);
 };
+
+// add invitation
+export const _addNewInvitation = async ({
+	team_id,
+	creater_id,
+	status,
+	invited_byUser_email,
+	invited_by_userId,
+	invited_email,
+}: {
+	team_id: string;
+	creater_id: string;
+	status: string;
+	invited_email: string;
+	invited_by_userId: any;
+	invited_byUser_email: string;
+}): Promise<{
+	data: InvitationTable[] | null;
+	error: any;
+}> => {
+	return await supabase
+		.from('invitations')
+		.insert([
+			{
+				team_id: team_id,
+				creater_id: creater_id,
+				status: status,
+				invited_byUser_email: invited_byUser_email,
+				invited_by_userId: invited_by_userId,
+				invited_email: invited_email,
+			},
+		])
+		.select();
+};

@@ -236,10 +236,7 @@ const Sidebar: React.FC = () => {
 								src={user?.avatar_url}
 								cursor="pointer"
 							/>
-							<Flex direction="column" ml={4} fontSize="14px">
-								{/* <Text fontWeight="semibold">
-									{user?.username ? user.username : user?.email}
-								</Text> */}
+							<Flex direction="column" ml={4} fontSize="12px">
 								<Text w="100px" fontWeight="semibold">
 									{user?.email}
 								</Text>

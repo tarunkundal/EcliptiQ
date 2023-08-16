@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
+	AddInvitationActionPayload,
 	InvitationState,
 	SetInvitationActionPayload,
 	UpdateInvitationStatusActionPayload,
@@ -33,6 +34,15 @@ const invitationSlice = createSlice({
 				// Update the status of the invitation
 				state.invitations[invitationIndex].status = status;
 			}
+		},
+		add_invitation: (
+			state,
+			action: PayloadAction<AddInvitationActionPayload>
+		) => {
+			return {
+				...state,
+				invitations: [...state.invitations, action.payload.invitation],
+			};
 		},
 	},
 });

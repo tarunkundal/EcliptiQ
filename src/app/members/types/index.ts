@@ -4,12 +4,25 @@ export interface MemberState {
 
 export interface MemberTable {
 	id: string;
-	team_id: string | undefined;
-	user_id: string | undefined;
+	team_id: string;
+	user_id: string;
 	role: string;
-	user_email: string | undefined;
+	user_email: string;
 }
 
 export interface SetMemberActionPayload {
 	members: MemberTable[];
+}
+
+export interface AddMemberActionPayload {
+	member: MemberTable;
+}
+
+export interface UpdateMemberActionPayload {
+	memberId: any;
+	role: string | any;
+}
+
+export interface DeleteMemberActionPayload {
+	memberId: any;
 }

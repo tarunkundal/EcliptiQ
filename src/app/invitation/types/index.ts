@@ -21,3 +21,7 @@ export interface UpdateInvitationStatusActionPayload {
 	status: string;
 	invitationId: string;
 }
+
+export interface AddInvitationActionPayload {
+	invitation: InvitationTable;
+}

@@ -13,7 +13,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import useCustomToast from '../../../hooks/useToastHook';
-// import { memberActions } from '../../members/slice';
+import { _addNewTeamMember } from '../../members/service';
+import { memberActions } from '../../members/slice';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { _creatingNewTeam } from '../service';
 import { teamActions } from '../slice';
@@ -44,25 +45,22 @@ const CreateTeamForm = () => {
 			dispatch(teamActions.add_team({ team: data[0] }));
 
 			// storing user as admin in the member table
-			// const res = await supabase
-			// 	.from('members')
-			// 	.insert([
-			// 		{
-			// 			team_id: data.id,
-			// 			user_id: user.user?.id,
-			// 			role: 'admin',
-			// 			user_email: user.user?.email,
-			// 		},
-			// 	])
-			// 	.select();
-			// if (res.data) {
-			// 	customToast({
-			// 		title: 'Sucussfully created you as the admin of your Workspace',
-			// 		status: 'success',
-			// 	});
-			// } else if (res.error) {
-			// 	console.log(error, 'error while inserting as member');
-			// }
+			const response = await _addNewTeamMember({
+				team_id: data[0].id,
+				user_id: user.user?.id,
+				user_email: user.user?.email,
+				role: 'admin',
+			});
+
+			if (response.data && !response.error) {
+				customToast({ title: 'Member added.', status: 'success' });
+				dispatch(memberActions.add_member({ member: response.data[0] }));
+			} else if (response.error) {
+				customToast({
+					title: 'Error while adding as team member',
+					status: 'error',
+				});
+			}
 
 			history.goBack();
 		} else if (error) {

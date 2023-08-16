@@ -6,7 +6,7 @@ const Routes = {
 	DASHBOARD: '/',
 	NEWTASK: '/newtask',
 	CREATE_TEAM: '/create-team',
-	INVITATIONS: '/all-invitations',
+	INVITATIONS: '/invitations',
 	TEAMDETAIL: '/teams/:id',
 	TEAMS: '/teams',
 	TEAMSMEMBERS: '/teams/members/:id',

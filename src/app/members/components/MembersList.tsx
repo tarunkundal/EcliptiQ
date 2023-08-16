@@ -16,18 +16,58 @@ import {
 	Text,
 	Tr,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiUsers } from 'react-icons/fi';
 import { LuArrowDownCircle } from 'react-icons/lu';
+import { useParams } from 'react-router-dom';
 
-// import { useParams } from 'react-router-dom';
+import useCustomToast from '../../../hooks/useToastHook';
 import InvitationForm from '../../invitation/components/InvitationForm';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { _deleteMemberById, _fetchAllTeamsMembers } from '../service';
+import { memberActions } from '../slice';
 
 const MembersList = () => {
-	// const { id } = useParams();
-	// const teamId = id;
-
+	const { id } = useParams();
+	const dispatch = useAppDispatch();
+	const customToast = useCustomToast();
+	const teamId = id;
 	const [sendInvite, setSendInvite] = useState(false);
+	const members = useAppSelector((state) => state.members.members);
+	const teams = useAppSelector((state) => state.teams.teams);
+
+	// finding team by teamId
+	const selectedTeam = teams.find((team) => team.id === teamId);
+
+	// fetching team members
+	useEffect(() => {
+		const fetchAllTeamMemberByTeamId = async () => {
+			const { data, error } = await _fetchAllTeamsMembers(teamId);
+			if (!error && data) {
+				dispatch(memberActions.set_member({ members: data }));
+			} else if (error) {
+				customToast({
+					title: 'Error while fetching members.',
+					status: 'error',
+				});
+			}
+		};
+		fetchAllTeamMemberByTeamId();
+	}, [teamId]);
+
+	// delete team member
+	const deleteTeamMemberHandler = async (memberId: string) => {
+		const { error } = await _deleteMemberById(memberId);
+		if (error) {
+			customToast({
+				title: 'Error while removing from members List',
+				status: 'error',
+			});
+		} else if (!error) {
+			customToast({ title: 'Removed sucessfully', status: 'success' });
+			dispatch(memberActions.delete_member({ memberId: memberId }));
+		}
+	};
 
 	const closeInvitation = () => setSendInvite(false);
 	return (
@@ -39,7 +79,9 @@ const MembersList = () => {
 					<Heading fontWeight="400" fontSize="30px">
 						Team Members
 					</Heading>
-					<Text>Manage who is the member of `Team Name`</Text>
+					<Text>
+						Manage the members of <b> `{selectedTeam?.name}`</b>
+					</Text>
 				</Stack>
 				<hr />
 				<Text my={4}>Manage Members</Text>
@@ -76,21 +118,37 @@ const MembersList = () => {
 							</TableCaption>
 
 							<Tbody>
-								<Tr>
-									<Td>
-										<Flex alignItems="center">
-											<Avatar size="sm" />
-											<Stack gap={-1} ml={2}>
-												<Text fontSize="15px" fontWeight="semibold">
-													Tarun Chauhan
-												</Text>
-												<Text fontSize="13px">email@gmail.com</Text>
-											</Stack>
-										</Flex>
-									</Td>
-									<Td>Role</Td>
-									<Td isNumeric>Leave Team</Td>
-								</Tr>
+								{members.map((member) => {
+									return (
+										<Tr key={member.id}>
+											<Td>
+												<Flex alignItems="center">
+													<Avatar size="sm" name={member.user_email} />
+													<Stack gap={-1} ml={2}>
+														{/* <Text fontSize="15px" fontWeight="semibold"></Text> */}
+														<Text fontSize="14px" fontWeight="semibold">
+															{member.user_email}
+														</Text>
+													</Stack>
+												</Flex>
+											</Td>
+											<Td>{member.role}</Td>
+											<Td isNumeric>
+												{member.role === 'member' ? (
+													<Button
+														onClick={() => deleteTeamMemberHandler(member.id)}
+														variant="red"
+														size="sm"
+													>
+														Leave Team
+													</Button>
+												) : (
+													''
+												)}
+											</Td>
+										</Tr>
+									);
+								})}
 							</Tbody>
 						</Table>
 					</TableContainer>

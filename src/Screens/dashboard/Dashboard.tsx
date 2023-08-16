@@ -10,9 +10,7 @@ import DashboardBody from './DashboardBody';
 
 const Dashboard = () => {
 	const user = useAppSelector((state) => state.user.user);
-	// const workspace = useAppSelector((state) => state.teams.teams);
 	const dispatch = useAppDispatch();
-	// const [selectedWorkspace, setSelectedWorkspace] = useState(null);
 
 	// fetching user invitations
 	useEffect(() => {
@@ -28,22 +26,14 @@ const Dashboard = () => {
 
 	// fetching userteams
 	useEffect(() => {
-		const fetchUserTeams = async () => {
+		const fetchUserAllTeams = async () => {
 			const { data, error } = await _fetchAllTeamsOfUser(user?.id);
 			if (data && !error) {
 				dispatch(teamActions.set_team({ teams: data }));
 			}
 		};
-		fetchUserTeams();
+		fetchUserAllTeams();
 	}, []);
-
-	// const selectWorkspaceHandler = (prop: any) => {
-	// 	setSelectedWorkspace(prop);
-	// 	console.log(prop);
-	// };
-
-	// if (workspace.length > 1 && selectedWorkspace === null)
-	// 	return <WorkspaceSelect onselect={selectWorkspaceHandler} />;
 
 	return (
 		<>

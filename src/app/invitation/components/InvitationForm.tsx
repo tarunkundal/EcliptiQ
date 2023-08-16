@@ -1,12 +1,11 @@
 import { Button, Input, Select, Stack, Text } from '@chakra-ui/react';
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 
 import Modal from '../../../components/Modal';
 import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
 import supabase from '../../supabase';
-import { _fetchAllTeamsOfUser } from '../../team/service';
-import { teamActions } from '../../team/slice';
+import { invitationActions } from '../slice';
 
 const InvitationForm = (props: {
 	// eslint-disable-next-line no-undef
@@ -20,17 +19,7 @@ const InvitationForm = (props: {
 
 	const customToast = useCustomToast();
 
-	// fetch all teams for the user
 	const user_id = user?.id;
-	useEffect(() => {
-		const allTeams = async () => {
-			const { data } = await _fetchAllTeamsOfUser(user_id);
-			if (data) {
-				dispatch(teamActions.set_team({ teams: data }));
-			}
-		};
-		allTeams();
-	}, []);
 
 	const userTeamsName = teams.teams.map((team) => team.name);
 
@@ -43,6 +32,25 @@ const InvitationForm = (props: {
 			(team) => team.name === invitedInWhichTeam
 		);
 		const team_Id = teamInWhichInvited[0].id;
+
+		// fetching all invitations from invitations table
+		const response = await supabase.from('invitations').select('*');
+		if (response.error) {
+			customToast({ title: response.error.message, status: 'error' });
+		}
+		// finding weather the invitation is alredy send or not
+		const isUserAlreadyInvited = response.data?.find(
+			(invitation) =>
+				invitation.team_id === team_Id &&
+				invitation.invited_email === emailToInvited
+		);
+		if (isUserAlreadyInvited) {
+			customToast({
+				title: 'User is alredy invited for this team.',
+				status: 'warning',
+			});
+			return;
+		}
 
 		const { data, error } = await supabase
 			.from('invitations')
@@ -61,6 +69,7 @@ const InvitationForm = (props: {
 				title: 'Invitation send successfully.',
 				status: 'success',
 			});
+			dispatch(invitationActions.add_invitation({ invitation: data[0] }));
 			props.onClose;
 		} else if (data === null && error) {
 			customToast({
@@ -69,8 +78,6 @@ const InvitationForm = (props: {
 				status: 'error',
 			});
 		}
-
-		console.log(data, 'and', error?.message);
 	};
 
 	return (
@@ -99,6 +106,7 @@ const InvitationForm = (props: {
 							<Text>Add to team</Text>
 							<Select
 								placeholder="Select option"
+								required
 								value={invitedInWhichTeam}
 								onChange={(value) => setInvitedInWhichTeam(value.target.value)}
 							>
