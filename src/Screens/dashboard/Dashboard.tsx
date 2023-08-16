@@ -14,7 +14,7 @@ const Dashboard = () => {
 	const dispatch = useAppDispatch();
 	// const [selectedWorkspace, setSelectedWorkspace] = useState(null);
 
-	// fetching the user invitations
+	// fetching user invitations
 	useEffect(() => {
 		const fetchAllInvitations = async () => {
 			const { data, error } = await _fetchInvitations(user?.email);
@@ -28,13 +28,13 @@ const Dashboard = () => {
 
 	// fetching userteams
 	useEffect(() => {
-		const fetchingUserWorkspace = async () => {
+		const fetchUserTeams = async () => {
 			const { data, error } = await _fetchAllTeamsOfUser(user?.id);
 			if (data && !error) {
 				dispatch(teamActions.set_team({ teams: data }));
 			}
 		};
-		fetchingUserWorkspace();
+		fetchUserTeams();
 	}, []);
 
 	// const selectWorkspaceHandler = (prop: any) => {

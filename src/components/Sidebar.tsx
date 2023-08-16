@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { IconType } from 'react-icons';
-import { AiOutlineTeam } from 'react-icons/ai';
+import { BsMicrosoftTeams } from 'react-icons/bs';
 import { FiHome, FiLogOut, FiPlus, FiSettings, FiUser } from 'react-icons/fi';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
@@ -31,6 +31,7 @@ const LinkItems: Array<LinkItemProps> = [
 	{ name: 'Home', icon: FiHome, path: Routes.DASHBOARD },
 	{ name: 'New Task', icon: FiPlus, path: Routes.NEWTASK },
 	{ name: 'Settings', icon: FiSettings, path: Routes.USER_SETTING },
+	{ name: 'Teams', icon: BsMicrosoftTeams, path: Routes.TEAMS },
 ];
 
 const Sidebar: React.FC = () => {
@@ -145,20 +146,7 @@ const Sidebar: React.FC = () => {
 					Profile
 				</Flex>
 
-				<Flex
-					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
-					alignItems="center"
-					p={2}
-					my={5}
-					mx={2}
-					rounded="md"
-					onClick={openProfile}
-				>
-					<Icon as={AiOutlineTeam} mr="4" />
-					Your Team
-				</Flex>
-
-				<Link style={{ color: 'initial' }} to={Routes.CREATE_TEAM}>
+				{/* <Link style={{ color: 'initial' }} to={Routes.CREATE_TEAM}>
 					<Flex
 						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
 						alignItems="center"
@@ -170,7 +158,7 @@ const Sidebar: React.FC = () => {
 						<Icon as={AiOutlineTeam} mr="4" />
 						Create Team
 					</Flex>
-				</Link>
+				</Link> */}
 
 				{/* invitation form */}
 				<Flex

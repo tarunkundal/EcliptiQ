@@ -13,16 +13,16 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import useCustomToast from '../../../hooks/useToastHook';
-import Routes from '../../../Routes';
 // import { memberActions } from '../../members/slice';
-import { useAppSelector } from '../../store';
-import supabase from '../../supabase';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { _creatingNewTeam } from '../service';
+import { teamActions } from '../slice';
 
 const CreateTeamForm = () => {
 	const [teamName, setTeamName] = useState('');
 	const [role, setRole] = useState('admin');
 	const user = useAppSelector((state) => state.user);
-	// const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 	const customToast = useCustomToast();
 	const history = useHistory();
 
@@ -30,55 +30,41 @@ const CreateTeamForm = () => {
 		e.preventDefault();
 
 		// creating new team
-		const { data, error } = await supabase
-			.from('teams')
-			.insert([
-				{
-					creater_id: user.user?.id,
-					name: teamName,
-				},
-			])
-			.select();
+		const { data, error } = await _creatingNewTeam({
+			userId: user.user?.id,
+			teamName: teamName,
+		});
 		if (data) {
 			customToast({
 				title: 'Workspace created sucessfully.',
 				status: 'success',
 			});
-			// storing user as admin in the member table
-			const res = await supabase
-				.from('members')
-				.insert([
-					{
-						team_id: data[0].id,
-						user_id: user.user?.id,
-						role: 'admin',
-						user_email: user.user?.email,
-					},
-				])
-				.select();
-			if (res.data) {
-				// dispatch(
-				// 	memberActions.set_member({
-				// 		members: [
-				// 			{
-				// 				team_id: data[0].id,
-				// 				user_id: user.user?.id,
-				// 				user_email: user.user?.email,
-				// 				id: res.data[0].id,
-				// 				role: res.data[0].role,
-				// 			},
-				// 		],
-				// 	})
-				// );
-				customToast({
-					title: 'Sucussfully created you as the admin of your Workspace',
-					status: 'success',
-				});
-			} else if (res.error) {
-				console.log('error while inserting as member');
-			}
 
-			history.push(Routes.DASHBOARD);
+			// updateing store
+			dispatch(teamActions.add_team({ team: data[0] }));
+
+			// storing user as admin in the member table
+			// const res = await supabase
+			// 	.from('members')
+			// 	.insert([
+			// 		{
+			// 			team_id: data.id,
+			// 			user_id: user.user?.id,
+			// 			role: 'admin',
+			// 			user_email: user.user?.email,
+			// 		},
+			// 	])
+			// 	.select();
+			// if (res.data) {
+			// 	customToast({
+			// 		title: 'Sucussfully created you as the admin of your Workspace',
+			// 		status: 'success',
+			// 	});
+			// } else if (res.error) {
+			// 	console.log(error, 'error while inserting as member');
+			// }
+
+			history.goBack();
 		} else if (error) {
 			customToast({
 				title: error.message,

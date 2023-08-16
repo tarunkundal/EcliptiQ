@@ -7,6 +7,8 @@ const Routes = {
 	NEWTASK: '/newtask',
 	CREATE_TEAM: '/create-team',
 	INVITATIONS: '/all-invitations',
+	TEAMDETAIL: '/teams/:id',
+	TEAMS: '/teams',
 };
 
 export default Routes;

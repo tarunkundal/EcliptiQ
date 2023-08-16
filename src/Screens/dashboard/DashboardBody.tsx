@@ -5,6 +5,8 @@ import InvitationAcceptForm from '../../app/invitation/components/InvitationAcce
 import AllTasks from '../../app/tasks/components';
 import TaskForm from '../../app/tasks/components/TaskForm';
 import CreateTeamForm from '../../app/team/components/CreateTeamForm';
+import TeamDetailPage from '../../app/team/components/TeamDetailPage';
+import TeamList from '../../app/team/components/TeamList';
 import UserSetting from '../../app/user/components/UserSetting';
 import Routes from '../../Routes';
 
@@ -16,6 +18,8 @@ const DashboardBody = () => {
 			<Route exact path={Routes.NEWTASK} component={TaskForm} />
 			<Route exact path={Routes.CREATE_TEAM} component={CreateTeamForm} />
 			<Route exact path={Routes.INVITATIONS} component={InvitationAcceptForm} />
+			<Route exact path={Routes.TEAMDETAIL} component={TeamDetailPage} />
+			<Route exact path={Routes.TEAMS} component={TeamList} />
 		</Box>
 	);
 };

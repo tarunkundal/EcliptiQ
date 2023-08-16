@@ -15,3 +15,45 @@ export const _fetchAllTeamsOfUser = async (
 ): Promise<{ data: TeamTable[] | null; error: any }> => {
 	return await supabase.from('teams').select().eq('creater_id', user_id);
 };
+
+// adding team
+export const _creatingNewTeam = async ({
+	userId,
+	teamName,
+}: {
+	userId: any;
+	teamName: string;
+}): Promise<{
+	data: TeamTable[] | null;
+	error: any;
+}> => {
+	return await supabase
+		.from('teams')
+		.insert([
+			{
+				creater_id: userId,
+				name: teamName,
+			},
+		])
+		.select();
+};
+
+// updating teamname
+export const _updateTeamName = async ({
+	teamId,
+	teamName,
+}: {
+	teamId: any;
+	teamName: string | undefined;
+}): Promise<{ data: TeamTable[] | null; error: any }> => {
+	return await supabase
+		.from('teams')
+		.update({ name: teamName })
+		.eq('id', teamId)
+		.select();
+};
+
+// delete team
+export const _deleteTeam = async (teamId: string): Promise<{ error: any }> => {
+	return await supabase.from('teams').delete().eq('id', teamId);
+};
