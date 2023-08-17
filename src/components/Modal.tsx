@@ -35,13 +35,14 @@ const Modal = (props: {
 			<Box
 				position="fixed"
 				top="10%"
-				left={{ base: '8%', md: '35%' }}
+				left={{ base: '3%', md: '25%' }}
+				right={{ base: '3%', md: '25%' }}
 				boxShadow="xl"
-				minWidth={{ base: '80%', md: '30%' }}
+				minWidth={{ base: '90%', md: '40%' }}
 				zIndex={50}
-				p={4}
 				bg="white"
 				rounded="2xl"
+				pt={2}
 			>
 				<CloseButton
 					onClick={props.onClose}

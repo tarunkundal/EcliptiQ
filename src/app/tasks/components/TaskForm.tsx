@@ -1,84 +1,118 @@
 import {
+	Box,
 	Button,
 	Flex,
-	Heading,
 	Input,
-	Select,
 	Stack,
 	Text,
 	Textarea,
 } from '@chakra-ui/react';
+import { LuArrowRight } from 'react-icons/lu';
+import { MdClose } from 'react-icons/md';
+import Select from 'react-select';
+
+import {
+	customControl,
+	CustomOption,
+	PriorityOptions,
+	StatusOptions,
+} from '../taskHelper';
 
 const TaskForm = () => {
+	// const [selectedPriorty, setSelectedPriority] = useState(null);
+
+	// handle priority
+	const handlePriorityChange = (selectedOption: any) => {
+		console.log(selectedOption);
+	};
+
 	return (
 		<Stack
-			spacing={{ base: '2', md: '4' }}
-			boxShadow="2xl"
-			rounded="3xl"
-			w={{ base: '90%', md: '70%' }}
+			spacing={{ base: '4', md: '4' }}
+			rounded={{ base: 'md', md: '2xl' }}
 			mx="auto"
-			p="5"
-			mt={15}
+			p={{ base: '2', md: '5' }}
+			w={{ base: '90%', md: '70%' }}
+			my={4}
+			mt={{ base: '0', md: '10%' }}
+			border="1px"
+			fontSize={{ base: '14px', md: '-moz-initial' }}
 		>
-			<Heading textAlign="center" fontSize="22px" pb={4}>
-				Create Task
-			</Heading>
+			<Flex justifyContent="space-between">
+				<Flex alignItems="center" fontSize="14px">
+					<Box p="2px" border="1px" borderColor="gray.100" rounded="md">
+						Team Name
+					</Box>
+					<Box mx={1}>
+						<LuArrowRight />
+					</Box>
+					<Text>New Task</Text>
+				</Flex>
+				<Button variant="red" size="sm">
+					<MdClose color="white" />
+				</Button>
+			</Flex>
 			<hr />
 
 			<form>
-				<Stack gap={6}>
-					<Input border="none" type="text" placeholder="New Task..." />
+				<Stack gap={{ base: 3, md: 6 }}>
+					<Input type="text" placeholder="Task Title..." />
 
-					<Textarea border="none" placeholder="Add Description..." />
+					<Textarea placeholder="Task Description..." />
 
-					<Stack flexDirection="row" justifyContent="space-around">
+					<Stack
+						display={{ base: 'grid', md: 'flex' }}
+						flexDirection={{ base: 'column', md: 'row' }}
+					>
 						<Stack>
 							<Text fontWeight="semibold" fontSize="14px">
-								Forms
+								Status
 							</Text>
-							<Select placeholder="Select Form">
-								<option value="backlog">Backlog</option>
-								<option value="todo">Todo</option>
-								<option value="progress">In Progress</option>
-								<option value="done">Done</option>
-							</Select>
+							<Select
+								placeholder="Select Status"
+								onChange={handlePriorityChange}
+								options={StatusOptions}
+								components={{
+									Option: CustomOption,
+								}}
+								styles={customControl}
+							/>
 						</Stack>
 						<Stack>
 							<Text fontWeight="semibold" fontSize="14px">
 								Priority
 							</Text>
-							<Select placeholder="Select Priority">
-								<option value="urgent">Urgent</option>
-								<option value="high">High</option>
-								<option value="medium">Medium</option>
-								<option value="low">Low</option>
-							</Select>
+							<Select
+								placeholder="Select Priority"
+								onChange={handlePriorityChange}
+								options={PriorityOptions}
+								components={{
+									Option: CustomOption,
+								}}
+								styles={customControl}
+							/>
 						</Stack>
 						<Stack>
 							<Text fontWeight="semibold" fontSize="14px">
 								Assign to...
 							</Text>
-							<Select placeholder="Select option">
-								<option value="option1">Option 1</option>
-								<option value="option2">Option 2</option>
-								<option value="option3">Option 3</option>
-							</Select>
+							<Select placeholder="Select option" />
 						</Stack>
 						<Stack>
 							<Text fontWeight="semibold" fontSize="14px">
 								Due Date
 							</Text>
-							<Input type="date" />
+							<Input type="date" cursor="pointer" />
 						</Stack>
 					</Stack>
 
 					<hr />
 					<Flex justifyContent="space-around">
-						<Button type="submit" w="30%" variant="blue">
-							Create task
-						</Button>
 						<Button variant="red" w="30%">
 							Cancle
+						</Button>
+						<Button type="submit" w="30%" variant="blue">
+							Create task
 						</Button>
 					</Flex>
 				</Stack>

@@ -36,7 +36,15 @@ const Logout = (props: {
 
 	return (
 		<Modal onClose={props.onClose}>
-			<Stack mt={4} gap={8} rounded="lg" direction="column" mx="auto">
+			<Stack
+				mt={4}
+				p={4}
+				pb={6}
+				gap={4}
+				rounded="lg"
+				direction="column"
+				mx="auto"
+			>
 				<Text textAlign="center" fontSize="xl" fontWeight="bold">
 					Are you sure?
 				</Text>

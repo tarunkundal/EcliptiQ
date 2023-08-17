@@ -82,7 +82,7 @@ const InvitationForm = (props: {
 
 	return (
 		<Modal onClose={props.onClose}>
-			<Stack p={2}>
+			<Stack p={4}>
 				<Text mb={2} fontWeight="semibold">
 					Invite your team
 				</Text>
@@ -94,7 +94,6 @@ const InvitationForm = (props: {
 							<Text>Email</Text>
 							<Input
 								required
-								h={14}
 								value={emailToInvited}
 								onChange={(e) => setEmailToInvited(e.target.value)}
 								placeholder="example@gmail.com"
