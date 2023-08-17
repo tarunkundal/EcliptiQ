@@ -132,6 +132,7 @@ const Invitations = () => {
 				flexDirection="row"
 				justifyContent="space-between"
 				alignItems="center"
+				mx={12}
 			>
 				<Stack>
 					<Heading fontSize="25px">Invitations</Heading>

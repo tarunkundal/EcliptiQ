@@ -15,8 +15,9 @@ import {
 import React, { useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsMicrosoftTeams } from 'react-icons/bs';
-import { FiHome, FiLogOut, FiPlus, FiUser } from 'react-icons/fi';
+import { FiHome, FiPlus, FiUser } from 'react-icons/fi';
 import { LuSettings2, LuUser } from 'react-icons/lu';
+import { MdInsertInvitation } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -25,7 +26,6 @@ import { useAppSelector } from '../app/store';
 import UserProfile from '../app/user/components/UserProfileCard';
 import Logo from '../assets/logoQ.png';
 import Routes from '../Routes';
-import Logout from '../Routes/auth/Logout';
 
 interface LinkItemProps {
 	name: string;
@@ -37,6 +37,7 @@ const LinkItems: Array<LinkItemProps> = [
 	{ name: 'Home', icon: FiHome, path: Routes.DASHBOARD },
 	{ name: 'New Task', icon: FiPlus, path: Routes.NEWTASK },
 	{ name: 'Teams', icon: BsMicrosoftTeams, path: Routes.TEAMS },
+	{ name: 'Invitations', icon: MdInsertInvitation, path: Routes.INVITATIONS },
 ];
 
 const Sidebar: React.FC = () => {
@@ -45,12 +46,8 @@ const Sidebar: React.FC = () => {
 
 	const user = useAppSelector((state) => state.user.user);
 
-	const [isOpenLogout, setIsOpenLogout] = useState(false);
 	const [isOpenProfile, setIsOpenProfile] = useState(false);
 	const [isOpenInvitation, setIsOpenInvitation] = useState(false);
-
-	const closeLogout = () => setIsOpenLogout(false);
-	const openLogout = () => setIsOpenLogout(true);
 
 	const openProfile = () => setIsOpenProfile(true);
 	const closeProfile = () => setIsOpenProfile(false);
@@ -63,7 +60,6 @@ const Sidebar: React.FC = () => {
 
 	return (
 		<>
-			{isOpenLogout && <Logout onClose={closeLogout} />}
 			{isOpenProfile && <UserProfile onClose={closeProfile} />}
 			{isOpenInvitation && <InvitationForm onClose={closeInvitation} />}
 
@@ -207,19 +203,6 @@ const Sidebar: React.FC = () => {
 							</Link>
 						</MenuList>
 					</Menu>
-				</Flex>
-
-				<Flex
-					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
-					alignItems="center"
-					p={2}
-					my={5}
-					mx={2}
-					rounded="md"
-					onClick={openLogout}
-				>
-					<Icon as={FiLogOut} mr="4" />
-					<Text>Logout</Text>
 				</Flex>
 
 				<Box my={4} position="absolute" bottom={0}>
