@@ -1,5 +1,5 @@
 import supabase from '../../supabase';
-import { InvitationTable } from '../types';
+import { InvitationTable, InvitationTableWithTeamName } from '../types';
 
 // fetch all invitations of the user
 export const _fetchInvitations = async (
@@ -60,4 +60,19 @@ export const _addNewInvitation = async ({
 			},
 		])
 		.select();
+};
+
+// fetching Userinvitations with team name
+export const _fetchInvitationsWithTeamName = async ({
+	userEmail,
+}: {
+	userEmail: string | undefined;
+}): Promise<{
+	data: InvitationTableWithTeamName[] | null;
+	error: any;
+}> => {
+	return await supabase
+		.from('invitations')
+		.select('*,teams:team_id (name)')
+		.eq('invited_email', userEmail);
 };

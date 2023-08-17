@@ -25,3 +25,15 @@ export interface UpdateInvitationStatusActionPayload {
 export interface AddInvitationActionPayload {
 	invitation: InvitationTable;
 }
+
+export interface InvitationTableWithTeamName {
+	id: string;
+	team_id: string;
+	creater_id: string;
+	created_at: string | any;
+	status: string;
+	invited_email: string;
+	invited_by_userId: any;
+	invited_byUser_email: string;
+	teams: { name: string };
+}
