@@ -71,3 +71,30 @@ export const customControl = {
 		},
 	}),
 };
+
+// icons with colors
+export const priorityIcons = {
+	high: TbAntennaBars5,
+	medium: TbAntennaBars4,
+	low: TbAntennaBars3,
+	urgent: MdLabelImportant,
+};
+export const priorityColors = {
+	high: 'green.400',
+	medium: 'blue.400',
+	low: 'gray.500',
+	urgent: 'red.400',
+};
+
+export const stagesIcons = {
+	backlog: ImSpinner6,
+	todo: FaRegCircle,
+	progress: TbProgressBolt,
+	done: FaCheckCircle,
+};
+export const stagesColors = {
+	backlog: 'skyblue',
+	todo: 'gray.400',
+	progress: 'red',
+	done: 'blue',
+};

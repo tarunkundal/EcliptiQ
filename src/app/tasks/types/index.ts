@@ -36,7 +36,7 @@ export interface UpdateTaskActionPayload {
 }
 export interface UpdateTaskStatusActionPayload {
 	taskId: any;
-	status: string | any;
+	stage: string | any;
 }
 
 export interface AddTaskActionPayload {

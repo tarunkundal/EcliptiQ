@@ -9,21 +9,23 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { BsMicrosoftTeams } from 'react-icons/bs';
-import { FaCheckCircle, FaPlus, FaRegCircle, FaThList } from 'react-icons/fa';
+import { FaPlus, FaThList } from 'react-icons/fa';
 import { HiViewList } from 'react-icons/hi';
-import { ImSpinner6 } from 'react-icons/im';
 import { IoMdArrowDropright } from 'react-icons/io';
-import { MdLabelImportant, MdOutlineOpenInNew } from 'react-icons/md';
+import { MdOutlineOpenInNew } from 'react-icons/md';
 import { PiUserFocus } from 'react-icons/pi';
-import {
-	TbAntennaBars3,
-	TbAntennaBars4,
-	TbAntennaBars5,
-	TbProgressBolt,
-} from 'react-icons/tb';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
-import { useAppSelector } from '../../store';
+import useCustomToast from '../../../hooks/useToastHook';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { _updateTaskStatus } from '../service';
+import { taskActions } from '../slice';
+import {
+	priorityColors,
+	priorityIcons,
+	stagesColors,
+	stagesIcons,
+} from '../taskHelper';
 const AllTasks = () => {
 	const history = useHistory();
 	const location = useLocation();
@@ -33,6 +35,8 @@ const AllTasks = () => {
 	const [selectedTeamId, setSelectedTeamId] = useState(
 		storedSelectedTeamId || ''
 	);
+	const customToast = useCustomToast();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		const byDefaultSelectedTeamId = teams.length > 0 ? teams[0].id : '';
@@ -55,30 +59,33 @@ const AllTasks = () => {
 	// fetching selected team tasks
 	const teamTasks = allTasks.filter((task) => task.team_id === selectedTeamId);
 
-	const priorityIcons = {
-		high: TbAntennaBars5,
-		medium: TbAntennaBars4,
-		low: TbAntennaBars3,
-		urgent: MdLabelImportant,
-	};
-	const priorityColors = {
-		high: 'green.400',
-		medium: 'blue.400',
-		low: 'gray.500',
-		urgent: 'red.400',
-	};
+	// handle checkbox state
+	const handleCheckboxChange = async (taskId: string, checked: boolean) => {
+		let taskStatus = 'todo';
+		if (checked === true) {
+			taskStatus = 'done';
+		}
 
-	const stagesIcons = {
-		backlog: ImSpinner6,
-		todo: FaRegCircle,
-		progress: TbProgressBolt,
-		done: FaCheckCircle,
-	};
-	const stagesColors = {
-		backlog: 'skyblue',
-		todo: 'gray.400',
-		progress: 'red',
-		done: 'blue',
+		const { data, error } = await _updateTaskStatus({
+			taskId: taskId,
+			taskStatus: taskStatus,
+		});
+		console.log(data, error);
+
+		if (data && !error) {
+			customToast({
+				title: 'Task stage updated sucessfully.',
+				status: 'success',
+			});
+			dispatch(
+				taskActions.update_task_status({ taskId: taskId, stage: taskStatus })
+			);
+		} else if (error) {
+			customToast({
+				title: 'Error while updating task stage.',
+				status: 'error',
+			});
+		}
 	};
 
 	return (
@@ -111,7 +118,6 @@ const AllTasks = () => {
 							placeholder=""
 							value={selectedTeamId}
 							onChange={(value) => handleTeamChange(value.target.value)}
-							// onChange={(value) => setSelectedTeamId(value.target.value)}
 						>
 							{teams.map((team) => {
 								return (
@@ -129,12 +135,7 @@ const AllTasks = () => {
 			<Stack my={4} mx={8} fontSize="14px">
 				{teamTasks.map((task) => {
 					return (
-						<Box
-							key={task.id}
-							borderBottom="1px"
-							pb={2}
-							// onClick={<Link to={`/tasks/${task.id}`} />}
-						>
+						<Box key={task.id} borderBottom="1px" pb={2}>
 							<Flex
 								key={task.id}
 								p={2}
@@ -144,7 +145,13 @@ const AllTasks = () => {
 								rounded="md"
 							>
 								<Flex alignItems="center">
-									<Checkbox colorScheme="blue" />
+									<Checkbox
+										colorScheme="blue"
+										onChange={(e) =>
+											handleCheckboxChange(task.id, e.target.checked)
+										}
+										defaultChecked={task.stage === 'done' ? true : false}
+									/>
 									<Text ml={4}>
 										<Icon
 											mt={1}

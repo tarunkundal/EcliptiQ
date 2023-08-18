@@ -26,7 +26,7 @@ export const _updateTaskStatus = async ({
 }): Promise<{ data: TaskTable[] | null; error: any }> => {
 	return await supabase
 		.from('tasks')
-		.update({ status: taskStatus })
+		.update({ stage: taskStatus })
 		.eq('id', taskId)
 		.select();
 };
@@ -44,6 +44,6 @@ export const _createNewTask = async ({
 };
 
 // delete task
-export const _deleteTeam = async (taskId: string): Promise<{ error: any }> => {
-	return await supabase.from('Tasks').delete().eq('id', taskId);
+export const _deleteTask = async (taskId: string): Promise<{ error: any }> => {
+	return await supabase.from('tasks').delete().eq('id', taskId);
 };

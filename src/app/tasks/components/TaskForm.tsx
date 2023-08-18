@@ -110,9 +110,9 @@ const TaskForm = () => {
 
 	const AssigneOptions = [
 		// eslint-disable-next-line no-unsafe-optional-chaining
-		...teamMembers?.map((team) => ({
-			value: `${team.user_id}`,
-			label: `${team.user_email}` || 'No Members',
+		...teamMembers?.map((member) => ({
+			value: `${member.user_id}`,
+			label: `${member.user_email}` || 'No Members',
 			icon: <FiUser />,
 		})),
 	];

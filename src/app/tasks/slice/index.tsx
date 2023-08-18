@@ -27,7 +27,7 @@ const taskSlice = createSlice({
 				...state,
 				tasks: state.tasks.map((task) =>
 					task.id === action.payload.taskId
-						? { ...task, status: action.payload.status }
+						? { ...task, stage: action.payload.stage }
 						: task
 				),
 			};
