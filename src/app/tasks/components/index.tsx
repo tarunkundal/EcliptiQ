@@ -21,24 +21,39 @@ import {
 	TbAntennaBars5,
 	TbProgressBolt,
 } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import { useAppSelector } from '../../store';
 const AllTasks = () => {
+	const history = useHistory();
+	const location = useLocation();
+	const storedSelectedTeamId = localStorage.getItem('selectedTeamId');
 	const teams = useAppSelector((state) => state.teams.teams);
 	const allTasks = useAppSelector((state) => state.tasks.tasks);
-	const [selectedTeamId, setSelectedTeamId] = useState('');
+	const [selectedTeamId, setSelectedTeamId] = useState(
+		storedSelectedTeamId || ''
+	);
 
 	useEffect(() => {
 		const byDefaultSelectedTeamId = teams.length > 0 ? teams[0].id : '';
-		setSelectedTeamId(byDefaultSelectedTeamId);
+		setSelectedTeamId(storedSelectedTeamId || byDefaultSelectedTeamId);
 	}, []);
+
+	// Save selected team to local storage whenever it changes
+	useEffect(() => {
+		localStorage.setItem('selectedTeamId', selectedTeamId);
+	}, [selectedTeamId]);
+
+	// Handle changing the selected team ID when selecting from the dropdown
+	const handleTeamChange = (value: string) => {
+		history.replace(location.pathname); // Keep the current route and update URL
+		setSelectedTeamId(value); // Update the selectedTeamId directly
+	};
 
 	const selectedTeam = teams.find((team) => team.id === selectedTeamId);
 
 	// fetching selected team tasks
 	const teamTasks = allTasks.filter((task) => task.team_id === selectedTeamId);
-	console.log(teamTasks);
 
 	const priorityIcons = {
 		high: TbAntennaBars5,
@@ -95,7 +110,8 @@ const AllTasks = () => {
 							size="xs"
 							placeholder=""
 							value={selectedTeamId}
-							onChange={(value) => setSelectedTeamId(value.target.value)}
+							onChange={(value) => handleTeamChange(value.target.value)}
+							// onChange={(value) => setSelectedTeamId(value.target.value)}
 						>
 							{teams.map((team) => {
 								return (

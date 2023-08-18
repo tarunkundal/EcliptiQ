@@ -75,6 +75,7 @@
 		"window": true,
 		"alert": true,
 		"document": true,
-		"process": true
+		"process": true,
+		"localStorage": true
 	}
 }
