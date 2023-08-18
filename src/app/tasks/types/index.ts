@@ -26,6 +26,15 @@ export interface NewTaskData {
 	created_by: string | undefined;
 }
 
+export interface UpdateTaskData {
+	title: string;
+	description: string;
+	dueDate: Date | any;
+	stage: string;
+	priority: string;
+	assigned_to: string;
+}
+
 export interface SetTaskActionPayload {
 	tasks: TaskTable[];
 }

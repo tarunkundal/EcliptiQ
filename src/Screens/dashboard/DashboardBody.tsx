@@ -6,6 +6,7 @@ import MembersList from '../../app/members/components/MembersList';
 import AllTasks from '../../app/tasks/components';
 import TaskDetail from '../../app/tasks/components/TaskDetail';
 import TaskForm from '../../app/tasks/components/TaskForm';
+import TaskUpdateForm from '../../app/tasks/components/TaskUpdateForm';
 import CreateTeamForm from '../../app/team/components/CreateTeamForm';
 import TeamDetailPage from '../../app/team/components/TeamDetailPage';
 import TeamList from '../../app/team/components/TeamList';
@@ -26,6 +27,7 @@ const DashboardBody = () => {
 			<Route exact path={Routes.TEAMS} component={TeamList} />
 			<Route exact path={Routes.TEAMSMEMBERS} component={MembersList} />
 			<Route exact path={Routes.TASKDETAIL} component={TaskDetail} />
+			<Route exact path={Routes.UPDATE_TASK} component={TaskUpdateForm} />
 		</Box>
 	);
 };

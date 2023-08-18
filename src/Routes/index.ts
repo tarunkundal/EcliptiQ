@@ -12,6 +12,7 @@ const Routes = {
 	TEAMSMEMBERS: '/teams/members/:id',
 	TASKDETAIL: '/tasks/:taskID',
 	TASKS: '/tasks',
+	UPDATE_TASK: '/tasks/task/:taskId',
 };
 
 export default Routes;

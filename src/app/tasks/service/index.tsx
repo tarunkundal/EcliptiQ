@@ -1,5 +1,5 @@
 import supabase from '../../supabase';
-import { NewTaskData, TaskTable } from '../types';
+import { NewTaskData, TaskTable, UpdateTaskData } from '../types';
 
 // fetch all Tasks
 export const _fetchAllTasks = async (): Promise<{
@@ -46,4 +46,26 @@ export const _createNewTask = async ({
 // delete task
 export const _deleteTask = async (taskId: string): Promise<{ error: any }> => {
 	return await supabase.from('tasks').delete().eq('id', taskId);
+};
+
+// update task
+export const _updateTask = async ({
+	taskId,
+	taskData,
+}: {
+	taskId: any;
+	taskData: UpdateTaskData;
+}): Promise<{ data: TaskTable[] | null; error: any }> => {
+	return await supabase
+		.from('tasks')
+		.update({
+			stage: taskData.stage,
+			title: taskData.title,
+			description: taskData.description,
+			dueDate: taskData.dueDate,
+			priority: taskData.priority,
+			assigned_to: taskData.assigned_to,
+		})
+		.eq('id', taskId)
+		.select();
 };

@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { MdDateRange } from 'react-icons/md';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
 import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
@@ -147,9 +147,11 @@ const TaskDetail = () => {
 					<Button variant="red" onClick={deleteTaskHandler} size="sm">
 						Delete
 					</Button>
-					<Button variant="blue" size="sm">
-						Update
-					</Button>
+					<Link to={`/tasks/task/${selectedTask?.id}`}>
+						<Button variant="blue" size="sm">
+							Update
+						</Button>
+					</Link>
 				</Flex>
 			</Stack>
 		</Stack>
