@@ -1,7 +1,179 @@
-import React from 'react';
+import {
+	Box,
+	Checkbox,
+	Flex,
+	Icon,
+	Select,
+	Stack,
+	Text,
+} from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { BsMicrosoftTeams } from 'react-icons/bs';
+import { FaCheckCircle, FaPlus, FaRegCircle, FaThList } from 'react-icons/fa';
+import { HiViewList } from 'react-icons/hi';
+import { ImSpinner6 } from 'react-icons/im';
+import { IoMdArrowDropright } from 'react-icons/io';
+import { MdLabelImportant, MdOutlineOpenInNew } from 'react-icons/md';
+import { PiUserFocus } from 'react-icons/pi';
+import {
+	TbAntennaBars3,
+	TbAntennaBars4,
+	TbAntennaBars5,
+	TbProgressBolt,
+} from 'react-icons/tb';
+import { Link } from 'react-router-dom';
 
+import { useAppSelector } from '../../store';
 const AllTasks = () => {
-	return <div>AllTasks</div>;
+	const teams = useAppSelector((state) => state.teams.teams);
+	const allTasks = useAppSelector((state) => state.tasks.tasks);
+	const [selectedTeamId, setSelectedTeamId] = useState('');
+
+	useEffect(() => {
+		const byDefaultSelectedTeamId = teams.length > 0 ? teams[0].id : '';
+		setSelectedTeamId(byDefaultSelectedTeamId);
+	}, []);
+
+	const selectedTeam = teams.find((team) => team.id === selectedTeamId);
+
+	// fetching selected team tasks
+	const teamTasks = allTasks.filter((task) => task.team_id === selectedTeamId);
+	console.log(teamTasks);
+
+	const priorityIcons = {
+		high: TbAntennaBars5,
+		medium: TbAntennaBars4,
+		low: TbAntennaBars3,
+		urgent: MdLabelImportant,
+	};
+	const priorityColors = {
+		high: 'green.400',
+		medium: 'blue.400',
+		low: 'gray.500',
+		urgent: 'red.400',
+	};
+
+	const stagesIcons = {
+		backlog: ImSpinner6,
+		todo: FaRegCircle,
+		progress: TbProgressBolt,
+		done: FaCheckCircle,
+	};
+	const stagesColors = {
+		backlog: 'skyblue',
+		todo: 'gray.400',
+		progress: 'red',
+		done: 'blue',
+	};
+
+	return (
+		<Stack my={{ base: 1, md: 4 }} gap={4} p={2}>
+			<Flex alignItems="center" justifyContent="space-between">
+				<Flex alignItems="center">
+					<Box p={1} bg="gray.100" rounded="md">
+						<BsMicrosoftTeams />
+					</Box>
+					<Text mx={2}>{selectedTeam?.name}</Text>
+					<IoMdArrowDropright />
+					<Text mx={2}>Your Tasks</Text>
+				</Flex>
+				<Flex alignItems="center">
+					<Link to={`newTask/${selectedTeamId}`} style={{ color: 'initial' }}>
+						<Box cursor="pointer" mx={2} p={1} bg="gray.50" rounded="md">
+							<FaPlus />
+						</Box>
+					</Link>
+					<Box cursor="pointer" mx={2} p={1} bg="gray.50" rounded="md">
+						<HiViewList />
+					</Box>
+					<Box mx={2} p={1} cursor="pointer" bg="gray.50" rounded="md">
+						<FaThList />
+					</Box>
+					<Box mx={2} p={1} cursor="pointer" bg="gray.50" rounded="md">
+						<Select
+							required
+							size="xs"
+							placeholder=""
+							value={selectedTeamId}
+							onChange={(value) => setSelectedTeamId(value.target.value)}
+						>
+							{teams.map((team) => {
+								return (
+									<option key={team.name} value={team.id}>
+										{team.name}
+									</option>
+								);
+							})}
+						</Select>
+					</Box>
+				</Flex>
+			</Flex>
+			<hr />
+
+			<Stack my={4} mx={8} fontSize="14px">
+				{teamTasks.map((task) => {
+					return (
+						<Box
+							key={task.id}
+							borderBottom="1px"
+							pb={2}
+							// onClick={<Link to={`/tasks/${task.id}`} />}
+						>
+							<Flex
+								key={task.id}
+								p={2}
+								justifyContent="space-between"
+								alignItems="center"
+								_hover={{ bg: 'gray.50', cursor: 'pointer' }}
+								rounded="md"
+							>
+								<Flex alignItems="center">
+									<Checkbox colorScheme="blue" />
+									<Text ml={4}>
+										<Icon
+											mt={1}
+											as={
+												priorityIcons[
+													task.priority as keyof typeof priorityIcons
+												]
+											}
+											color={
+												priorityColors[
+													task.priority as keyof typeof priorityColors
+												]
+											}
+											fontSize="18px"
+										/>
+									</Text>
+									<Text ml={4}>
+										<Icon
+											mt={1}
+											as={stagesIcons[task.stage as keyof typeof stagesIcons]}
+											color={
+												stagesColors[task.stage as keyof typeof stagesColors]
+											}
+											fontSize="18px"
+										/>
+									</Text>
+									<Text ml={4}> {task.title} </Text>
+								</Flex>
+
+								<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
+									<Flex alignItems="center">
+										<Text>{task.dueDate}</Text>
+										<Box mx={4}>
+											<PiUserFocus fontSize="18px" />
+										</Box>
+										<MdOutlineOpenInNew fontSize="18px" color="blue" />
+									</Flex>
+								</Link>
+							</Flex>
+						</Box>
+					);
+				})}
+			</Stack>
+		</Stack>
+	);
 };
 
 export default AllTasks;

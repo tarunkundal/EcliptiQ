@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import invitationReducer from '../invitation/slice/index';
 import memberReducer from '../members/slice/index';
+import taskReducer from '../tasks/slice/index';
 import teamReducer from '../team/slice/index';
 import userReducer from '../user/slice/index';
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
 	teams: teamReducer,
 	members: memberReducer,
 	invitations: invitationReducer,
+	tasks: taskReducer,
 });
 
 const store = configureStore({

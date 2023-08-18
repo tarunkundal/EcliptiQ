@@ -16,9 +16,12 @@ import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { _deleteTeam, _updateTeamName } from '../service';
 import { teamActions } from '../slice';
+interface RouteParams {
+	id: string;
+}
 
 const TeamDetailPage = () => {
-	const parm = useParams();
+	const parm = useParams<RouteParams>();
 	const teamId = parm.id;
 	const teams = useAppSelector((state) => state.teams.teams);
 	const selectedTeam = teams.find((team) => team.id === teamId);

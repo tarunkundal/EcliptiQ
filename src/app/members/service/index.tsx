@@ -11,6 +11,8 @@ export const _fetchAllTeamsMembers = async (
 	return await supabase.from('members').select().eq('team_id', team_id);
 };
 
+// fetching all members from membertable
+
 // add new team member
 export const _addNewTeamMember = async ({
 	team_id,

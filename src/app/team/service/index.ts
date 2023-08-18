@@ -16,7 +16,7 @@ export const _fetchAllTeamsOfUser = async (
 	return await supabase.from('teams').select().eq('creater_id', user_id);
 };
 
-// adding team
+// creating team
 export const _creatingNewTeam = async ({
 	userId,
 	teamName,

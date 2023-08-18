@@ -3,7 +3,7 @@ import { FaCheckCircle, FaRegCircle } from 'react-icons/fa';
 import { ImSpinner6 } from 'react-icons/im';
 import { MdLabelImportant } from 'react-icons/md';
 import {
-	TbAntennaBars2,
+	TbAntennaBars3,
 	TbAntennaBars4,
 	TbAntennaBars5,
 	TbProgressBolt,
@@ -41,7 +41,7 @@ export const PriorityOptions = [
 		label: 'Medium',
 		icon: <TbAntennaBars4 color="blue" />,
 	},
-	{ value: 'low', label: 'Low', icon: <TbAntennaBars2 color="red" /> },
+	{ value: 'low', label: 'Low', icon: <TbAntennaBars3 color="red" /> },
 ];
 
 export const StatusOptions = [

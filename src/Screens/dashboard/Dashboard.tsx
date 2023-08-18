@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { _fetchInvitations } from '../../app/invitation/service';
 import { invitationActions } from '../../app/invitation/slice';
 import { useAppDispatch, useAppSelector } from '../../app/store';
+import { _fetchAllTasks } from '../../app/tasks/service';
+import { taskActions } from '../../app/tasks/slice';
 import { _fetchAllTeamsOfUser } from '../../app/team/service';
 import { teamActions } from '../../app/team/slice';
 import Sidebar from '../../components/Sidebar';
@@ -33,7 +35,17 @@ const Dashboard = () => {
 			}
 		};
 		fetchUserAllTeams();
+
+		const fetchAllTasks = async () => {
+			const { data, error } = await _fetchAllTasks();
+			if (data && !error) {
+				dispatch(taskActions.set_tasks({ tasks: data }));
+			}
+		};
+		fetchAllTasks();
 	}, []);
+
+	// fetching tasks
 
 	return (
 		<>

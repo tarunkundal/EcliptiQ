@@ -4,12 +4,14 @@ const Routes = {
 	PROFILE_PAGE: '/profile',
 	USER_SETTING: '/user/settings',
 	DASHBOARD: '/',
-	NEWTASK: '/newtask',
+	NEWTASK: '/newtask/:teamID',
 	CREATE_TEAM: '/create-team',
 	INVITATIONS: '/invitations',
 	TEAMDETAIL: '/teams/:id',
 	TEAMS: '/teams',
 	TEAMSMEMBERS: '/teams/members/:id',
+	TASKDETAIL: '/tasks/:taskID',
+	TASKS: '/tasks',
 };
 
 export default Routes;

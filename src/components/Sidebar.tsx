@@ -16,6 +16,7 @@ import React, { useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsMicrosoftTeams } from 'react-icons/bs';
 import { FiHome, FiPlus, FiUser } from 'react-icons/fi';
+import { GrTasks } from 'react-icons/gr';
 import { LuSettings2, LuUser } from 'react-icons/lu';
 import { MdInsertInvitation } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
@@ -35,9 +36,9 @@ interface LinkItemProps {
 
 const LinkItems: Array<LinkItemProps> = [
 	{ name: 'Home', icon: FiHome, path: Routes.DASHBOARD },
-	{ name: 'New Task', icon: FiPlus, path: Routes.NEWTASK },
 	{ name: 'Teams', icon: BsMicrosoftTeams, path: Routes.TEAMS },
 	{ name: 'Invitations', icon: MdInsertInvitation, path: Routes.INVITATIONS },
+	{ name: 'Tasks', icon: GrTasks, path: Routes.TASKS },
 ];
 
 const Sidebar: React.FC = () => {
@@ -65,7 +66,7 @@ const Sidebar: React.FC = () => {
 
 			{!isMediumScreen && (
 				<Flex
-					boxShadow="xl"
+					boxShadow="outline"
 					px={4}
 					justifyContent="space-between"
 					alignItems="center"

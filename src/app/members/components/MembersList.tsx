@@ -27,8 +27,12 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { _deleteMemberById, _fetchAllTeamsMembers } from '../service';
 import { memberActions } from '../slice';
 
+interface RouteParams {
+	id: string;
+}
+
 const MembersList = () => {
-	const { id } = useParams();
+	const { id } = useParams<RouteParams>();
 	const dispatch = useAppDispatch();
 	const customToast = useCustomToast();
 	const teamId = id;
