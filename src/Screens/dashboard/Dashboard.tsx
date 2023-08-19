@@ -38,10 +38,11 @@ const Dashboard = () => {
 		fetchAllInvitations();
 	}, [dispatch, user?.email]);
 
-	// fetching userteams
 	useEffect(() => {
+		// fetching userteams which he creats or is member of
 		const fetchUserAllTeams = async () => {
 			const { data, error } = await _fetchAllTeamsOfUser(user?.id);
+
 			if (data && !error) {
 				dispatch(teamActions.set_team({ teams: data }));
 			}

@@ -70,7 +70,6 @@ const AllTasks = () => {
 			taskId: taskId,
 			taskStatus: taskStatus,
 		});
-		console.log(data, error);
 
 		if (data && !error) {
 			customToast({
@@ -89,8 +88,13 @@ const AllTasks = () => {
 	};
 
 	return (
-		<Stack my={{ base: 1, md: 4 }} gap={4} p={2}>
-			<Flex alignItems="center" justifyContent="space-between">
+		<Stack my={{ base: 0, md: 4 }} gap={4}>
+			<Flex
+				p={2}
+				fontSize={{ base: '14px', md: '' }}
+				alignItems="center"
+				justifyContent="space-between"
+			>
 				<Flex alignItems="center">
 					<Box p={1} bg="gray.100" rounded="md">
 						<BsMicrosoftTeams />
@@ -116,7 +120,6 @@ const AllTasks = () => {
 							required
 							cursor="pointer"
 							size="xs"
-							placeholder=""
 							value={selectedTeamId}
 							onChange={(value) => handleTeamChange(value.target.value)}
 						>
@@ -133,7 +136,7 @@ const AllTasks = () => {
 			</Flex>
 			<hr />
 
-			<Stack my={4} mx={0} fontSize="14px">
+			<Stack mx={0} fontSize="14px">
 				{teamTasks.map((task) => {
 					return (
 						<Box key={task.id} borderBottom="1px" pb={2}>
