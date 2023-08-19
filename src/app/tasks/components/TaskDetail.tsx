@@ -143,7 +143,7 @@ const TaskDetail = () => {
 			</Stack>
 			<hr />
 			<Stack gap={4} my={4}>
-				<Flex justifyContent="space-between">
+				<Flex w="50%" mx="auto" justifyContent="space-between">
 					<Button variant="red" onClick={deleteTaskHandler} size="sm">
 						Delete
 					</Button>

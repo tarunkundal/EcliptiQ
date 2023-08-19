@@ -9,16 +9,15 @@ import {
 	Textarea,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { FiUser } from 'react-icons/fi';
 import { LuArrowRight } from 'react-icons/lu';
 import { MdClose } from 'react-icons/md';
 import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
 
 import useCustomToast from '../../../hooks/useToastHook';
-import { _fetchAllTeamsMembers } from '../../members/service';
-import { memberActions } from '../../members/slice';
 import { useAppDispatch, useAppSelector } from '../../store';
+import { _updateTask } from '../service';
+import { taskActions } from '../slice';
 import {
 	customControl,
 	CustomOption,
@@ -38,7 +37,6 @@ const TaskUpdateForm = () => {
 	const customToast = useCustomToast();
 
 	const teams = useAppSelector((state) => state.teams.teams);
-	// const members = useAppSelector((state) => state.members.members);
 	const tasks = useAppSelector((state) => state.tasks.tasks);
 
 	const taskToUpdate = tasks.find((task) => task.id === taskId);
@@ -47,22 +45,19 @@ const TaskUpdateForm = () => {
 	const [taskDescription, setTaskDescription] = useState('');
 	const [taskPriorty, setTaskPriority] = useState('');
 	const [taskStatus, setTaskStatus] = useState('');
-	const [assignedTo, setAssignedTo] = useState('');
 	const [dueDate, setDueDate] = useState<any>('');
 
-	const selectedTeam = teams.find((team) => team.id === taskToUpdate?.team_id);
-	// const teamMembers = members.filter(
-	// 	(member) => member.team_id === taskToUpdate?.team_id
-	// );
-
-	// fetching team members
 	useEffect(() => {
-		const fetchingAllTeamMembers = async () => {
-			const { data } = await _fetchAllTeamsMembers(taskToUpdate?.team_id);
-			dispatch(memberActions.set_member({ members: data }));
-		};
-		fetchingAllTeamMembers();
-	}, [taskToUpdate?.team_id]);
+		if (taskToUpdate) {
+			setTaskTitle(taskToUpdate.title || '');
+			setTaskDescription(taskToUpdate.description || '');
+			setTaskPriority(taskToUpdate.priority || '');
+			setTaskStatus(taskToUpdate.stage || '');
+			setDueDate(taskToUpdate.dueDate || '');
+		}
+	}, [taskToUpdate]);
+
+	const selectedTeam = teams.find((team) => team.id === taskToUpdate?.team_id);
 
 	// handle priority, stage and assigned to
 	const handlePriorityChange = (selectedOption: string) => {
@@ -71,16 +66,13 @@ const TaskUpdateForm = () => {
 	const handleStatusChange = (selectedOption: string) => {
 		setTaskStatus(selectedOption);
 	};
-	const handleAssignedTo = (selectedOption: string) => {
-		setAssignedTo(selectedOption);
-	};
 	const handleDateChange = (e: { target: { value: any } }) => {
 		const dateString = e.target.value;
 		const newDate = new Date(dateString);
 		setDueDate(newDate);
 	};
 
-	// create task handler
+	// update task handler
 	const handleUpdateHandler = async (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 
@@ -90,19 +82,23 @@ const TaskUpdateForm = () => {
 			priority: taskPriorty,
 			stage: taskStatus,
 			dueDate: dueDate,
-			assigned_to: assignedTo,
 		};
-		console.log(taskData);
-	};
 
-	// const AssigneOptions = [
-	// 	// eslint-disable-next-line no-unsafe-optional-chaining
-	// 	...teamMembers?.map((member) => ({
-	// 		value: `${member.user_id}`,
-	// 		label: `${member.user_email}` || 'No Members',
-	// 		icon: <FiUser />,
-	// 	})),
-	// ];
+		const { data, error } = await _updateTask({
+			taskId: taskId,
+			taskData: taskData,
+		});
+		if (data && !error) {
+			customToast({ title: 'Task Updated Sucessfully.', status: 'success' });
+			dispatch(taskActions.update_task({ taskId: taskId, taskData: taskData }));
+			history.goBack();
+		} else if (error) {
+			customToast({ title: 'Error while updating task.', status: 'error' });
+			history.goBack();
+
+			console.log(error);
+		}
+	};
 
 	return (
 		<Stack
@@ -157,14 +153,21 @@ const TaskUpdateForm = () => {
 					<Stack
 						display={{ base: 'grid', md: 'flex' }}
 						flexDirection={{ base: 'column', md: 'row' }}
+						justifyContent="space-around"
 					>
 						<Stack>
 							<Text fontWeight="semibold" fontSize="14px">
 								Status
 							</Text>
 							<Select
-								placeholder="Task Stage"
-								onChange={(option) => handleStatusChange(option.value)}
+								placeholder={`${
+									taskStatus.slice(0, 1).toUpperCase() + taskStatus.slice(1)
+								}`}
+								onChange={(option) => {
+									if (option) {
+										handleStatusChange(option.value);
+									}
+								}}
 								options={StatusOptions}
 								components={{
 									Option: CustomOption,
@@ -177,7 +180,9 @@ const TaskUpdateForm = () => {
 								Priority
 							</Text>
 							<Select
-								placeholder="Select Priority"
+								placeholder={`${
+									taskPriorty.slice(0, 1).toUpperCase() + taskPriorty.slice(1)
+								}`}
 								onChange={(option) => handlePriorityChange(option.value)}
 								options={PriorityOptions}
 								components={{
@@ -186,27 +191,15 @@ const TaskUpdateForm = () => {
 								styles={customControl}
 							/>
 						</Stack>
-						<Stack>
-							<Text fontWeight="semibold" fontSize="14px">
-								Assign to...
-							</Text>
-							<Select
-								placeholder="Select option"
-								onChange={(option) => handleAssignedTo(option.value)}
-								// options={AssigneOptions}
-								components={{
-									Option: CustomOption,
-								}}
-								styles={customControl}
-							/>
-						</Stack>
+
 						<Stack>
 							<Text fontWeight="semibold" fontSize="14px">
 								Due Date
 							</Text>
 							<Input
 								type="date"
-								value={dueDate}
+								min={new Date().toISOString().substr(0, 10)}
+								defaultValue={dueDate}
 								cursor="pointer"
 								onChange={handleDateChange}
 							/>

@@ -223,6 +223,7 @@ const TaskForm = () => {
 							</Text>
 							<Input
 								type="date"
+								min={new Date().toISOString().substr(0, 10)}
 								value={dueDate ? dueDate.toISOString().substr(0, 10) : ''}
 								cursor="pointer"
 								onChange={handleDateChange}

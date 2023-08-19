@@ -45,7 +45,6 @@ const taskSlice = createSlice({
 								dueDate: action.payload.taskData.dueDate,
 								priority: action.payload.taskData.priority,
 								stage: action.payload.taskData.stage,
-								assigned_to: action.payload.taskData.assigned_to,
 								// eslint-disable-next-line no-mixed-spaces-and-tabs
 						  }
 						: task

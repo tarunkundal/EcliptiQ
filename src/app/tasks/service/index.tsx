@@ -64,7 +64,6 @@ export const _updateTask = async ({
 			description: taskData.description,
 			dueDate: taskData.dueDate,
 			priority: taskData.priority,
-			assigned_to: taskData.assigned_to,
 		})
 		.eq('id', taskId)
 		.select();

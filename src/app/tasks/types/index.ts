@@ -32,7 +32,6 @@ export interface UpdateTaskData {
 	dueDate: Date | any;
 	stage: string;
 	priority: string;
-	assigned_to: string;
 }
 
 export interface SetTaskActionPayload {
@@ -41,7 +40,7 @@ export interface SetTaskActionPayload {
 
 export interface UpdateTaskActionPayload {
 	taskId: any;
-	taskData: TaskTable;
+	taskData: UpdateTaskData;
 }
 export interface UpdateTaskStatusActionPayload {
 	taskId: any;

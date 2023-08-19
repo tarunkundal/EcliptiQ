@@ -183,7 +183,7 @@ const AllTasks = () => {
 
 								<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
 									<Flex alignItems="center">
-										<Text>{task.dueDate}</Text>
+										<Text>{task.created_at}</Text>
 										<Box mx={4}>
 											<PiUserFocus fontSize="18px" />
 										</Box>
