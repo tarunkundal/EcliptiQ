@@ -1,8 +1,8 @@
 export interface UserState {
-	user: UserProfile | null;
+	user: User | null;
 }
 
-export interface UserProfile {
+export interface User {
 	id: string;
 	email: string | undefined;
 	username: string;
@@ -10,9 +10,5 @@ export interface UserProfile {
 }
 
 export interface SetUserActionPayload {
-	user: UserProfile | null;
-}
-
-export interface UpdateUsernameActionPayload {
-	username: string;
+	user: User | null;
 }

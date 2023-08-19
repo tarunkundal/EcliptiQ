@@ -6,6 +6,7 @@ import memberReducer from '../members/slice/index';
 import taskReducer from '../tasks/slice/index';
 import teamReducer from '../team/slice/index';
 import userReducer from '../user/slice/index';
+import userProfileReducer from '../user_profile/slice/index';
 
 const rootReducer = combineReducers({
 	user: userReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
 	members: memberReducer,
 	invitations: invitationReducer,
 	tasks: taskReducer,
+	userProfile: userProfileReducer,
 });
 
 const store = configureStore({

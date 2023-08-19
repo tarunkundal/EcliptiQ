@@ -63,7 +63,6 @@ export const customControl = {
 	control: (provided: any, state: { isFocused: any }) => ({
 		...provided,
 		cursor: 'pointer',
-		// width: '150px',
 		borderColor: state.isFocused ? 'blue' : 'gray',
 		boxShadow: state.isFocused ? '0 0 0 1px blue' : 'none',
 		'&:hover': {
@@ -82,8 +81,8 @@ export const priorityIcons = {
 export const priorityColors = {
 	high: 'green.400',
 	medium: 'blue.400',
-	low: 'gray.500',
-	urgent: 'red.400',
+	low: 'red',
+	urgent: 'red.300',
 };
 
 export const stagesIcons = {

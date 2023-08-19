@@ -57,7 +57,7 @@ const TaskDetail = () => {
 	};
 
 	return (
-		<Stack mx="10%" my={4}>
+		<Stack mx={{ base: '5%', md: '10%' }} my={{ base: 0, md: 4 }}>
 			<Stack my={4} gap={6}>
 				<Heading>{selectedTask?.title}</Heading>
 
@@ -144,11 +144,15 @@ const TaskDetail = () => {
 			<hr />
 			<Stack gap={4} my={4}>
 				<Flex w="50%" mx="auto" justifyContent="space-between">
-					<Button variant="red" onClick={deleteTaskHandler} size="sm">
+					<Button
+						variant="red"
+						onClick={deleteTaskHandler}
+						size={{ base: 'sm', md: 'md' }}
+					>
 						Delete
 					</Button>
 					<Link to={`/tasks/task/${selectedTask?.id}`}>
-						<Button variant="blue" size="sm">
+						<Button variant="blue" size={{ base: 'sm', md: 'md' }}>
 							Update
 						</Button>
 					</Link>

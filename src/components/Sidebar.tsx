@@ -15,7 +15,7 @@ import {
 import React, { useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsMicrosoftTeams } from 'react-icons/bs';
-import { FiHome, FiPlus, FiUser } from 'react-icons/fi';
+import { FiPlus, FiUser } from 'react-icons/fi';
 import { GrTasks } from 'react-icons/gr';
 import { LuSettings2, LuUser } from 'react-icons/lu';
 import { MdInsertInvitation } from 'react-icons/md';
@@ -24,7 +24,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 import InvitationForm from '../app/invitation/components/InvitationForm';
 import { useAppSelector } from '../app/store';
-import UserProfile from '../app/user/components/UserProfileCard';
+import UserProfile from '../app/user_profile/components/UserProfileCard';
 import Logo from '../assets/logoQ.png';
 import Routes from '../Routes';
 
@@ -35,7 +35,6 @@ interface LinkItemProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-	{ name: 'Home', icon: FiHome, path: Routes.DASHBOARD },
 	{ name: 'Teams', icon: BsMicrosoftTeams, path: Routes.TEAMS },
 	{ name: 'Invitations', icon: MdInsertInvitation, path: Routes.INVITATIONS },
 	{ name: 'Tasks', icon: GrTasks, path: Routes.TASKS },
@@ -102,6 +101,7 @@ const Sidebar: React.FC = () => {
 				transition="left 0.3s"
 				boxShadow={{ md: 'md' }}
 				zIndex={2}
+				fontSize="14px"
 			>
 				<Flex justifyContent="space-between" alignItems="center">
 					<Box
@@ -160,22 +160,6 @@ const Sidebar: React.FC = () => {
 					Profile
 				</Flex>
 
-				{/* invitation form */}
-				<Flex
-					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
-					alignItems="center"
-					p={2}
-					my={5}
-					mx={2}
-					rounded="md"
-					onClick={() => setIsOpenInvitation(true)}
-				>
-					<Icon as={FiPlus} mr="4" />
-					Invite People
-				</Flex>
-
-				<hr />
-
 				<Flex
 					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
 					alignItems="center"
@@ -204,6 +188,25 @@ const Sidebar: React.FC = () => {
 							</Link>
 						</MenuList>
 					</Menu>
+				</Flex>
+
+				{/* <hr /> */}
+
+				{/* invitation form */}
+				<Text mt={8} fontSize="12px">
+					Try new
+				</Text>
+				<Flex
+					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+					alignItems="center"
+					p={2}
+					my={2}
+					mx={2}
+					rounded="md"
+					onClick={() => setIsOpenInvitation(true)}
+				>
+					<Icon as={FiPlus} mr="4" />
+					Invite People
 				</Flex>
 
 				<Box my={4} position="absolute" bottom={0}>

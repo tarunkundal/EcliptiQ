@@ -114,6 +114,7 @@ const AllTasks = () => {
 					<Box mx={2} p={1} cursor="pointer" bg="gray.50" rounded="md">
 						<Select
 							required
+							cursor="pointer"
 							size="xs"
 							placeholder=""
 							value={selectedTeamId}
@@ -132,7 +133,7 @@ const AllTasks = () => {
 			</Flex>
 			<hr />
 
-			<Stack my={4} mx={8} fontSize="14px">
+			<Stack my={4} mx={0} fontSize="14px">
 				{teamTasks.map((task) => {
 					return (
 						<Box key={task.id} borderBottom="1px" pb={2}>
@@ -141,7 +142,7 @@ const AllTasks = () => {
 								p={2}
 								justifyContent="space-between"
 								alignItems="center"
-								_hover={{ bg: 'gray.50', cursor: 'pointer' }}
+								_hover={{ bg: 'gray.50' }}
 								rounded="md"
 							>
 								<Flex alignItems="center">
@@ -178,12 +179,12 @@ const AllTasks = () => {
 											fontSize="18px"
 										/>
 									</Text>
-									<Text ml={4}> {task.title} </Text>
+									<Text ml={4}>{task.title} </Text>
 								</Flex>
 
 								<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
 									<Flex alignItems="center">
-										<Text>{task.created_at}</Text>
+										<Text fontWeight="light">{task.dueDate}</Text>
 										<Box mx={4}>
 											<PiUserFocus fontSize="18px" />
 										</Box>

@@ -10,14 +10,13 @@ import TaskUpdateForm from '../../app/tasks/components/TaskUpdateForm';
 import CreateTeamForm from '../../app/team/components/CreateTeamForm';
 import TeamDetailPage from '../../app/team/components/TeamDetailPage';
 import TeamList from '../../app/team/components/TeamList';
-import UserSetting from '../../app/user/components/UserSetting';
-import Home from '../../components/Home';
+import UserSetting from '../../app/user_profile/components/UserSetting';
 import Routes from '../../Routes';
 
 const DashboardBody = () => {
 	return (
 		<Box ml={{ base: 0, md: '200px' }} p={2}>
-			<Route exact path={Routes.DASHBOARD} component={Home} />
+			<Route exact path={Routes.DASHBOARD} component={AllTasks} />
 			<Route exact path={Routes.TASKS} component={AllTasks} />
 			<Route exact path={Routes.USER_SETTING} component={UserSetting} />
 			<Route exact path={Routes.NEWTASK} component={TaskForm} />

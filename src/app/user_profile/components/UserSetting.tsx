@@ -7,18 +7,55 @@ import {
 	Input,
 	Stack,
 	Text,
+	Textarea,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
+import useCustomToast from '../../../hooks/useToastHook';
 import Logout from '../../../Routes/auth/Logout';
-import { useAppSelector } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { _updateUserProfile } from '../services';
+import { userProfileActions } from '../slice';
 
 const UserSetting = () => {
 	const user = useAppSelector((state) => state.user.user);
+	const userProfileData = useAppSelector(
+		(state) => state.userProfile.userProfile
+	);
 	const [isOpenLogout, setIsOpenLogout] = useState(false);
+	const [userName, setUserName] = useState(userProfileData?.userName || '');
+	const [userBio, setUserBio] = useState(userProfileData?.bio || '');
+	// const [avtarUrl, setAvtarUrl] = useState(userProfileData?.avtar_url);
 
 	const closeLogout = () => setIsOpenLogout(false);
+	const dispatch = useAppDispatch();
+	const customToast = useCustomToast();
+
+	// update handler
+	const updateUserProfileHandler = async (e: {
+		preventDefault: () => void;
+	}) => {
+		e.preventDefault();
+		const updatedData = {
+			userName: userName,
+			avtar_url: user?.avatar_url,
+			bio: userBio,
+		};
+
+		const { data, error } = await _updateUserProfile({
+			user_id: userProfileData?.user_id,
+			updatedData: updatedData,
+		});
+		if (!error && data) {
+			customToast({ title: 'Profile Updated.', status: 'success' });
+			dispatch(
+				userProfileActions.updateUserProfile({ updatedData: updatedData })
+			);
+		} else if (error) {
+			customToast({ title: 'Error while updating profile.', status: 'error' });
+		}
+	};
 
 	return (
 		<>
@@ -63,18 +100,35 @@ const UserSetting = () => {
 					<Stack gap={-2}>
 						<Text>Email</Text>
 						<Text fontSize="14px" fontWeight="bold">
-							tarunchauhan@gmail.com
+							{user?.email}
 						</Text>
 					</Stack>
-					<Stack>
-						<Text>Name</Text>
-						<Input type="email" placeholder="tarun@gmail.com" />
-					</Stack>
+
 					<Stack>
 						<Text>User Name</Text>
-						<Input type="text" />
+						<Input
+							value={userName}
+							onChange={(e) => setUserName(e.target.value)}
+							placeholder="nick@"
+							type="text"
+						/>
 					</Stack>
-					<Button mb={4} size="sm" variant="blue" w="fit-content">
+					<Stack>
+						<Text>Bio</Text>
+						<Textarea
+							value={userBio}
+							maxLength={150}
+							onChange={(e) => setUserBio(e.target.value)}
+							placeholder="Your bio not more than 150char..."
+						/>
+					</Stack>
+					<Button
+						onClick={updateUserProfileHandler}
+						mb={4}
+						size="sm"
+						variant="blue"
+						w="fit-content"
+					>
 						Update Account
 					</Button>
 				</Stack>
