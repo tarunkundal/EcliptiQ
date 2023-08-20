@@ -38,3 +38,11 @@ export const _updateUserProfile = async ({
 		.eq('user_id', user_id)
 		.select();
 };
+
+// finding all users from user profile table
+export const _fetchAllUsersFromUserProfileTable = async (): Promise<{
+	data: UserProfile[] | null;
+	error: any;
+}> => {
+	return await supabase.from('user_profile').select('*');
+};

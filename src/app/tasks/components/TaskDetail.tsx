@@ -7,12 +7,13 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdDateRange } from 'react-icons/md';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
+import { _fetchAllUsersFromUserProfileTable } from '../../user_profile/services';
 import { _deleteTask } from '../service';
 import { taskActions } from '../slice';
 import {
@@ -33,8 +34,28 @@ const TaskDetail = () => {
 	const customToast = useCustomToast();
 	const dispatch = useAppDispatch();
 	const history = useHistory();
+	const [taskCreatedBy, setTaskCreatedBy] = useState<string | undefined>('');
+	const [taskAssignedTo, setTaskAssignedTo] = useState<string | undefined>('');
 
 	const selectedTask = allTasks.find((task) => task.id === taskID);
+
+	// finding task created by and assigned to
+	useEffect(() => {
+		const fetchAllUsers = async () => {
+			const { data } = await _fetchAllUsersFromUserProfileTable();
+
+			const createdBy = data?.find(
+				(user) => user.user_id === selectedTask?.created_by
+			);
+			const assignedTo = data?.find(
+				(user) => user.user_id === selectedTask?.assigned_to
+			);
+
+			setTaskAssignedTo(assignedTo?.user_email);
+			setTaskCreatedBy(createdBy?.user_email);
+		};
+		fetchAllUsers();
+	}, [selectedTask]);
 
 	// finding team of task from teamId
 	const taskOfWhichTeam = teams.find(
@@ -71,6 +92,9 @@ const TaskDetail = () => {
 				</Text>
 			</Stack>
 			<hr />
+			<Heading fontSize="22px" textDecoration="underline">
+				Issue Details :
+			</Heading>
 			<Stack
 				my={4}
 				gap={3}
@@ -117,10 +141,18 @@ const TaskDetail = () => {
 				</Flex>{' '}
 				<hr />
 				<Flex justifyContent="space-between">
-					<Text>Assignee</Text>
+					<Text>Assigned To</Text>
 					<Flex alignItems="center">
-						<Avatar boxSize="18px" />
-						<Text ml={2}>{}</Text>
+						<Avatar size="xs" name={taskAssignedTo} fontSize="12px" />
+						<Text ml={2}>{taskAssignedTo}</Text>
+					</Flex>
+				</Flex>{' '}
+				<hr />
+				<Flex justifyContent="space-between">
+					<Text>Created By</Text>
+					<Flex alignItems="center">
+						<Avatar size="xs" name={taskCreatedBy} />
+						<Text ml={2}>{taskCreatedBy}</Text>
 					</Flex>
 				</Flex>{' '}
 				<hr />
