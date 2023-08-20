@@ -1,12 +1,9 @@
 import {
 	Avatar,
+	Box,
 	Button,
 	Flex,
 	Heading,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	Stack,
 	Table,
 	TableCaption,
@@ -17,8 +14,6 @@ import {
 	Tr,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { FiUsers } from 'react-icons/fi';
-import { LuArrowDownCircle } from 'react-icons/lu';
 import { useParams } from 'react-router-dom';
 
 import useCustomToast from '../../../hooks/useToastHook';
@@ -90,21 +85,7 @@ const MembersList = () => {
 				<hr />
 				<Text my={4}>Manage Members</Text>
 				<Stack flexDirection="row" justifyContent="space-between">
-					<Menu>
-						<MenuButton
-							as={Button}
-							_hover={{ boxShadow: 'xl' }}
-							color="black"
-							colorScheme="whiteAlpha"
-							rightIcon={<LuArrowDownCircle color="red" />}
-						>
-							Fliter
-						</MenuButton>
-						<MenuList>
-							<MenuItem>All</MenuItem>
-							<MenuItem icon={<FiUsers />}>Member</MenuItem>
-						</MenuList>
-					</Menu>
+					<Box />
 					<Button
 						variant="blue"
 						onClick={() => setSendInvite(true)}
