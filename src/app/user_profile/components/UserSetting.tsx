@@ -17,6 +17,7 @@ import Logout from '../../../Routes/auth/Logout';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { _updateUserProfile } from '../services';
 import { userProfileActions } from '../slice';
+import UserProfileAvatarUpload from './AvtarUpload';
 
 const UserSetting = () => {
 	const user = useAppSelector((state) => state.user.user);
@@ -39,7 +40,6 @@ const UserSetting = () => {
 		e.preventDefault();
 		const updatedData = {
 			userName: userName,
-			avtar_url: user?.avatar_url,
 			bio: userBio,
 		};
 
@@ -94,8 +94,11 @@ const UserSetting = () => {
 						<Avatar
 							name={user?.username ? user.username : user?.email}
 							size="2xl"
-							src={user?.avatar_url}
+							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userProfileData?.avtar_url}`}
 						/>
+					</Stack>
+					<Stack>
+						<UserProfileAvatarUpload userId={user?.id} />
 					</Stack>
 					<Stack gap={-2}>
 						<Text>Email</Text>

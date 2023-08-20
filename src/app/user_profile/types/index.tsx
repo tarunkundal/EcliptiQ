@@ -18,10 +18,18 @@ export interface SetUserProfileActionPayload {
 
 export interface UserProfileUpdate {
 	userName: string | undefined;
-	avtar_url: string | undefined;
+	bio: string | undefined;
+}
+
+export interface UserProfileAvatarUpdate {
+	userName: string | undefined;
 	bio: string | undefined;
 }
 
 export interface UpdateUserProfileActionPayload {
 	updatedData: UserProfileUpdate;
+}
+
+export interface UpdateUserProfileAvatarActionPayload {
+	updatedData: UserProfileAvatarUpdate;
 }

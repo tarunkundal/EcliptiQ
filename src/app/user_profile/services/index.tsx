@@ -33,7 +33,6 @@ export const _updateUserProfile = async ({
 		.update({
 			userName: updatedData.userName,
 			bio: updatedData.bio,
-			avtar_url: updatedData.avtar_url,
 		})
 		.eq('user_id', user_id)
 		.select();
@@ -45,4 +44,22 @@ export const _fetchAllUsersFromUserProfileTable = async (): Promise<{
 	error: any;
 }> => {
 	return await supabase.from('user_profile').select('*');
+};
+
+// Update the user_profile record with the avatar URL
+export const _updateAvatar = async ({
+	avatarUrl,
+	userId,
+}: {
+	avatarUrl: string;
+	userId: string | any;
+}): Promise<{
+	data: UserProfile[] | null;
+	error: any;
+}> => {
+	return await supabase
+		.from('user_profile')
+		.update({ avtar_url: avatarUrl })
+		.eq('user_id', userId)
+		.select();
 };

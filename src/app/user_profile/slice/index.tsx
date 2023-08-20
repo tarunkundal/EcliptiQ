@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
 	SetUserProfileActionPayload,
 	UpdateUserProfileActionPayload,
+	UpdateUserProfileAvatarActionPayload,
 	UserProfileState,
 } from '../types';
 
@@ -23,6 +24,16 @@ const userProfileSlice = createSlice({
 		updateUserProfile: (
 			state,
 			action: PayloadAction<UpdateUserProfileActionPayload>
+		) => {
+			return {
+				...state,
+				...action.payload.updatedData,
+			};
+		},
+
+		updateUserAvatar: (
+			state,
+			action: PayloadAction<UpdateUserProfileAvatarActionPayload>
 		) => {
 			return {
 				...state,
