@@ -16,6 +16,45 @@ export const _fetchAllTeamsOfUser = async (
 	return await supabase.from('teams').select().eq('creater_id', user_id);
 };
 
+// fetching all teams which user creates or is member of. (error in this function)
+export const _fetchAllTeamsOfUserCreatesOrMember = async (
+	user_id: any
+): Promise<{ data: TeamTable[] | null; error: any }> => {
+	const memberOfTeams = await supabase
+		.from('members')
+		.select('team_id')
+		.eq('user_id', user_id);
+
+	const createdByUser = await supabase
+		.from('teams')
+		.select('*')
+		.eq('creater_id', user_id);
+
+	const teams: { data: TeamTable[] | null; error: any } = {
+		data: [], // Initialize with an empty array
+		error: null,
+	};
+
+	if (memberOfTeams.data && createdByUser.data) {
+		const teamIds = new Set([
+			...createdByUser.data.map((team) => team.id),
+			...memberOfTeams.data.map((member) => member.team_id),
+		]);
+
+		// Fetch the full team details using the collected team IDs
+		const teamsResponse = await supabase
+			.from('teams')
+			.select('*')
+			.in('id', [...teamIds]);
+
+		console.log(teams.data, teams.error);
+		teams.data = teamsResponse.data || []; // Assign the fetched data or an empty array
+		teams.error = teamsResponse.error;
+	}
+
+	return { data: teams.data, error: teams.error };
+};
+
 // creating team
 export const _creatingNewTeam = async ({
 	userId,

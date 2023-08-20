@@ -6,16 +6,17 @@ import { useAppDispatch, useAppSelector } from '../../app/store';
 import supabase from '../../app/supabase';
 import { _fetchAllTasks } from '../../app/tasks/service';
 import { taskActions } from '../../app/tasks/slice';
-import { _fetchAllTeamsOfUser } from '../../app/team/service';
 import { teamActions } from '../../app/team/slice';
 import { _fetchingUserProfileData } from '../../app/user_profile/services';
 import { userProfileActions } from '../../app/user_profile/slice';
 import Sidebar from '../../components/Sidebar';
+import useCustomToast from '../../hooks/useToastHook';
 import DashboardBody from './DashboardBody';
 
 const Dashboard = () => {
 	const user = useAppSelector((state) => state.user.user);
 	const dispatch = useAppDispatch();
+	const customToast = useCustomToast();
 
 	// adding user to userprofile
 	const addingUserToUserProfileData = async () => {
@@ -39,16 +40,6 @@ const Dashboard = () => {
 	}, [dispatch, user?.email]);
 
 	useEffect(() => {
-		// fetching userteams which he creats or is member of
-		const fetchUserAllTeams = async () => {
-			const { data, error } = await _fetchAllTeamsOfUser(user?.id);
-
-			if (data && !error) {
-				dispatch(teamActions.set_team({ teams: data }));
-			}
-		};
-		fetchUserAllTeams();
-
 		// fetching tasks
 		const fetchAllTasks = async () => {
 			const { data, error } = await _fetchAllTasks();
@@ -68,6 +59,35 @@ const Dashboard = () => {
 			}
 		};
 		fetchUserProfileData();
+
+		// fetching userteams which he creats or is member of
+		const fetchTeamsCreatedByUserOrIsMember = async () => {
+			const memberOfTeams = await supabase
+				.from('members')
+				.select('team_id')
+				.eq('user_id', user?.id);
+			const createdByUser = await supabase
+				.from('teams')
+				.select('*')
+				.eq('creater_id', user?.id);
+			if (memberOfTeams.data && createdByUser.data) {
+				const teamIds = new Set([
+					...createdByUser.data.map((team) => team.id),
+					...memberOfTeams.data.map((member) => member.team_id),
+				]);
+				// Fetch the full team details using the collected team IDs
+				const teams = await supabase
+					.from('teams')
+					.select('*')
+					.in('id', [...teamIds]);
+				if (teams.data) {
+					dispatch(teamActions.set_team({ teams: teams.data }));
+				} else if (teams.error) {
+					customToast({ title: teams.error.message, status: 'error' });
+				}
+			}
+		};
+		fetchTeamsCreatedByUserOrIsMember();
 	}, []);
 
 	return (

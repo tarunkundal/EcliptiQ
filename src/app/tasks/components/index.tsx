@@ -8,11 +8,11 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import { AiOutlineFullscreen } from 'react-icons/ai';
 import { BsMicrosoftTeams } from 'react-icons/bs';
 import { FaPlus, FaThList } from 'react-icons/fa';
 import { HiViewList } from 'react-icons/hi';
 import { IoMdArrowDropright } from 'react-icons/io';
-import { MdOutlineOpenInNew } from 'react-icons/md';
 import { PiUserFocus } from 'react-icons/pi';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
@@ -191,7 +191,7 @@ const AllTasks = () => {
 										<Box mx={4}>
 											<PiUserFocus fontSize="18px" />
 										</Box>
-										<MdOutlineOpenInNew fontSize="18px" color="blue" />
+										<AiOutlineFullscreen fontSize="18px" color="blue" />
 									</Flex>
 								</Link>
 							</Flex>
