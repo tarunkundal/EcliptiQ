@@ -1,6 +1,8 @@
 import {
+	Avatar,
 	Box,
 	Button,
+	Flex,
 	Heading,
 	Stack,
 	Table,
@@ -35,6 +37,9 @@ function isInvitationWithTeamName(
 const Invitations = () => {
 	const userInvitations = useAppSelector(
 		(state) => state.invitations.invitations
+	);
+	const userProfileData = useAppSelector(
+		(state) => state.userProfile.userProfile
 	);
 	const [userInvitaionsWithTeamName, setUserInvitaionsWithTeamName] = useState<
 		InvitationType[]
@@ -127,18 +132,26 @@ const Invitations = () => {
 	};
 
 	return (
-		<Stack p={2} my={4} gap={4}>
+		<Stack my={4} gap={4}>
 			<Stack
 				flexDirection="row"
 				justifyContent="space-between"
 				alignItems="center"
 				mx={12}
 			>
-				<Stack>
+				<Stack gap={-1}>
 					<Heading fontSize="25px">Invitations</Heading>
 					<Text fontSize="14px">Manage your invitations</Text>
 				</Stack>
-				<Text fontWeight="semibold">{user?.username}</Text>
+				<Flex alignItems="center">
+					<Text fontWeight="semibold">{user?.username}</Text>
+					<Avatar
+						ml={2}
+						size="sm"
+						src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userProfileData?.avtar_url}`}
+						name={userProfileData?.userName || userProfileData?.user_email}
+					/>
+				</Flex>
 			</Stack>
 			<hr />
 			<Stack my={4}>

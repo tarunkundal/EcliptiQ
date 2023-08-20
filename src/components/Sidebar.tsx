@@ -46,6 +46,9 @@ const Sidebar: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const user = useAppSelector((state) => state.user.user);
+	const userProfileData = useAppSelector(
+		(state) => state.userProfile.userProfile
+	);
 
 	const [isOpenProfile, setIsOpenProfile] = useState(false);
 	const [isOpenInvitation, setIsOpenInvitation] = useState(false);
@@ -210,26 +213,28 @@ const Sidebar: React.FC = () => {
 				</Flex>
 
 				<Box my={4} position="absolute" bottom={0}>
-					<Link to={Routes.USER_SETTING} style={{ color: 'black' }}>
-						<Flex
-							w="full"
-							h="full"
-							alignItems="center"
-							justifyContent="space-between"
-						>
-							<Avatar
-								size="sm"
-								name={user?.username}
-								src={user?.avatar_url}
-								cursor="pointer"
-							/>
-							<Flex direction="column" ml={4} fontSize="12px">
-								<Text w="100px" fontWeight="semibold">
-									{user?.email}
-								</Text>
-							</Flex>
+					<Flex
+						w="full"
+						h="full"
+						alignItems="center"
+						justifyContent="space-between"
+						onClick={openProfile}
+						cursor="pointer"
+					>
+						<Avatar
+							size="sm"
+							name={user?.username}
+							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userProfileData?.avtar_url}`}
+							cursor="pointer"
+						/>
+						<Flex direction="column" ml={4} fontSize="12px">
+							<Text w="100px" fontWeight="semibold">
+								{userProfileData?.userName
+									? userProfileData.userName
+									: userProfileData?.user_email}
+							</Text>
 						</Flex>
-					</Link>
+					</Flex>
 				</Box>
 			</Box>
 		</>

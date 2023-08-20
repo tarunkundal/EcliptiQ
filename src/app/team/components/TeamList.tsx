@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Flex,
 	Stack,
@@ -13,8 +14,8 @@ import {
 	Tr,
 } from '@chakra-ui/react';
 import React, { memo } from 'react';
+import { BiPlus } from 'react-icons/bi';
 import { BsMicrosoftTeams } from 'react-icons/bs';
-import { FiPlus } from 'react-icons/fi';
 import { LuSettings2 } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +24,6 @@ import { useAppSelector } from '../../store';
 
 const TeamList = () => {
 	const teams = useAppSelector((state) => state.teams.teams);
-	// const members = useAppSelector((state) => state.members.members);
 
 	return (
 		<Stack w="full">
@@ -33,18 +33,11 @@ const TeamList = () => {
 				justifyContent="space-between"
 				p={4}
 			>
-				<Text>Your Teams</Text>
+				<Text fontWeight="semibold">Your Teams</Text>
 				<Link to={Routes.CREATE_TEAM}>
-					<Button
-						_hover={{ bg: 'blue1' }}
-						size="sm"
-						variant="outline"
-						bg="none"
-						w="fit-content"
-						boxShadow="none"
-					>
+					<Button size="sm" variant="blue" w="fit-content">
 						{' '}
-						<FiPlus />
+						<BiPlus />
 						<Text fontWeight="normal" ml={2}>
 							Add Team
 						</Text>
@@ -73,7 +66,9 @@ const TeamList = () => {
 								<Tr key={team.id}>
 									<Td>
 										<Flex alignItems="center">
-											<BsMicrosoftTeams color="blue" />
+											<Box p={1} bg="pink1" rounded="md">
+												<BsMicrosoftTeams color="red" />
+											</Box>
 											<Text ml={2}>{team.name}</Text>
 										</Flex>
 									</Td>

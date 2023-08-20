@@ -15,7 +15,7 @@ import Routes from '../../Routes';
 
 const DashboardBody = () => {
 	return (
-		<Box ml={{ base: 0, md: '200px' }} p={2}>
+		<Box ml={{ base: 0, md: '200px' }}>
 			<Route exact path={Routes.DASHBOARD} component={AllTasks} />
 			<Route exact path={Routes.TASKS} component={AllTasks} />
 			<Route exact path={Routes.USER_SETTING} component={UserSetting} />

@@ -93,7 +93,7 @@ const UserSetting = () => {
 						<Text>Profile Avatar</Text>
 						<Avatar
 							name={user?.username ? user.username : user?.email}
-							size="2xl"
+							boxSize={{ base: 150, md: 200 }}
 							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userProfileData?.avtar_url}`}
 						/>
 					</Stack>

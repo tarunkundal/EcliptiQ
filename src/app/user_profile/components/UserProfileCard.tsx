@@ -14,12 +14,16 @@ import { useHistory } from 'react-router-dom';
 
 import Modal from '../../../components/Modal';
 import Routes from '../../../Routes';
+import { useAppSelector } from '../../store';
 
 const UserProfile = (props: {
 	// eslint-disable-next-line no-undef
 	onClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> | undefined;
 }) => {
 	const history = useHistory();
+	const userProfileData = useAppSelector(
+		(state) => state.userProfile.userProfile
+	);
 
 	// handle on click
 	const handleCloseModalAndRedirect = (e: any) => {
@@ -32,43 +36,21 @@ const UserProfile = (props: {
 	return (
 		<Modal onClose={props.onClose}>
 			<Center py={6}>
-				<Box
-					maxW="350px"
-					w="full"
-					bg={useColorModeValue('white', 'gray.900')}
-					rounded="lg"
-					textAlign="center"
-				>
+				<Box rounded="lg" textAlign="center">
 					<Avatar
-						size="xl"
-						src="https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+						boxSize={{ base: 150, md: 200 }}
+						src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userProfileData?.avtar_url}`}
 						mb={4}
-						pos="relative"
-						_after={{
-							content: '""',
-							w: 4,
-							h: 4,
-							bg: 'green.300',
-							border: '2px solid white',
-							rounded: 'full',
-							pos: 'absolute',
-							bottom: 0,
-							right: 3,
-						}}
+						name={userProfileData?.userName || userProfileData?.user_email}
 					/>
 					<Heading fontSize="2xl" fontFamily="body">
-						Lindsey James
+						{userProfileData?.userName}
 					</Heading>
 					<Text fontWeight={600} color="gray.500" mb={4}>
-						@lindsey_jam3s
+						{userProfileData?.user_email}
 					</Text>
-					<Text
-						textAlign="center"
-						color={useColorModeValue('gray.700', 'gray.400')}
-						px={3}
-					>
-						Actress, musician, songwriter and artist. PM for work inquires or{' '}
-						<Text color="blue.400">#tag</Text> me in your posts
+					<Text textAlign="center" px={3} fontWeight="semibold">
+						{userProfileData?.bio}
 					</Text>
 
 					<Stack align="center" justify="center" direction="row" mt={6}>

@@ -78,8 +78,8 @@ const CreateTeamForm = () => {
 					Create a new workspace
 				</Heading>
 				<Text mt={{ base: 2, md: 6 }} textAlign="center">
-					Workspace are the shared environments where teams can workon tasks and
-					projects.
+					Workspace are the shared environments where teams can work on tasks
+					and projects.
 				</Text>
 				<form onSubmit={createWorkspaceHandler}>
 					<Stack
