@@ -105,16 +105,20 @@ const TaskUpdateForm = () => {
 			spacing={{ base: '2', md: '4' }}
 			rounded={{ base: 'md', md: '2xl' }}
 			mx="auto"
-			p={{ base: '2', md: '5' }}
-			w={{ base: '90%', md: '70%' }}
+			p={{ base: 4, md: '5' }}
+			w={{ base: '95%', md: '70%' }}
 			my={4}
 			mt={{ base: '0', md: '5%' }}
-			border="1px"
 			borderColor="gray.200"
+			boxShadow="md"
 			fontSize={{ base: '14px', md: '-moz-initial' }}
+			fontWeight="semibold"
 		>
-			<Heading textAlign="center">Update Task</Heading>
-			<Flex justifyContent="space-between">
+			<Heading textAlign="center" mb={2} fontSize="22px">
+				{' '}
+				Update Task
+			</Heading>
+			<Flex my={4} justifyContent="space-between">
 				<Flex alignItems="center" fontSize="14px">
 					<Box p="2px" px={2} border="1px" borderColor="gray.100" rounded="md">
 						{selectedTeam?.name}
@@ -126,9 +130,9 @@ const TaskUpdateForm = () => {
 				</Flex>
 				<Button
 					onClick={() => history.goBack()}
-					mt={-16}
+					mt={{ base: -12, md: -14 }}
 					variant="red"
-					size="sm"
+					size={{ base: 'xs', md: 'sm' }}
 				>
 					<MdClose color="white" />
 				</Button>{' '}
@@ -136,7 +140,7 @@ const TaskUpdateForm = () => {
 			<hr />
 
 			<form onSubmit={handleUpdateHandler}>
-				<Stack gap={{ base: 3, md: 6 }}>
+				<Stack my={4} gap={{ base: 3, md: 6 }}>
 					<Input
 						type="text"
 						value={taskTitle}
@@ -151,11 +155,11 @@ const TaskUpdateForm = () => {
 					/>
 
 					<Stack
-						display={{ base: 'grid', md: 'flex' }}
 						flexDirection={{ base: 'column', md: 'row' }}
 						justifyContent="space-around"
+						my={4}
 					>
-						<Stack>
+						<Stack w={{ md: '30%' }}>
 							<Text fontWeight="semibold" fontSize="14px">
 								Status
 							</Text>
@@ -175,7 +179,7 @@ const TaskUpdateForm = () => {
 								styles={customControl}
 							/>
 						</Stack>
-						<Stack>
+						<Stack w={{ md: '30%' }}>
 							<Text fontWeight="semibold" fontSize="14px">
 								Priority
 							</Text>
@@ -192,11 +196,12 @@ const TaskUpdateForm = () => {
 							/>
 						</Stack>
 
-						<Stack>
+						<Stack w={{ md: '30%' }}>
 							<Text fontWeight="semibold" fontSize="14px">
 								Due Date
 							</Text>
 							<Input
+								border="1px"
 								type="date"
 								min={new Date().toISOString().substr(0, 10)}
 								defaultValue={dueDate}
@@ -208,10 +213,20 @@ const TaskUpdateForm = () => {
 
 					<hr />
 					<Flex justifyContent="space-around">
-						<Button onClick={() => history.goBack()} variant="red" w="30%">
+						<Button
+							size={{ base: 'sm', md: 'md' }}
+							onClick={() => history.goBack()}
+							variant="red"
+							w="30%"
+						>
 							Cancle
 						</Button>
-						<Button type="submit" w="30%" variant="blue">
+						<Button
+							size={{ base: 'sm', md: 'md' }}
+							type="submit"
+							w="30%"
+							variant="blue"
+						>
 							Update task
 						</Button>
 					</Flex>

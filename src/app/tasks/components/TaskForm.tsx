@@ -93,7 +93,6 @@ const TaskForm = () => {
 		};
 
 		const { data, error } = await _createNewTask({ taskData });
-		console.log(data, error);
 
 		if (data && !error) {
 			customToast({
@@ -122,18 +121,29 @@ const TaskForm = () => {
 			spacing={{ base: '2', md: '4' }}
 			rounded={{ base: 'md', md: '2xl' }}
 			mx="auto"
-			p={{ base: '2', md: '5' }}
-			w={{ base: '90%', md: '70%' }}
+			p={{ base: '4', md: '5' }}
+			w={{ base: '95%', md: '70%' }}
 			my={4}
 			mt={{ base: '0', md: '5%' }}
 			border="1px"
+			fontWeight="semibold"
 			borderColor="gray.200"
-			fontSize={{ base: '14px', md: '-moz-initial' }}
+			fontSize={{ base: '14px', md: '16px' }}
+			boxShadow="md"
 		>
-			<Heading textAlign="center">New Task</Heading>
-			<Flex justifyContent="space-between">
+			<Heading mb={2} fontSize="22px" textAlign="center">
+				New Task
+			</Heading>
+			<Flex my={4} justifyContent="space-between">
 				<Flex alignItems="center" fontSize="14px">
-					<Box p="2px" px={2} border="1px" borderColor="gray.100" rounded="md">
+					<Box
+						p="2px"
+						px={2}
+						fontWeight="semibold"
+						borderColor="gray.100"
+						rounded="md"
+						border="2px"
+					>
 						{selectedTeam?.name}
 					</Box>
 					<Box mx={1}>
@@ -143,17 +153,17 @@ const TaskForm = () => {
 				</Flex>
 				<Button
 					onClick={() => history.goBack()}
-					mt={-16}
+					mt={{ base: -14, md: -16 }}
 					variant="red"
-					size="sm"
+					size={{ base: 'xs', md: 'sm' }}
 				>
-					<MdClose color="white" />
+					<MdClose color="white" fontSize="18px" />
 				</Button>{' '}
 			</Flex>
 			<hr />
 
 			<form onSubmit={handleSubmitHandler}>
-				<Stack gap={{ base: 3, md: 6 }}>
+				<Stack my={4} gap={{ base: 3, md: 6 }}>
 					<Input
 						required
 						type="text"
@@ -171,6 +181,7 @@ const TaskForm = () => {
 					<Stack
 						display={{ base: 'grid', md: 'flex' }}
 						flexDirection={{ base: 'column', md: 'row' }}
+						my={4}
 					>
 						<Stack>
 							<Text fontWeight="semibold" fontSize="14px">
@@ -233,10 +244,20 @@ const TaskForm = () => {
 
 					<hr />
 					<Flex justifyContent="space-around">
-						<Button onClick={() => history.goBack()} variant="red" w="30%">
+						<Button
+							size={{ base: 'sm', md: 'md' }}
+							onClick={() => history.goBack()}
+							variant="red"
+							w="30%"
+						>
 							Cancle
 						</Button>
-						<Button type="submit" w="30%" variant="blue">
+						<Button
+							size={{ base: 'sm', md: 'md' }}
+							type="submit"
+							w="30%"
+							variant="blue"
+						>
 							Create task
 						</Button>
 					</Flex>

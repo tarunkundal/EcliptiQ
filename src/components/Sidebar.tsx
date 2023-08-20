@@ -3,6 +3,7 @@ import {
 	Box,
 	CloseButton,
 	Flex,
+	Heading,
 	Icon,
 	Image,
 	Menu,
@@ -18,7 +19,7 @@ import { BsMicrosoftTeams } from 'react-icons/bs';
 import { FiPlus, FiUser } from 'react-icons/fi';
 import { GrTasks } from 'react-icons/gr';
 import { LuSettings2, LuUser } from 'react-icons/lu';
-import { MdInsertInvitation } from 'react-icons/md';
+import { MdInsertInvitation, MdWorkspacesFilled } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -35,7 +36,7 @@ interface LinkItemProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-	{ name: 'Teams', icon: BsMicrosoftTeams, path: Routes.TEAMS },
+	{ name: 'Workspaces', icon: MdWorkspacesFilled, path: Routes.TEAMS },
 	{ name: 'Invitations', icon: MdInsertInvitation, path: Routes.INVITATIONS },
 	{ name: 'Tasks', icon: GrTasks, path: Routes.TASKS },
 ];
@@ -110,18 +111,17 @@ const Sidebar: React.FC = () => {
 						alignItems="center"
 						mx={2}
 						mb={2}
-						w="full"
 					>
 						<Image src={Logo} boxSize={12} alt="logo" />
-						<Avatar
-							name={user?.username ? user.username : user?.email}
-							size="sm"
-							src={user?.avatar_url}
-						/>
+						<Heading fontSize="16px" mt={1}>
+							EcliptiQ
+						</Heading>
 					</Box>
 					<CloseButton
 						display={{ base: 'block', md: 'none' }}
 						onClick={() => setIsOpen(false)}
+						color="red"
+						_hover={{ bg: 'red', color: 'white' }}
 					/>
 				</Flex>
 				<hr />

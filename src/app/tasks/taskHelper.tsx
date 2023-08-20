@@ -63,6 +63,7 @@ export const customControl = {
 	control: (provided: any, state: { isFocused: any }) => ({
 		...provided,
 		cursor: 'pointer',
+
 		borderColor: state.isFocused ? 'blue' : 'gray',
 		boxShadow: state.isFocused ? '0 0 0 1px blue' : 'none',
 		'&:hover': {
