@@ -97,7 +97,7 @@ const UserSetting = () => {
 							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userProfileData?.avtar_url}`}
 						/>
 					</Stack>
-					{userProfileData?.avtar_url ? (
+					{!userProfileData?.avtar_url ? (
 						''
 					) : (
 						<Stack>
