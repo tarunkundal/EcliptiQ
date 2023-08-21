@@ -75,3 +75,12 @@ If you are developing a production application, we recommend updating the config
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Contributing
+We welcome contributions from the community! If you'd like to contribute:
+
+Fork the repository.
+Create a new branch: git checkout -b feature-name.
+Implement your changes and commit: git commit -m "Add some feature".
+Push to your branch: git push origin feature-name.
+Create a pull request.
