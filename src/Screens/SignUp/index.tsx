@@ -187,8 +187,8 @@ const SignUp = () => {
 							p="6"
 						>
 							<Text fontFamily="Merienda" fontStyle="italic">
-								Before EcliptiQ, my to-do lists were scattered all around! Now,
-								everything is in order and in one place.
+								Before <b> EcliptiQ</b>, my tasks lists were scattered all
+								around! Now, everything is in order and in one place.
 							</Text>
 							<Text mt={4}>– Matt M.</Text>
 						</Box>
