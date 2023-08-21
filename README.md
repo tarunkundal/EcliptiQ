@@ -40,15 +40,15 @@ npm run dev
 Open your browser and navigate to http://localhost:3000.
 
 ## Technologies Used:
-Vite
-React.js
-Chakra UI
-TypeScript
-Supabase
-ESLint
+-- Vite
+-- React.js
+-- Chakra UI
+-- TypeScript
+-- Supabase
+-- ESLint
 
-------- Additional --------
 # React + TypeScript + Vite
+------- Additional --------
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
