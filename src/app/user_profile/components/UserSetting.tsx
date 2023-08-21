@@ -27,7 +27,6 @@ const UserSetting = () => {
 	const [isOpenLogout, setIsOpenLogout] = useState(false);
 	const [userName, setUserName] = useState(userProfileData?.userName || '');
 	const [userBio, setUserBio] = useState(userProfileData?.bio || '');
-	// const [avtarUrl, setAvtarUrl] = useState(userProfileData?.avtar_url);
 
 	const closeLogout = () => setIsOpenLogout(false);
 	const dispatch = useAppDispatch();
@@ -118,6 +117,7 @@ const UserSetting = () => {
 							onChange={(e) => setUserName(e.target.value)}
 							placeholder="nick@"
 							type="text"
+							name="username"
 						/>
 					</Stack>
 					<Stack>
@@ -126,7 +126,8 @@ const UserSetting = () => {
 							value={userBio}
 							maxLength={150}
 							onChange={(e) => setUserBio(e.target.value)}
-							placeholder="Your bio not more than 150char..."
+							placeholder="Your bio not more than 150 char..."
+							name="user bio"
 						/>
 					</Stack>
 					<Button
@@ -155,7 +156,7 @@ const UserSetting = () => {
 					<Text fontWeight="bold">Delete account</Text>
 					<Text fontSize="14px">
 						This will immediately delete all of your data including tasks,
-						projects, comments, and more. This can’t be undone.
+						projects, teams, and more. This can’t be undone.
 					</Text>
 
 					<Button size="sm" variant="red" w="fit-content">

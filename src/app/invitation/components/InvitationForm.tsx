@@ -98,6 +98,7 @@ const InvitationForm = (props: {
 								onChange={(e) => setEmailToInvited(e.target.value)}
 								placeholder="example@gmail.com"
 								type="email"
+								name="email"
 							/>
 						</Stack>
 

@@ -170,12 +170,14 @@ const TaskForm = () => {
 						value={taskTitle}
 						onChange={(e) => setTaskTitle(e.target.value)}
 						placeholder="Task Title..."
+						name="task title"
 					/>
 
 					<Textarea
 						placeholder="Task Description..."
 						value={taskDescription}
 						onChange={(e) => setTaskDescription(e.target.value)}
+						name="description"
 					/>
 
 					<Stack
@@ -238,6 +240,7 @@ const TaskForm = () => {
 								value={dueDate ? dueDate.toISOString().substr(0, 10) : ''}
 								cursor="pointer"
 								onChange={handleDateChange}
+								name="date"
 							/>
 						</Stack>
 					</Stack>

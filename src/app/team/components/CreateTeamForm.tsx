@@ -101,6 +101,7 @@ const CreateTeamForm = () => {
 								_placeholder={{ color: 'gray.300' }}
 								value={teamName}
 								onChange={(e) => setTeamName(e.target.value)}
+								name="workspace name"
 							/>
 						</Stack>
 						<hr />

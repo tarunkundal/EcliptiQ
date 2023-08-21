@@ -105,7 +105,14 @@ const AllTasks = () => {
 				</Flex>
 				<Flex alignItems="center">
 					<Link to={`newTask/${selectedTeamId}`} style={{ color: 'initial' }}>
-						<Box cursor="pointer" mx={2} p={1} bg="gray.50" rounded="md">
+						<Box
+							_hover={{ bg: 'black', color: 'white' }}
+							cursor="pointer"
+							mx={2}
+							p={1}
+							bg="gray.50"
+							rounded="md"
+						>
 							<FaPlus />
 						</Box>
 					</Link>
@@ -121,7 +128,7 @@ const AllTasks = () => {
 							cursor="pointer"
 							size="xs"
 							value={selectedTeamId}
-							onChange={(value) => handleTeamChange(value.target.value)}
+							onChange={(e) => handleTeamChange(e.target.value)}
 						>
 							{teams.map((team) => {
 								return (

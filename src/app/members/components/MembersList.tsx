@@ -110,7 +110,6 @@ const MembersList = () => {
 												<Flex alignItems="center">
 													<Avatar size="sm" name={member.user_email} />
 													<Stack gap={-1} ml={2}>
-														{/* <Text fontSize="15px" fontWeight="semibold"></Text> */}
 														<Text fontSize="14px" fontWeight="semibold">
 															{member.user_email}
 														</Text>
