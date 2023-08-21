@@ -36,6 +36,10 @@ const TaskDetail = () => {
 	const history = useHistory();
 	const [taskCreatedBy, setTaskCreatedBy] = useState<string | undefined>('');
 	const [taskAssignedTo, setTaskAssignedTo] = useState<string | undefined>('');
+	const [assigneAvatarUrl, setAssigneAvatarUrl] = useState<string | undefined>(
+		''
+	);
+	const [userAvatarUrl, setuserAvatarUrl] = useState<string | undefined>('');
 
 	const selectedTask = allTasks.find((task) => task.id === taskID);
 
@@ -53,6 +57,8 @@ const TaskDetail = () => {
 
 			setTaskAssignedTo(assignedTo?.user_email);
 			setTaskCreatedBy(createdBy?.user_email);
+			setAssigneAvatarUrl(assignedTo?.avtar_url);
+			setuserAvatarUrl(createdBy?.avtar_url);
 		};
 		fetchAllUsers();
 	}, [selectedTask]);
@@ -143,7 +149,12 @@ const TaskDetail = () => {
 				<Flex justifyContent="space-between">
 					<Text>Assigned To</Text>
 					<Flex alignItems="center">
-						<Avatar size="xs" name={taskAssignedTo} fontSize="12px" />
+						<Avatar
+							size="xs"
+							name={taskAssignedTo}
+							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${assigneAvatarUrl}`}
+							fontSize="12px"
+						/>
 						<Text ml={2}>{taskAssignedTo}</Text>
 					</Flex>
 				</Flex>{' '}
@@ -151,7 +162,11 @@ const TaskDetail = () => {
 				<Flex justifyContent="space-between">
 					<Text>Created By</Text>
 					<Flex alignItems="center">
-						<Avatar size="xs" name={taskCreatedBy} />
+						<Avatar
+							size="xs"
+							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userAvatarUrl}`}
+							name={taskCreatedBy}
+						/>
 						<Text ml={2}>{taskCreatedBy}</Text>
 					</Flex>
 				</Flex>{' '}

@@ -35,10 +35,10 @@ const Modal = (props: {
 			<Box
 				position="fixed"
 				top="10%"
-				left={{ base: '3%', md: '25%' }}
-				right={{ base: '3%', md: '25%' }}
+				left={{ base: '5%', md: '35%' }}
+				right={{ base: '5%', md: '35%' }}
 				boxShadow="xl"
-				minWidth={{ base: '90%', md: '40%' }}
+				minW={{ base: '90%', md: '30%' }}
 				zIndex={50}
 				bg="white"
 				rounded="2xl"

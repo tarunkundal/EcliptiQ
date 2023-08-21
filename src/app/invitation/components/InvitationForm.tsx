@@ -84,7 +84,7 @@ const InvitationForm = (props: {
 		<Modal onClose={props.onClose}>
 			<Stack p={4}>
 				<Text mb={2} fontWeight="semibold">
-					Invite your team
+					Invite to your workspace
 				</Text>
 
 				<hr />
