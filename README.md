@@ -47,8 +47,8 @@ Open your browser and navigate to http://localhost:3000.
 -- Supabase
 -- ESLint
 
-# React + TypeScript + Vite
 ------- Additional --------
+# React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
