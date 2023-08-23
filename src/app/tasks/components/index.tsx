@@ -1,31 +1,17 @@
-import {
-	Box,
-	Checkbox,
-	Flex,
-	Icon,
-	Select,
-	Stack,
-	Text,
-} from '@chakra-ui/react';
+import { Box, Flex, Select, Stack, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { AiOutlineFullscreen } from 'react-icons/ai';
 import { BsMicrosoftTeams } from 'react-icons/bs';
-import { FaPlus, FaThList } from 'react-icons/fa';
-import { HiViewList } from 'react-icons/hi';
+import { FaListUl, FaPlus } from 'react-icons/fa';
 import { IoMdArrowDropright } from 'react-icons/io';
-import { PiUserFocus } from 'react-icons/pi';
+import { LuLayoutDashboard } from 'react-icons/lu';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { _updateTaskStatus } from '../service';
 import { taskActions } from '../slice';
-import {
-	priorityColors,
-	priorityIcons,
-	stagesColors,
-	stagesIcons,
-} from '../taskHelper';
+import IssueBoardView from './BoardView';
+import IssueListView from './ListView';
 const AllTasks = () => {
 	const history = useHistory();
 	const location = useLocation();
@@ -37,6 +23,7 @@ const AllTasks = () => {
 	);
 	const customToast = useCustomToast();
 	const dispatch = useAppDispatch();
+	const [viewMode, setViewMode] = useState('list');
 
 	useEffect(() => {
 		const byDefaultSelectedTeamId = teams.length > 0 ? teams[0].id : '';
@@ -57,7 +44,9 @@ const AllTasks = () => {
 	const selectedTeam = teams.find((team) => team.id === selectedTeamId);
 
 	// fetching selected team tasks
-	const teamTasks = allTasks.filter((task) => task.team_id === selectedTeamId);
+	const allTeamTasks = allTasks.filter(
+		(task) => task.team_id === selectedTeamId
+	);
 
 	// handle checkbox state
 	const handleCheckboxChange = async (taskId: string, checked: boolean) => {
@@ -99,7 +88,9 @@ const AllTasks = () => {
 					<Box p={1} bg="gray.100" rounded="md">
 						<BsMicrosoftTeams />
 					</Box>
-					<Text mx={2}>{selectedTeam?.name}</Text>
+					<Text mx={2} fontWeight="semibold">
+						{selectedTeam?.name}
+					</Text>
 					<IoMdArrowDropright />
 					<Text mx={2}>Your Tasks</Text>
 				</Flex>
@@ -116,11 +107,27 @@ const AllTasks = () => {
 							<FaPlus />
 						</Box>
 					</Link>
-					<Box cursor="pointer" mx={2} p={1} bg="gray.50" rounded="md">
-						<HiViewList />
+					<Box
+						cursor="pointer"
+						_hover={{ bg: 'black', color: 'white' }}
+						mx={2}
+						p={1}
+						bg="gray.50"
+						rounded="md"
+						onClick={() => setViewMode('list')}
+					>
+						<FaListUl />
 					</Box>
-					<Box mx={2} p={1} cursor="pointer" bg="gray.50" rounded="md">
-						<FaThList />
+					<Box
+						_hover={{ bg: 'black', color: 'white' }}
+						mx={2}
+						p={1}
+						cursor="pointer"
+						bg="gray.50"
+						rounded="md"
+						onClick={() => setViewMode('board')}
+					>
+						<LuLayoutDashboard />
 					</Box>
 					<Box mx={2} p={1} cursor="pointer" bg="gray.50" rounded="md">
 						<Select
@@ -142,70 +149,14 @@ const AllTasks = () => {
 				</Flex>
 			</Flex>
 			<hr />
-
-			<Stack mx={0} fontSize="14px">
-				{teamTasks.map((task) => {
-					return (
-						<Box key={task.id} borderBottom="1px" pb={2}>
-							<Flex
-								key={task.id}
-								p={2}
-								justifyContent="space-between"
-								alignItems="center"
-								_hover={{ bg: 'gray.50' }}
-								rounded="md"
-							>
-								<Flex alignItems="center">
-									<Checkbox
-										colorScheme="blue"
-										onChange={(e) =>
-											handleCheckboxChange(task.id, e.target.checked)
-										}
-										defaultChecked={task.stage === 'done' ? true : false}
-									/>
-									<Text ml={4}>
-										<Icon
-											mt={1}
-											as={
-												priorityIcons[
-													task.priority as keyof typeof priorityIcons
-												]
-											}
-											color={
-												priorityColors[
-													task.priority as keyof typeof priorityColors
-												]
-											}
-											fontSize="18px"
-										/>
-									</Text>
-									<Text ml={4}>
-										<Icon
-											mt={1}
-											as={stagesIcons[task.stage as keyof typeof stagesIcons]}
-											color={
-												stagesColors[task.stage as keyof typeof stagesColors]
-											}
-											fontSize="18px"
-										/>
-									</Text>
-									<Text ml={4}>{task.title} </Text>
-								</Flex>
-
-								<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
-									<Flex alignItems="center">
-										<Text fontWeight="light">{task.dueDate}</Text>
-										<Box mx={4}>
-											<PiUserFocus fontSize="18px" />
-										</Box>
-										<AiOutlineFullscreen fontSize="18px" color="blue" />
-									</Flex>
-								</Link>
-							</Flex>
-						</Box>
-					);
-				})}
-			</Stack>
+			{/* views */}
+			{viewMode === 'list' && (
+				<IssueListView
+					tasks={allTeamTasks}
+					handleCheckboxChange={handleCheckboxChange}
+				/>
+			)}
+			{viewMode === 'board' && <IssueBoardView tasks={allTeamTasks} />}
 		</Stack>
 	);
 };
