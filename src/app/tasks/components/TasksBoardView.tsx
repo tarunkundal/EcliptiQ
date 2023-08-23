@@ -28,8 +28,12 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 
 	return (
 		<Box>
-			<Flex justifyContent="space-between" p={4}>
-				<Box w="24%" p={1}>
+			<Flex
+				display={{ base: 'block', md: 'flex' }}
+				justifyContent="space-between"
+				p={4}
+			>
+				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
 					<Flex alignItems="center" mb={6} justifyContent="space-between">
 						<Text fontSize="18px">
 							<Flex alignItems="center">
@@ -94,8 +98,8 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 						))}
 					</ul>
 				</Box>
-				{/* for progress */}
-				<Box w="24%" p={1}>
+				{/* for progress */}{' '}
+				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
 					<Flex alignItems="center" mb={6} justifyContent="space-between">
 						<Text fontSize="18px">
 							<Flex alignItems="center">
@@ -159,9 +163,8 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 						))}
 					</ul>
 				</Box>
-
-				{/* for todo */}
-				<Box w="24%" p={1}>
+				{/* for todo */}{' '}
+				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
 					<Flex alignItems="center" mb={6} justifyContent="space-between">
 						<Text fontSize="18px">
 							<Flex alignItems="center">
@@ -225,8 +228,8 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 						))}
 					</ul>
 				</Box>
-				{/* for backlog */}
-				<Box w="24%" p={1}>
+				{/* for backlog */}{' '}
+				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
 					<Flex alignItems="center" mb={6} justifyContent="space-between">
 						<Text fontSize="18px">
 							<Flex alignItems="center">
