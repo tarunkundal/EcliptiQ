@@ -12,6 +12,7 @@ import { _updateTaskStatus } from '../service';
 import { taskActions } from '../slice';
 import TasksBoardView from './TasksBoardView';
 import TasksListView from './TasksListView';
+
 const AllTasks = () => {
 	const history = useHistory();
 	const location = useLocation();
