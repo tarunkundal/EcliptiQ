@@ -11,7 +11,7 @@ import {
 } from '../taskHelper';
 import { TaskTable } from '../types';
 
-const IssueListView = ({
+const TasksListView = ({
 	tasks,
 	handleCheckboxChange,
 }: {
@@ -77,4 +77,4 @@ const IssueListView = ({
 	);
 };
 
-export default IssueListView;
+export default TasksListView;

@@ -14,7 +14,7 @@ type Columns = {
 	[key: string]: TaskTable[];
 };
 
-const IssueBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
+const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 	const columns: Columns = {
 		done: [],
 		progress: [],
@@ -296,4 +296,4 @@ const IssueBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 	);
 };
 
-export default IssueBoardView;
+export default TasksBoardView;

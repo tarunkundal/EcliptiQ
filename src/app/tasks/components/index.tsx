@@ -10,8 +10,8 @@ import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { _updateTaskStatus } from '../service';
 import { taskActions } from '../slice';
-import IssueBoardView from './BoardView';
-import IssueListView from './ListView';
+import TasksBoardView from './TasksBoardView';
+import TasksListView from './TasksListView';
 const AllTasks = () => {
 	const history = useHistory();
 	const location = useLocation();
@@ -151,12 +151,12 @@ const AllTasks = () => {
 			<hr />
 			{/* views */}
 			{viewMode === 'list' && (
-				<IssueListView
+				<TasksListView
 					tasks={allTeamTasks}
 					handleCheckboxChange={handleCheckboxChange}
 				/>
 			)}
-			{viewMode === 'board' && <IssueBoardView tasks={allTeamTasks} />}
+			{viewMode === 'board' && <TasksBoardView tasks={allTeamTasks} />}
 		</Stack>
 	);
 };
