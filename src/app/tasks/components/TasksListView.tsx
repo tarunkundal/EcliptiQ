@@ -18,13 +18,16 @@ const TasksListView = ({
 	tasks: TaskTable[];
 	handleCheckboxChange: (id: any, value: any) => void;
 }) => {
+	const todayDate = new Date();
+
 	return (
-		<Box>
+		<Box fontSize="14px">
 			{tasks.map((task) => (
-				<Box key={task.id} borderBottom="1px" pb={2}>
+				<Box key={task.id} borderBottom="1px" py={2}>
 					<Flex
 						key={task.id}
-						p={2}
+						px={2}
+						py={1}
 						justifyContent="space-between"
 						alignItems="center"
 						_hover={{ bg: 'gray.50' }}
@@ -63,7 +66,18 @@ const TasksListView = ({
 
 						<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
 							<Flex alignItems="center">
-								<Text fontWeight="light">{task.dueDate}</Text>
+								<Text
+									color={
+										new Date(task.dueDate) < todayDate && task.stage !== 'done'
+											? 'red'
+											: 'inherit'
+									}
+									fontWeight={
+										new Date(task.dueDate) < todayDate ? 'bold' : 'inherit'
+									}
+								>
+									{task.dueDate}
+								</Text>
 								<Box mx={4}>
 									<PiUserFocus fontSize="18px" />
 								</Box>

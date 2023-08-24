@@ -13,6 +13,7 @@ const Routes = {
 	TASKDETAIL: '/tasks/:taskID',
 	TASKS: '/tasks',
 	UPDATE_TASK: '/tasks/task/:taskId',
+	SETTINGS: '/settings',
 };
 
 export default Routes;

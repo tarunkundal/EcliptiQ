@@ -91,7 +91,7 @@ const TaskDetail = () => {
 				<Text>
 					Team: <b> {taskOfWhichTeam?.name} </b>{' '}
 				</Text>
-				<Text fontSize="18px">
+				<Text fontSize="16px">
 					{' '}
 					<b> Description: </b>{' '}
 					{selectedTask?.description ? selectedTask.description : 'null...'}
@@ -99,7 +99,7 @@ const TaskDetail = () => {
 			</Stack>
 			<hr />
 			<Heading fontSize="22px" textDecoration="underline">
-				Issue Details :
+				Task Details :
 			</Heading>
 			<Stack
 				my={4}

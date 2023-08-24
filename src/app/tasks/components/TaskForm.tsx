@@ -126,7 +126,6 @@ const TaskForm = () => {
 			my={4}
 			mt={{ base: '0', md: '5%' }}
 			border="1px"
-			fontWeight="semibold"
 			borderColor="gray.200"
 			fontSize={{ base: '14px', md: '16px' }}
 			boxShadow="md"
@@ -163,7 +162,7 @@ const TaskForm = () => {
 			<hr />
 
 			<form onSubmit={handleSubmitHandler}>
-				<Stack my={4} gap={{ base: 3, md: 6 }}>
+				<Stack my={4} gap={{ base: 3, md: 6 }} fontSize="14px">
 					<Input
 						required
 						type="text"
@@ -171,6 +170,7 @@ const TaskForm = () => {
 						onChange={(e) => setTaskTitle(e.target.value)}
 						placeholder="Task Title..."
 						name="task title"
+						_placeholder={{ fontSize: '14px' }}
 					/>
 
 					<Textarea
@@ -178,6 +178,7 @@ const TaskForm = () => {
 						value={taskDescription}
 						onChange={(e) => setTaskDescription(e.target.value)}
 						name="description"
+						_placeholder={{ fontSize: '14px' }}
 					/>
 
 					<Stack

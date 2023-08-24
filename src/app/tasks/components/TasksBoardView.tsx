@@ -32,10 +32,11 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 				display={{ base: 'block', md: 'flex' }}
 				justifyContent="space-between"
 				p={4}
+				fontSize="14px"
 			>
 				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
 					<Flex alignItems="center" mb={6} justifyContent="space-between">
-						<Text fontSize="18px">
+						<Text>
 							<Flex alignItems="center">
 								<FaCheckCircle color="blue" />
 								<Text ml={2}>Completed</Text>
@@ -101,7 +102,7 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 				{/* for progress */}{' '}
 				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
 					<Flex alignItems="center" mb={6} justifyContent="space-between">
-						<Text fontSize="18px">
+						<Text>
 							<Flex alignItems="center">
 								<TbProgressBolt color="red" />
 								<Text ml={2}>Progress</Text>
@@ -166,7 +167,7 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 				{/* for todo */}{' '}
 				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
 					<Flex alignItems="center" mb={6} justifyContent="space-between">
-						<Text fontSize="18px">
+						<Text>
 							<Flex alignItems="center">
 								<FaRegCircle color="gray" />
 								<Text ml={2}>Todo</Text>
@@ -231,7 +232,7 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 				{/* for backlog */}{' '}
 				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
 					<Flex alignItems="center" mb={6} justifyContent="space-between">
-						<Text fontSize="18px">
+						<Text>
 							<Flex alignItems="center">
 								<ImSpinner6 color="skyblue" />
 								<Text ml={2}>Backlog</Text>

@@ -78,7 +78,7 @@ const AllTasks = () => {
 	};
 
 	return (
-		<Stack my={{ base: 0, md: 4 }} gap={4}>
+		<Stack my={{ base: 0, md: 4 }} gap={2}>
 			<Flex
 				p={2}
 				fontSize={{ base: '14px', md: '' }}
