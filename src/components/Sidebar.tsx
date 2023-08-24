@@ -6,16 +6,21 @@ import {
 	Heading,
 	Icon,
 	Image,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	Text,
 	useBreakpointValue,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { IconType } from 'react-icons';
-import { FiPlus, FiUser } from 'react-icons/fi';
+import { BsMicrosoftTeams } from 'react-icons/bs';
+import { FiPlus } from 'react-icons/fi';
 import { GrTasks } from 'react-icons/gr';
 import { LuSettings2 } from 'react-icons/lu';
-import { MdInsertInvitation, MdWorkspacesFilled } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { TbSwitch3 } from 'react-icons/tb';
 import { Link, NavLink } from 'react-router-dom';
 
 import InvitationForm from '../app/invitation/components/InvitationForm';
@@ -31,12 +36,20 @@ interface LinkItemProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-	{ name: 'Workspaces', icon: MdWorkspacesFilled, path: Routes.TEAMS },
-	{ name: 'Invitations', icon: MdInsertInvitation, path: Routes.INVITATIONS },
+	// { name: 'Workspaces', icon: MdWorkspacesFilled, path: Routes.TEAMS },
+	// { name: 'Invitations', icon: MdInsertInvitation, path: Routes.INVITATIONS },
 	{ name: 'Tasks', icon: GrTasks, path: Routes.TASKS },
 ];
 
-const Sidebar: React.FC = () => {
+interface TeamSelectorProps {
+	selectTeamOnChange: (teamId: string) => void;
+}
+
+const Sidebar: React.FC<TeamSelectorProps> = ({
+	selectTeamOnChange,
+}: {
+	selectTeamOnChange: (teamId: any) => void;
+}) => {
 	const isMediumScreen = useBreakpointValue({ base: false, md: true });
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -55,6 +68,12 @@ const Sidebar: React.FC = () => {
 
 	const toggleSidebar = () => {
 		setIsOpen(!isOpen);
+	};
+
+	const teams = useAppSelector((state) => state.teams.teams);
+
+	const handleSelectedTeam = ({ teamId }: { teamId: string }) => {
+		selectTeamOnChange(teamId);
 	};
 
 	return (
@@ -123,6 +142,38 @@ const Sidebar: React.FC = () => {
 					/>
 				</Flex>
 				<hr />
+				<Flex
+					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+					alignItems="center"
+					p={2}
+					my={5}
+					mx={2}
+					rounded="md"
+				>
+					<Menu>
+						<MenuButton>
+							<Flex alignItems="center">
+								<TbSwitch3 />
+								<Text ml={4}>Switch Teams</Text>
+							</Flex>
+						</MenuButton>
+						<MenuList>
+							{teams.map((team) => {
+								return (
+									<MenuItem
+										icon={<BsMicrosoftTeams color="red" />}
+										command="⌘N"
+										key={team.id}
+										onClick={() => handleSelectedTeam({ teamId: team.id })}
+									>
+										{team.name}
+									</MenuItem>
+								);
+							})}
+						</MenuList>
+					</Menu>
+				</Flex>
+				{/* <hr /> */}
 				{LinkItems.map((item) => {
 					return (
 						<NavLink
@@ -145,35 +196,8 @@ const Sidebar: React.FC = () => {
 						</NavLink>
 					);
 				})}
-				<Flex
-					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
-					alignItems="center"
-					p={2}
-					my={5}
-					mx={2}
-					rounded="md"
-					onClick={openProfile}
-				>
-					<Icon as={FiUser} mr="4" />
-					Profile
-				</Flex>
 
-				<Flex
-					_hover={{ bg: 'gray.100', cursor: 'pointer' }}
-					alignItems="center"
-					p={2}
-					my={5}
-					mx={2}
-					rounded="md"
-				>
-					<Link style={{ color: 'initial' }} to={Routes.SETTINGS}>
-						<Flex alignItems="center">
-							<LuSettings2 />
-							<Text ml={4}>Settings</Text>
-						</Flex>
-					</Link>
-
-					{/* <Menu>
+				{/* <Menu>
 						<MenuButton>
 							<Flex alignItems="center">
 								<LuSettings2 />
@@ -193,7 +217,6 @@ const Sidebar: React.FC = () => {
 							</Link>
 						</MenuList>
 					</Menu> */}
-				</Flex>
 
 				{/* invitation form */}
 				<Text mt={8} fontSize="12px">
@@ -211,8 +234,22 @@ const Sidebar: React.FC = () => {
 					<Icon as={FiPlus} mr="4" />
 					Invite People
 				</Flex>
-
 				<Box my={4} position="absolute" bottom={0}>
+					<Flex
+						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+						alignItems="center"
+						p={2}
+						my={5}
+						mx={2}
+						rounded="md"
+					>
+						<Link style={{ color: 'initial' }} to={Routes.SETTINGS}>
+							<Flex alignItems="center">
+								<LuSettings2 />
+								<Text ml={4}>Settings</Text>
+							</Flex>
+						</Link>
+					</Flex>
 					<Flex
 						w="full"
 						h="full"
