@@ -6,19 +6,14 @@ import {
 	Heading,
 	Icon,
 	Image,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	Text,
 	useBreakpointValue,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { IconType } from 'react-icons';
-import { BsMicrosoftTeams } from 'react-icons/bs';
 import { FiPlus, FiUser } from 'react-icons/fi';
 import { GrTasks } from 'react-icons/gr';
-import { LuSettings2, LuUser } from 'react-icons/lu';
+import { LuSettings2 } from 'react-icons/lu';
 import { MdInsertInvitation, MdWorkspacesFilled } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
@@ -171,7 +166,14 @@ const Sidebar: React.FC = () => {
 					mx={2}
 					rounded="md"
 				>
-					<Menu>
+					<Link style={{ color: 'initial' }} to={Routes.SETTINGS}>
+						<Flex alignItems="center">
+							<LuSettings2 />
+							<Text ml={4}>Settings</Text>
+						</Flex>
+					</Link>
+
+					{/* <Menu>
 						<MenuButton>
 							<Flex alignItems="center">
 								<LuSettings2 />
@@ -190,10 +192,8 @@ const Sidebar: React.FC = () => {
 								</MenuItem>
 							</Link>
 						</MenuList>
-					</Menu>
+					</Menu> */}
 				</Flex>
-
-				{/* <hr /> */}
 
 				{/* invitation form */}
 				<Text mt={8} fontSize="12px">

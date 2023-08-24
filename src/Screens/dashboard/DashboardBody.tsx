@@ -22,15 +22,15 @@ const DashboardBody = () => {
 				<Route exact path={Routes.TASKS} component={AllTasks} />
 				<Route exact path={Routes.USER_SETTING} component={UserSetting} />
 				<Route exact path={Routes.NEWTASK} component={TaskForm} />
-				<Route exact path={Routes.CREATE_TEAM} component={CreateTeamForm} />
 				<Route exact path={Routes.INVITATIONS} component={Invitations} />
+				<Route exact path={Routes.CREATE_TEAM} component={CreateTeamForm} />
 				<Route exact path={Routes.TEAMDETAIL} component={TeamDetailPage} />
 				<Route exact path={Routes.TEAMS} component={TeamList} />
 				<Route exact path={Routes.TEAMSMEMBERS} component={MembersList} />
 				<Route exact path={Routes.TASKDETAIL} component={TaskDetail} />
 				<Route exact path={Routes.UPDATE_TASK} component={TaskUpdateForm} />
+				<Route exact path={Routes.SETTINGS} component={Settings} />
 			</Box>
-			<Route exact path={Routes.SETTINGS} component={Settings} />
 		</>
 	);
 };
