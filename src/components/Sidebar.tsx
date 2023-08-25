@@ -13,7 +13,7 @@ import {
 	Text,
 	useBreakpointValue,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IconType } from 'react-icons';
 import { BsMicrosoftTeams } from 'react-icons/bs';
 import { FiPlus } from 'react-icons/fi';
@@ -21,7 +21,7 @@ import { GrTasks } from 'react-icons/gr';
 import { LuSettings2 } from 'react-icons/lu';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { TbSwitch3 } from 'react-icons/tb';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory, useLocation } from 'react-router-dom';
 
 import InvitationForm from '../app/invitation/components/InvitationForm';
 import { useAppDispatch, useAppSelector } from '../app/store';
@@ -37,8 +37,6 @@ interface LinkItemProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-	// { name: 'Workspaces', icon: MdWorkspacesFilled, path: Routes.TEAMS },
-	// { name: 'Invitations', icon: MdInsertInvitation, path: Routes.INVITATIONS },
 	{ name: 'Tasks', icon: GrTasks, path: Routes.TASKS },
 ];
 
@@ -51,24 +49,45 @@ const Sidebar: React.FC = () => {
 	const userProfileData = useAppSelector(
 		(state) => state.userProfile.userProfile
 	);
-
 	const [isOpenProfile, setIsOpenProfile] = useState(false);
 	const [isOpenInvitation, setIsOpenInvitation] = useState(false);
-
 	const openProfile = () => setIsOpenProfile(true);
 	const closeProfile = () => setIsOpenProfile(false);
-
 	const closeInvitation = () => setIsOpenInvitation(false);
 
 	const toggleSidebar = () => {
 		setIsOpen(!isOpen);
 	};
 
+	// teams logic for selecting and displaying
+	const history = useHistory();
+	const location = useLocation();
+	const storedSelectedTeamId = localStorage.getItem('selectedTeamId');
+	const [selectedTeamId, setSelectedTeamId] = useState(
+		storedSelectedTeamId || ''
+	);
 	const teams = useAppSelector((state) => state.teams.teams);
 
-	// handle seleted team
+	useEffect(() => {
+		const byDefaultSelectedTeamId = teams.length > 0 ? teams[0].id : '';
+		setSelectedTeamId(storedSelectedTeamId || byDefaultSelectedTeamId);
+		dispatch(
+			teamActions.set_selected_team(
+				storedSelectedTeamId || byDefaultSelectedTeamId
+			)
+		);
+	}, []);
+
+	// Save selected team to local storage whenever it changes
+	useEffect(() => {
+		localStorage.setItem('selectedTeamId', selectedTeamId);
+	}, [selectedTeamId]);
+
+	// handle selected team on change
 	const handleSelectedTeam = ({ teamId }: { teamId: string }) => {
-		dispatch(teamActions.set_selected_team(teamId));
+		history.replace(location.pathname); // Keep the current route and update URL
+		setSelectedTeamId(teamId);
+		dispatch(teamActions.set_selected_team(teamId)); // Update the selectedTeamId directly
 	};
 
 	return (
@@ -191,27 +210,6 @@ const Sidebar: React.FC = () => {
 						</NavLink>
 					);
 				})}
-
-				{/* <Menu>
-						<MenuButton>
-							<Flex alignItems="center">
-								<LuSettings2 />
-								<Text ml={4}>Settings</Text>
-							</Flex>
-						</MenuButton>
-						<MenuList>
-							<Link style={{ color: 'initial' }} to={Routes.USER_SETTING}>
-								<MenuItem icon={<LuUser color="blue" />} command="⌘T">
-									User Profile
-								</MenuItem>
-							</Link>
-							<Link style={{ color: 'initial' }} to={Routes.TEAMS}>
-								<MenuItem icon={<BsMicrosoftTeams color="red" />} command="⌘N">
-									Teams
-								</MenuItem>
-							</Link>
-						</MenuList>
-					</Menu> */}
 
 				{/* invitation form */}
 				<Text mt={8} fontSize="12px">

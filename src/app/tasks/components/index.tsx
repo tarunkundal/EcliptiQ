@@ -1,10 +1,10 @@
-import { Box, Flex, Select, Stack, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { Box, Flex, Stack, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { BsMicrosoftTeams } from 'react-icons/bs';
 import { FaListUl, FaPlus } from 'react-icons/fa';
 import { IoMdArrowDropright } from 'react-icons/io';
 import { LuLayoutDashboard } from 'react-icons/lu';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
@@ -14,36 +14,13 @@ import TasksBoardView from './TasksBoardView';
 import TasksListView from './TasksListView';
 
 const AllTasks = () => {
-	const history = useHistory();
-	const location = useLocation();
-	const storedSelectedTeamId = localStorage.getItem('selectedTeamId');
 	const teams = useAppSelector((state) => state.teams.teams);
-	// const selectedTeamByUser = useAppSelector(
-	// 	(state) => state.teams.selectedTeamId
-	// );
+	const selectedTeamId = useAppSelector((state) => state.teams.selectedTeamId);
 	const allTasks = useAppSelector((state) => state.tasks.tasks);
-	const [selectedTeamId, setSelectedTeamId] = useState(
-		storedSelectedTeamId || ''
-	);
+
 	const customToast = useCustomToast();
 	const dispatch = useAppDispatch();
 	const [viewMode, setViewMode] = useState('list');
-
-	useEffect(() => {
-		const byDefaultSelectedTeamId = teams.length > 0 ? teams[0].id : '';
-		setSelectedTeamId(storedSelectedTeamId || byDefaultSelectedTeamId);
-	}, []);
-
-	// Save selected team to local storage whenever it changes
-	useEffect(() => {
-		localStorage.setItem('selectedTeamId', selectedTeamId);
-	}, [selectedTeamId]);
-
-	// Handle changing the selected team ID when selecting from the dropdown
-	const handleTeamChange = (value: string) => {
-		history.replace(location.pathname); // Keep the current route and update URL
-		setSelectedTeamId(value); // Update the selectedTeamId directly
-	};
 
 	const selectedTeam = teams.find((team) => team.id === selectedTeamId);
 
@@ -132,23 +109,6 @@ const AllTasks = () => {
 						onClick={() => setViewMode('board')}
 					>
 						<LuLayoutDashboard />
-					</Box>
-					<Box mx={2} p={1} cursor="pointer" bg="gray.50" rounded="md">
-						<Select
-							required
-							cursor="pointer"
-							size="xs"
-							value={selectedTeamId}
-							onChange={(e) => handleTeamChange(e.target.value)}
-						>
-							{teams.map((team) => {
-								return (
-									<option key={team.name} value={team.id}>
-										{team.name}
-									</option>
-								);
-							})}
-						</Select>
 					</Box>
 				</Flex>
 			</Flex>
