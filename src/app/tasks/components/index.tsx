@@ -18,6 +18,9 @@ const AllTasks = () => {
 	const location = useLocation();
 	const storedSelectedTeamId = localStorage.getItem('selectedTeamId');
 	const teams = useAppSelector((state) => state.teams.teams);
+	// const selectedTeamByUser = useAppSelector(
+	// 	(state) => state.teams.selectedTeamId
+	// );
 	const allTasks = useAppSelector((state) => state.tasks.tasks);
 	const [selectedTeamId, setSelectedTeamId] = useState(
 		storedSelectedTeamId || ''

@@ -1,5 +1,6 @@
 export interface TeamState {
 	teams: TeamTable[];
+	selectedTeamId: string | null;
 }
 
 export interface TeamTable {

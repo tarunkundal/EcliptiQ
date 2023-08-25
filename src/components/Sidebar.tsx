@@ -24,7 +24,8 @@ import { TbSwitch3 } from 'react-icons/tb';
 import { Link, NavLink } from 'react-router-dom';
 
 import InvitationForm from '../app/invitation/components/InvitationForm';
-import { useAppSelector } from '../app/store';
+import { useAppDispatch, useAppSelector } from '../app/store';
+import { teamActions } from '../app/team/slice';
 import UserProfile from '../app/user_profile/components/UserProfileCard';
 import Logo from '../assets/logoQ.png';
 import Routes from '../Routes';
@@ -41,17 +42,10 @@ const LinkItems: Array<LinkItemProps> = [
 	{ name: 'Tasks', icon: GrTasks, path: Routes.TASKS },
 ];
 
-interface TeamSelectorProps {
-	selectTeamOnChange: (teamId: string) => void;
-}
-
-const Sidebar: React.FC<TeamSelectorProps> = ({
-	selectTeamOnChange,
-}: {
-	selectTeamOnChange: (teamId: any) => void;
-}) => {
+const Sidebar: React.FC = () => {
 	const isMediumScreen = useBreakpointValue({ base: false, md: true });
 	const [isOpen, setIsOpen] = useState(false);
+	const dispatch = useAppDispatch();
 
 	const user = useAppSelector((state) => state.user.user);
 	const userProfileData = useAppSelector(
@@ -72,8 +66,9 @@ const Sidebar: React.FC<TeamSelectorProps> = ({
 
 	const teams = useAppSelector((state) => state.teams.teams);
 
+	// handle seleted team
 	const handleSelectedTeam = ({ teamId }: { teamId: string }) => {
-		selectTeamOnChange(teamId);
+		dispatch(teamActions.set_selected_team(teamId));
 	};
 
 	return (

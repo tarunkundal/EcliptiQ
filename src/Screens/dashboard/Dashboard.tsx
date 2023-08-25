@@ -90,14 +90,9 @@ const Dashboard = () => {
 		fetchTeamsCreatedByUserOrIsMember();
 	}, []);
 
-	// function to get the selected team id
-	const selectedTeamId = (teamId: string) => {
-		console.log(teamId);
-	};
-
 	return (
 		<>
-			<Sidebar selectTeamOnChange={selectedTeamId} />
+			<Sidebar />
 
 			<DashboardBody />
 		</>
