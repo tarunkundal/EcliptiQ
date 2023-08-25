@@ -5,11 +5,13 @@ import { MdManageAccounts, MdWorkspacesFilled } from 'react-icons/md';
 import { PiPlus } from 'react-icons/pi';
 import { Link, useHistory } from 'react-router-dom';
 
+import { useAppSelector } from '../../app/store';
 import UserProfile from '../../app/user_profile/components/UserProfileCard';
 import Routes from '../../Routes';
 
 const SettingsSidebar = () => {
 	const history = useHistory();
+	const selectedTeamId = useAppSelector((state) => state.teams.selectedTeamId);
 	const [isOpenProfile, setIsOpenProfile] = useState(false);
 	const openProfile = () => setIsOpenProfile(true);
 	const closeProfile = () => setIsOpenProfile(false);
@@ -59,17 +61,22 @@ const SettingsSidebar = () => {
 							General
 						</Flex>
 					</Link>
-					<Flex
-						_hover={{ bg: 'gray.100', cursor: 'pointer' }}
-						alignItems="center"
-						p={2}
-						my={1}
-						mx={2}
-						rounded="md"
-						ml={10}
+					<Link
+						to={`/teams/members/${selectedTeamId}`}
+						style={{ color: 'inherit' }}
 					>
-						Members
-					</Flex>
+						<Flex
+							_hover={{ bg: 'gray.100', cursor: 'pointer' }}
+							alignItems="center"
+							p={2}
+							my={1}
+							mx={2}
+							rounded="md"
+							ml={10}
+						>
+							Members
+						</Flex>
+					</Link>
 					<Link to={Routes.INVITATIONS} style={{ color: 'inherit' }}>
 						<Flex
 							_hover={{ bg: 'gray.100', cursor: 'pointer' }}

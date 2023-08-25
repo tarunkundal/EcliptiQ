@@ -11,8 +11,8 @@ import CreateTeamForm from '../../app/team/components/CreateTeamForm';
 import TeamDetailPage from '../../app/team/components/TeamDetailPage';
 import TeamList from '../../app/team/components/TeamList';
 import UserSetting from '../../app/user_profile/components/UserSetting';
-import Settings from '../../components/settings';
 import Routes from '../../Routes';
+import Settings from '../settings';
 
 const DashboardBody = () => {
 	return (
