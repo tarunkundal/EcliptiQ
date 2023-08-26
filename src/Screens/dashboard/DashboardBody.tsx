@@ -20,10 +20,11 @@ const DashboardBody = () => {
 	return (
 		<>
 			<Box ml={{ base: 0, md: '200px' }}>
-				<Route
-					path={Routes.DASHBOARD}
-					component={teams.length === 0 ? CreateTeamForm : AllTasks}
-				/>
+				{!teams ? (
+					<Route path={Routes.DASHBOARD} component={CreateTeamForm} />
+				) : (
+					''
+				)}
 				<Route exact path={Routes.TASKS} component={AllTasks} />
 				<Route exact path={Routes.NEWTASK} component={TaskForm} />
 				<Route exact path={Routes.TEAMS} component={TeamList} />
