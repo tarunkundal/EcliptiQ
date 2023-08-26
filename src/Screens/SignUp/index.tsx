@@ -167,11 +167,7 @@ const SignUp = () => {
 					<Stack display={{ base: 'none', md: 'block' }}>
 						<Box borderRadius="2xl" overflow="hidden">
 							<video width="500px" autoPlay loop muted>
-								<source
-									src={sideVideo}
-									// src="https://todoist.b-cdn.net/assets/video/d1cc9a7bd4e95120022d9a2d66d14fbe.mp4"
-									type="video/mp4"
-								/>
+								<source src={sideVideo} type="video/mp4" />
 								Your browser does not support the video tag.
 							</video>
 						</Box>

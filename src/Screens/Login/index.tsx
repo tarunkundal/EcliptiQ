@@ -48,7 +48,7 @@ const Login = () => {
 				description: 'Login Sucessfully',
 				status: 'success',
 			});
-			history.push('/');
+			history.push('https://eclipti-q.vercel.app');
 		}
 		if (error) {
 			customToast({
@@ -72,9 +72,9 @@ const Login = () => {
 				boxShadow="md"
 				w="full"
 			>
-				<Logo size={16} />
+				<Logo size={{ base: 12, md: 16 }} />
 				<Flex justifyContent="space-around" alignItems="center">
-					<Text fontSize={{ base: '14px', md: '16px' }} mr={{ base: 2, md: 6 }}>
+					<Text fontSize={{ base: '12px', md: '16px' }} mr={{ base: 2, md: 6 }}>
 						Don`t have an account?
 					</Text>
 					<Button variant="blue" size={{ base: 'sm', md: 'md' }}>
@@ -168,6 +168,3 @@ const Login = () => {
 };
 
 export default memo(Login);
-
-// client id : 313435338028-vus930n1oruu3b92jjq47bc0g43n15rj.apps.googleusercontent.com
-// client secret : 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
