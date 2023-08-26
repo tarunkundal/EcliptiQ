@@ -9,8 +9,8 @@ const useFetchBacklogTasks = () => {
 		(task) => task.team_id === selectedTeamId
 	);
 
-	const todoTasks = allTeamTasks.filter((task) => task.stage === 'backlog');
-	return { todoTasks };
+	const backlogTasks = allTeamTasks.filter((task) => task.stage === 'backlog');
+	return { backlogTasks };
 };
 
 export default useFetchBacklogTasks;

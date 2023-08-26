@@ -148,7 +148,7 @@ const AllTasks = () => {
 					toggleFavorite={handleFavouriteStatus}
 				/>
 			)}
-			{viewMode === 'board' && <TasksBoardView tasks={allTeamTasks} />}
+			{viewMode === 'board' && <TasksBoardView />}
 		</Stack>
 	);
 };

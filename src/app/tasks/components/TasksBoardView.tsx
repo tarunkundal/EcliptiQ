@@ -7,24 +7,17 @@ import { PiUserFocus } from 'react-icons/pi';
 import { TbProgressBolt } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 
+import useFetchBacklogTasks from '../../../hooks/tasksCustomHooks/useFetchBacklogTasks';
+import useFetchCompletedTasks from '../../../hooks/tasksCustomHooks/useFetchCompletedTasks';
+import useFetchProgressTasks from '../../../hooks/tasksCustomHooks/useFetchProgressTasks';
+import useFetchTodoTasks from '../../../hooks/tasksCustomHooks/useFetchTodoTasks';
 import { priorityColors, priorityIcons } from '../taskHelper';
-import { TaskTable } from '../types';
 
-type Columns = {
-	[key: string]: TaskTable[];
-};
-
-const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
-	const columns: Columns = {
-		done: [],
-		progress: [],
-		todo: [],
-		backlog: [],
-	};
-
-	tasks.forEach((task) => {
-		columns[task.stage].push(task);
-	});
+const TasksBoardView = () => {
+	const { backlogTasks } = useFetchBacklogTasks();
+	const { completedTasks } = useFetchCompletedTasks();
+	const { progressTasks } = useFetchProgressTasks();
+	const { todoTasks } = useFetchTodoTasks();
 
 	return (
 		<Box>
@@ -42,11 +35,11 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 								<Text ml={2}>Completed</Text>
 							</Flex>
 						</Text>
-						<Text>{columns.done.length}</Text>
+						<Text>{completedTasks.length}</Text>
 					</Flex>
 					<hr />
 
-					{columns.done.length === 0 ? (
+					{completedTasks.length === 0 ? (
 						<Text textAlign="center" w="full" p={2}>
 							.... No Tasks ....
 						</Text>
@@ -54,7 +47,7 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 						''
 					)}
 					<ul style={{ listStyle: 'none' }}>
-						{columns.done.map((task) => (
+						{completedTasks.map((task) => (
 							<li key={task.id}>
 								<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
 									<Stack
@@ -108,10 +101,10 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 								<Text ml={2}>Progress</Text>
 							</Flex>
 						</Text>
-						<Text>{columns.progress.length}</Text>
+						<Text>{progressTasks.length}</Text>
 					</Flex>
 					<hr />
-					{columns.progress.length === 0 ? (
+					{progressTasks.length === 0 ? (
 						<Text textAlign="center" w="full" p={2}>
 							.... No Tasks ....
 						</Text>
@@ -119,7 +112,7 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 						''
 					)}
 					<ul style={{ listStyle: 'none' }}>
-						{columns.progress.map((task) => (
+						{progressTasks.map((task) => (
 							<li key={task.id}>
 								<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
 									<Stack
@@ -173,10 +166,10 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 								<Text ml={2}>Todo</Text>
 							</Flex>
 						</Text>
-						<Text>{columns.todo.length}</Text>
+						<Text>{todoTasks.length}</Text>
 					</Flex>
 					<hr />
-					{columns.todo.length === 0 ? (
+					{todoTasks.length === 0 ? (
 						<Text textAlign="center" w="full" p={2}>
 							.... No Tasks ....
 						</Text>
@@ -184,7 +177,7 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 						''
 					)}
 					<ul style={{ listStyle: 'none' }}>
-						{columns.todo.map((task) => (
+						{todoTasks.map((task) => (
 							<li key={task.id}>
 								<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
 									<Stack
@@ -238,11 +231,11 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 								<Text ml={2}>Backlog</Text>
 							</Flex>
 						</Text>
-						<Text>{columns.backlog.length}</Text>
+						<Text>{backlogTasks.length}</Text>
 					</Flex>
 					<hr />
 
-					{columns.backlog.length === 0 ? (
+					{backlogTasks.length === 0 ? (
 						<Text textAlign="center" w="full" p={2}>
 							.... No Tasks ....
 						</Text>
@@ -250,7 +243,7 @@ const TasksBoardView = ({ tasks }: { tasks: TaskTable[] }) => {
 						''
 					)}
 					<ul style={{ listStyle: 'none' }}>
-						{columns.backlog.map((task) => (
+						{backlogTasks.map((task) => (
 							<li key={task.id}>
 								<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
 									<Stack

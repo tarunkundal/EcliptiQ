@@ -9,8 +9,8 @@ const useFetchFavouriteTasks = () => {
 		(task) => task.team_id === selectedTeamId
 	);
 
-	const todoTasks = allTeamTasks.filter((task) => task.favourite === true);
-	return { todoTasks };
+	const favouriteTasks = allTeamTasks.filter((task) => task.favourite === true);
+	return { favouriteTasks };
 };
 
 export default useFetchFavouriteTasks;

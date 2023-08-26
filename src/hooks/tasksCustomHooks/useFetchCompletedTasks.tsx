@@ -9,8 +9,8 @@ const useFetchCompletedTasks = () => {
 		(task) => task.team_id === selectedTeamId
 	);
 
-	const todoTasks = allTeamTasks.filter((task) => task.stage === 'done');
-	return { todoTasks };
+	const completedTasks = allTeamTasks.filter((task) => task.stage === 'done');
+	return { completedTasks };
 };
 
 export default useFetchCompletedTasks;

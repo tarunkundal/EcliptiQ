@@ -9,8 +9,10 @@ const useFetchProgressTasks = () => {
 		(task) => task.team_id === selectedTeamId
 	);
 
-	const todoTasks = allTeamTasks.filter((task) => task.stage === 'progress');
-	return { todoTasks };
+	const progressTasks = allTeamTasks.filter(
+		(task) => task.stage === 'progress'
+	);
+	return { progressTasks };
 };
 
 export default useFetchProgressTasks;
