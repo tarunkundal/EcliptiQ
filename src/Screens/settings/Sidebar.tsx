@@ -25,7 +25,7 @@ const SettingsSidebar = () => {
 				top={0}
 				height="100vh"
 				p={4}
-				w={{ base: '50%', md: '200px' }}
+				w={{ base: '180px', md: '200px' }}
 				bg="gray.50"
 				transition="left 0.3s"
 				boxShadow={{ md: 'md' }}
