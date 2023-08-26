@@ -11,7 +11,7 @@ export interface MemberTable {
 }
 
 export interface SetMemberActionPayload {
-	members: MemberTable[] | null;
+	members: MemberTable[];
 }
 
 export interface AddMemberActionPayload {

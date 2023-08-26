@@ -17,12 +17,14 @@ const memberSlice = createSlice({
 		set_member: (state, action: PayloadAction<SetMemberActionPayload>) => {
 			state.members = action.payload.members;
 		},
+
 		add_member: (state, action: PayloadAction<AddMemberActionPayload>) => {
 			return {
 				...state,
 				members: [...state.members, action.payload.member],
 			};
 		},
+
 		delete_member: (
 			state,
 			action: PayloadAction<DeleteMemberActionPayload>
@@ -33,6 +35,7 @@ const memberSlice = createSlice({
 				),
 			};
 		},
+
 		update_member: (
 			state,
 			action: PayloadAction<UpdateMemberActionPayload>
