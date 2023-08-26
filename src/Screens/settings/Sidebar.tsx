@@ -48,7 +48,10 @@ const SettingsSidebar = () => {
 						</Box>
 						<Text ml={4}>Workspace</Text>
 					</Flex>
-					<Link to={`/teams/${selectedTeamId}`} style={{ color: 'inherit' }}>
+					<Link
+						to={`https://eclipti-q.vercel.app/teams/${selectedTeamId}`}
+						style={{ color: 'inherit' }}
+					>
 						<Flex
 							_hover={{ bg: 'gray.100', cursor: 'pointer' }}
 							alignItems="center"
@@ -62,7 +65,7 @@ const SettingsSidebar = () => {
 						</Flex>
 					</Link>
 					<Link
-						to={`/teams/members/${selectedTeamId}`}
+						to={`https://eclipti-q.vercel.app/teams/members/${selectedTeamId}`}
 						style={{ color: 'inherit' }}
 					>
 						<Flex
