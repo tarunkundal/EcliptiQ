@@ -92,10 +92,11 @@ const TaskForm = () => {
 			team_id: teamID,
 			assigned_to: assignedTo,
 			created_by: user?.id ? user?.id : '',
-			favoutite: false,
+			favourite: false,
 		};
 
 		const { data, error } = await _createNewTask({ taskData });
+		console.log(error, data);
 
 		if (data && !error) {
 			customToast({

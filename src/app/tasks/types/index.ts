@@ -26,7 +26,7 @@ export interface NewTaskData {
 	team_id: string;
 	assigned_to: string;
 	created_by: string | undefined;
-	favoutite: boolean;
+	favourite: boolean;
 }
 
 export interface UpdateTaskData {
