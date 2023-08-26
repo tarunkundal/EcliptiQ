@@ -78,7 +78,7 @@ const AllTasks = () => {
 			);
 		} else if (error) {
 			customToast({
-				title: 'Error while updating favourite status.',
+				title: 'Error while updating task favourite status.',
 				status: 'error',
 			});
 		}
