@@ -21,7 +21,6 @@ const DashboardBody = () => {
 		<>
 			<Box ml={{ base: 0, md: '200px' }}>
 				<Route
-					exact
 					path={Routes.DASHBOARD}
 					component={!teams ? CreateTeamForm : AllTasks}
 				/>

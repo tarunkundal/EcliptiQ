@@ -96,13 +96,10 @@ const UserSetting = () => {
 							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userProfileData?.avtar_url}`}
 						/>
 					</Stack>
-					{!userProfileData?.avtar_url ? (
-						''
-					) : (
-						<Stack>
-							<UserProfileAvatarUpload userId={user?.id} />
-						</Stack>
-					)}
+
+					<Stack>
+						<UserProfileAvatarUpload userId={user?.id} />
+					</Stack>
 					<Stack gap={-2}>
 						<Text>Email</Text>
 						<Text fontSize="14px" fontWeight="bold">
