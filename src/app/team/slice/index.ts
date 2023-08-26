@@ -58,13 +58,7 @@ const teamSlice: Slice<TeamState, TeamSliceCaseReducers, 'teamSlice'> =
 					),
 				};
 			},
-			// delete_team: (state, action: PayloadAction<DeleteTeamActionPayload>) => {
-			// 	return {
-			// 		teams: state.teams.filter(
-			// 			(team) => team.id !== action.payload.teamId
-			// 		),
-			// 	};
-			// },
+
 			delete_team: (state, action: PayloadAction<DeleteTeamActionPayload>) => {
 				state.teams = state.teams.filter(
 					(team) => team.id !== action.payload.teamId

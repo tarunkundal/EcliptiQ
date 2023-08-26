@@ -56,7 +56,9 @@ const TaskForm = () => {
 	useEffect(() => {
 		const fetchingAllTeamMembers = async () => {
 			const { data } = await _fetchAllTeamsMembers(teamID);
-			dispatch(memberActions.set_member({ members: data }));
+			if (data) {
+				dispatch(memberActions.set_member({ members: data }));
+			}
 		};
 		fetchingAllTeamMembers();
 	}, [teamID]);
