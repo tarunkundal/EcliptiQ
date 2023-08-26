@@ -13,6 +13,8 @@ export interface TaskTable {
 	team_id: string;
 	assigned_to: string;
 	created_by: string | undefined;
+	updated_at: Date | any;
+	favourite: boolean;
 }
 
 export interface NewTaskData {
@@ -24,6 +26,7 @@ export interface NewTaskData {
 	team_id: string;
 	assigned_to: string;
 	created_by: string | undefined;
+	favoutite: boolean;
 }
 
 export interface UpdateTaskData {
@@ -32,6 +35,7 @@ export interface UpdateTaskData {
 	dueDate: Date | any;
 	stage: string;
 	priority: string;
+	updated_at: string | Date;
 }
 
 export interface SetTaskActionPayload {
@@ -42,9 +46,15 @@ export interface UpdateTaskActionPayload {
 	taskId: any;
 	taskData: UpdateTaskData;
 }
+
 export interface UpdateTaskStatusActionPayload {
 	taskId: any;
-	stage: string | any;
+	stage: string;
+}
+
+export interface UpdateTaskFavouriteStatusActionPayload {
+	taskId: any;
+	favouriteStatus: boolean;
 }
 
 export interface AddTaskActionPayload {
@@ -52,5 +62,5 @@ export interface AddTaskActionPayload {
 }
 
 export interface DeleteTaskActionPayload {
-	taskId: any;
+	taskId: any | string;
 }

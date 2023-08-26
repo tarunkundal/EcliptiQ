@@ -1,6 +1,5 @@
 import { Box, Checkbox, Flex, Icon, Text } from '@chakra-ui/react';
-import { AiOutlineFullscreen } from 'react-icons/ai';
-import { PiUserFocus } from 'react-icons/pi';
+import { AiFillStar, AiOutlineFullscreen, AiOutlineStar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 import {
@@ -14,9 +13,11 @@ import { TaskTable } from '../types';
 const TasksListView = ({
 	tasks,
 	handleCheckboxChange,
+	toggleFavorite,
 }: {
 	tasks: TaskTable[];
 	handleCheckboxChange: (id: any, value: any) => void;
+	toggleFavorite: (taskId: string, favourite: boolean) => void;
 }) => {
 	const todayDate = new Date();
 
@@ -64,26 +65,37 @@ const TasksListView = ({
 							<Text ml={4}>{task.title} </Text>
 						</Flex>
 
-						<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
-							<Flex alignItems="center">
-								<Text
-									color={
-										new Date(task.dueDate) < todayDate && task.stage !== 'done'
-											? 'red'
-											: 'inherit'
-									}
-									fontWeight={
-										new Date(task.dueDate) < todayDate ? 'bold' : 'inherit'
-									}
-								>
-									{task.dueDate}
-								</Text>
-								<Box mx={4}>
-									<PiUserFocus fontSize="18px" />
-								</Box>
+						<Flex alignItems="center">
+							<Text
+								color={
+									new Date(task.dueDate) < todayDate && task.stage !== 'done'
+										? 'red'
+										: 'inherit'
+								}
+								fontWeight={
+									new Date(task.dueDate) < todayDate ? 'bold' : 'inherit'
+								}
+							>
+								{task.dueDate}
+							</Text>
+							<Box mx={4} cursor="pointer">
+								{task.favourite === true ? (
+									<AiFillStar
+										color="gold"
+										fontSize="18px"
+										onClick={() => toggleFavorite(task.id, false)}
+									/>
+								) : (
+									<AiOutlineStar
+										fontSize="18px"
+										onClick={() => toggleFavorite(task.id, true)}
+									/>
+								)}
+							</Box>
+							<Link to={`/tasks/${task.id}`} style={{ color: 'initial' }}>
 								<AiOutlineFullscreen fontSize="18px" color="blue" />
-							</Flex>
-						</Link>
+							</Link>
+						</Flex>
 					</Flex>
 				</Box>
 			))}

@@ -31,6 +31,21 @@ export const _updateTaskStatus = async ({
 		.select();
 };
 
+// updating task favourite status
+export const _updateFavouriteStatus = async ({
+	favouriteStatus,
+	taskId,
+}: {
+	favouriteStatus: boolean;
+	taskId: string;
+}): Promise<{ data: TaskTable[] | null; error: any }> => {
+	return await supabase
+		.from('tasks')
+		.update({ favourite: favouriteStatus })
+		.eq('id', taskId)
+		.select();
+};
+
 // create new task
 export const _createNewTask = async ({
 	taskData,

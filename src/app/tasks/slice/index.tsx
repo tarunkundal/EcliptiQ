@@ -6,6 +6,7 @@ import {
 	SetTaskActionPayload,
 	TaskState,
 	UpdateTaskActionPayload,
+	UpdateTaskFavouriteStatusActionPayload,
 	UpdateTaskStatusActionPayload,
 } from '../types';
 
@@ -28,6 +29,20 @@ const taskSlice = createSlice({
 				tasks: state.tasks.map((task) =>
 					task.id === action.payload.taskId
 						? { ...task, stage: action.payload.stage }
+						: task
+				),
+			};
+		},
+
+		update_favourite_status: (
+			state,
+			action: PayloadAction<UpdateTaskFavouriteStatusActionPayload>
+		) => {
+			return {
+				...state,
+				tasks: state.tasks.map((task) =>
+					task.id === action.payload.taskId
+						? { ...task, favourite: action.payload.favouriteStatus }
 						: task
 				),
 			};

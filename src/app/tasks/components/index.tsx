@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { _updateTaskStatus } from '../service';
+import { _updateFavouriteStatus, _updateTaskStatus } from '../service';
 import { taskActions } from '../slice';
 import TasksBoardView from './TasksBoardView';
 import TasksListView from './TasksListView';
@@ -52,6 +52,33 @@ const AllTasks = () => {
 		} else if (error) {
 			customToast({
 				title: 'Error while updating task stage.',
+				status: 'error',
+			});
+		}
+	};
+
+	// handle task favourite status
+	const handleFavouriteStatus = async (taskId: string, favourite: boolean) => {
+		const { data, error } = await _updateFavouriteStatus({
+			taskId: taskId,
+			favouriteStatus: favourite,
+		});
+		if (data && !error) {
+			customToast({
+				title: favourite
+					? 'Task added to Favourite.'
+					: 'Task removed from Favourite.',
+				status: 'success',
+			});
+			dispatch(
+				taskActions.update_favourite_status({
+					taskId: taskId,
+					favouriteStatus: favourite,
+				})
+			);
+		} else if (error) {
+			customToast({
+				title: 'Error while updating favourite status.',
 				status: 'error',
 			});
 		}
@@ -118,6 +145,7 @@ const AllTasks = () => {
 				<TasksListView
 					tasks={allTeamTasks}
 					handleCheckboxChange={handleCheckboxChange}
+					toggleFavorite={handleFavouriteStatus}
 				/>
 			)}
 			{viewMode === 'board' && <TasksBoardView tasks={allTeamTasks} />}

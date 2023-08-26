@@ -105,7 +105,7 @@ const TaskDetail = () => {
 				my={4}
 				gap={3}
 				mx="auto"
-				boxShadow="md"
+				boxShadow="xs"
 				p={4}
 				rounded="md"
 				w={{ base: '90%', md: '60%' }}
@@ -187,11 +187,20 @@ const TaskDetail = () => {
 					</Flex>
 				</Flex>
 				<hr />
+				<Flex justifyContent="space-between">
+					<Text>Is Favourite</Text>
+					<Flex alignItems="center">
+						<Text ml={2}>
+							{selectedTask?.favourite === true ? 'True' : 'False'}
+						</Text>
+					</Flex>
+				</Flex>
+				<hr />
 			</Stack>
 			<hr />
 			<Stack gap={4} my={4}>
 				<Flex
-					w={{ base: '90%', md: '70%' }}
+					w={{ base: '90%', md: '100%' }}
 					mx="auto"
 					justifyContent="space-between"
 				>
