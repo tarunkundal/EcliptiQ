@@ -90,6 +90,7 @@ const TaskForm = () => {
 			team_id: teamID,
 			assigned_to: assignedTo,
 			created_by: user?.id ? user?.id : '',
+			favoutite: false,
 		};
 
 		const { data, error } = await _createNewTask({ taskData });
@@ -125,10 +126,9 @@ const TaskForm = () => {
 			w={{ base: '95%', md: '70%' }}
 			my={4}
 			mt={{ base: '0', md: '5%' }}
-			border="1px"
 			borderColor="gray.200"
 			fontSize={{ base: '14px', md: '16px' }}
-			boxShadow="md"
+			boxShadow="xs"
 		>
 			<Heading mb={2} fontSize="22px" textAlign="center">
 				New Task

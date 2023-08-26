@@ -109,7 +109,7 @@ const TaskUpdateForm = () => {
 			my={4}
 			mt={{ base: '0', md: '5%' }}
 			borderColor="gray.200"
-			boxShadow="md"
+			boxShadow="xs"
 			fontSize={{ base: '14px', md: '-moz-initial' }}
 			fontWeight="semibold"
 		>

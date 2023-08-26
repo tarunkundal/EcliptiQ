@@ -48,7 +48,7 @@ const SettingsSidebar = () => {
 						</Box>
 						<Text ml={4}>Workspace</Text>
 					</Flex>
-					<Link to={Routes.TEAMS} style={{ color: 'inherit' }}>
+					<Link to={`/teams/${selectedTeamId}`} style={{ color: 'inherit' }}>
 						<Flex
 							_hover={{ bg: 'gray.100', cursor: 'pointer' }}
 							alignItems="center"

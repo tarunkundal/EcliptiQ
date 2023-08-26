@@ -8,7 +8,7 @@ const Routes = {
 	CREATE_TEAM: '/create-team',
 	INVITATIONS: '/settings/invitations',
 	TEAMDETAIL: '/teams/:id',
-	TEAMS: '/teams',
+	TEAMS: '/settings/teams',
 	TEAMSMEMBERS: '/teams/members/:id',
 	TASKDETAIL: '/tasks/:taskID',
 	TASKS: '/tasks',
