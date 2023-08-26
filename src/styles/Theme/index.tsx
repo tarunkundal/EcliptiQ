@@ -28,7 +28,7 @@ const theme = extendTheme({
 	},
 	fonts: {
 		heading: 'Axiforma, sans-serif',
-		body: 'Montserrat, sans-serif',
+		body: 'Inter UI, SF Pro Display,sans-serif',
 	},
 	components: {
 		Button,

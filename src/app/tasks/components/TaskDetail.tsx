@@ -69,6 +69,7 @@ const TaskDetail = () => {
 	);
 	const createdDate = new Date(selectedTask?.created_at);
 	const dueDate = new Date(selectedTask?.dueDate);
+	const updatedAt = new Date(selectedTask?.updated_at);
 
 	// delete task handler
 	const deleteTaskHandler = async () => {
@@ -89,7 +90,7 @@ const TaskDetail = () => {
 				<Heading>{selectedTask?.title}</Heading>
 
 				<Text>
-					Team: <b> {taskOfWhichTeam?.name} </b>{' '}
+					<b> {taskOfWhichTeam?.name} </b>{' '}
 				</Text>
 				<Text fontSize="16px">
 					{' '}
@@ -97,7 +98,7 @@ const TaskDetail = () => {
 					{selectedTask?.description ? selectedTask.description : 'null...'}
 				</Text>
 			</Stack>
-			<hr />
+			{/* <hr /> */}
 			<Heading fontSize="22px" textDecoration="underline">
 				Task Details :
 			</Heading>
@@ -109,7 +110,7 @@ const TaskDetail = () => {
 				p={4}
 				rounded="md"
 				w={{ base: '90%', md: '60%' }}
-				fontWeight="semibold"
+				fontSize="14px"
 			>
 				<Flex justifyContent="space-between">
 					<Text>Status</Text>
@@ -121,7 +122,9 @@ const TaskDetail = () => {
 							}
 							boxSize="18px"
 						/>
-						<Text ml={2}>{selectedTask?.stage}</Text>
+						<Text ml={2} fontWeight="semibold">
+							{selectedTask?.stage}
+						</Text>
 					</Flex>
 				</Flex>
 				<hr />
@@ -142,7 +145,9 @@ const TaskDetail = () => {
 							}
 							boxSize="18px"
 						/>
-						<Text ml={2}>{selectedTask?.priority}</Text>
+						<Text ml={2} fontWeight="semibold">
+							{selectedTask?.priority}
+						</Text>
 					</Flex>
 				</Flex>{' '}
 				<hr />
@@ -155,7 +160,9 @@ const TaskDetail = () => {
 							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${assigneAvatarUrl}`}
 							fontSize="12px"
 						/>
-						<Text ml={2}>{taskAssignedTo}</Text>
+						<Text ml={2} fontWeight="semibold">
+							{taskAssignedTo}
+						</Text>
 					</Flex>
 				</Flex>{' '}
 				<hr />
@@ -167,7 +174,9 @@ const TaskDetail = () => {
 							src={`https://kiiokeyfnlqufvpdyhap.supabase.co/storage/v1/object/public/avatars/${userAvatarUrl}`}
 							name={taskCreatedBy}
 						/>
-						<Text ml={2}>{taskCreatedBy}</Text>
+						<Text ml={2} fontWeight="semibold">
+							{taskCreatedBy}
+						</Text>
 					</Flex>
 				</Flex>{' '}
 				<hr />
@@ -175,7 +184,13 @@ const TaskDetail = () => {
 					<Text>Due Date</Text>
 					<Flex alignItems="center">
 						<MdDateRange color="red" size="18px" />
-						<Text ml={2}>{dueDate.toDateString()}</Text>
+						<Text
+							ml={2}
+							fontWeight="semibold"
+							color={new Date(dueDate) < new Date() ? 'red' : 'inherit'}
+						>
+							{dueDate.toDateString()}
+						</Text>
 					</Flex>
 				</Flex>
 				<hr />
@@ -183,19 +198,33 @@ const TaskDetail = () => {
 					<Text>Created At</Text>
 					<Flex alignItems="center">
 						<MdDateRange size="18px" color="blue" />
-						<Text ml={2}>{createdDate.toDateString()}</Text>
+						<Text ml={2} fontWeight="semibold">
+							{createdDate.toDateString()}
+						</Text>
 					</Flex>
 				</Flex>
 				<hr />
 				<Flex justifyContent="space-between">
 					<Text>Is Favourite</Text>
 					<Flex alignItems="center">
-						<Text ml={2}>
+						<Text ml={2} fontWeight="semibold">
 							{selectedTask?.favourite === true ? 'True' : 'False'}
 						</Text>
 					</Flex>
 				</Flex>
 				<hr />
+				{selectedTask?.updated_at === null ? (
+					''
+				) : (
+					<Flex justifyContent="space-between">
+						<Text>Updated At</Text>
+						<Flex alignItems="center">
+							<Text ml={2} fontWeight="semibold">
+								{updatedAt.toDateString()}
+							</Text>
+						</Flex>
+					</Flex>
+				)}
 			</Stack>
 			<hr />
 			<Stack gap={4} my={4}>

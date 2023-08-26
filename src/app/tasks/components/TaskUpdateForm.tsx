@@ -82,6 +82,7 @@ const TaskUpdateForm = () => {
 			priority: taskPriorty,
 			stage: taskStatus,
 			dueDate: dueDate,
+			updated_at: new Date(),
 		};
 
 		const { data, error } = await _updateTask({
@@ -95,8 +96,6 @@ const TaskUpdateForm = () => {
 		} else if (error) {
 			customToast({ title: 'Error while updating task.', status: 'error' });
 			history.goBack();
-
-			console.log(error);
 		}
 	};
 
