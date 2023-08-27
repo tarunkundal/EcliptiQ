@@ -17,14 +17,15 @@ import Settings from '../settings';
 
 const DashboardBody = () => {
 	const teams = useAppSelector((state) => state.teams.teams);
+
+	if (teams.length < 1) {
+		return <Route path={Routes.DASHBOARD} component={CreateTeamForm} />;
+	}
+
 	return (
 		<>
 			<Box ml={{ base: 0, md: '200px' }}>
-				{!teams || teams.length < 1 ? (
-					<Route path={Routes.DASHBOARD} component={CreateTeamForm} />
-				) : (
-					<Route exact path={Routes.TASKS} component={AllTasks} />
-				)}
+				<Route exact path={Routes.TASKS} component={AllTasks} />
 				<Route exact path={Routes.NEWTASK} component={TaskForm} />
 				<Route exact path={Routes.TEAMS} component={TeamList} />
 				<Route exact path={Routes.TASKDETAIL} component={TaskDetail} />
