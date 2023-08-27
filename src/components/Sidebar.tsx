@@ -140,8 +140,6 @@ const Sidebar: React.FC = () => {
 						display="flex"
 						justifyContent="space-between"
 						alignItems="center"
-						mx={2}
-						mb={2}
 					>
 						<Image src={Logo} boxSize={12} alt="logo" />
 						<Heading fontSize="16px" mt={1}>
@@ -161,7 +159,7 @@ const Sidebar: React.FC = () => {
 					alignItems="center"
 					p={2}
 					my={5}
-					mx={2}
+					mx={{ base: 0, md: 2 }}
 					rounded="md"
 				>
 					<Menu>
@@ -201,7 +199,7 @@ const Sidebar: React.FC = () => {
 								alignItems="center"
 								p={2}
 								my={5}
-								mx={2}
+								mx={{ base: 0, md: 2 }}
 								rounded="md"
 							>
 								<Icon as={item.icon} mr="4" />
@@ -220,7 +218,7 @@ const Sidebar: React.FC = () => {
 					alignItems="center"
 					p={2}
 					my={2}
-					mx={2}
+					mx={{ base: 0, md: 2 }}
 					rounded="md"
 					onClick={() => setIsOpenInvitation(true)}
 				>
@@ -233,7 +231,7 @@ const Sidebar: React.FC = () => {
 						alignItems="center"
 						p={2}
 						my={5}
-						mx={2}
+						mx={{ base: 0, md: 2 }}
 						rounded="md"
 					>
 						<Link style={{ color: 'initial' }} to={Routes.SETTINGS}>

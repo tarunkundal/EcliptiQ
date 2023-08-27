@@ -137,14 +137,18 @@ const Invitations = () => {
 				flexDirection="row"
 				justifyContent="space-between"
 				alignItems="center"
-				mx={12}
+				mx={{ base: 2, md: 12 }}
 			>
 				<Stack gap={-1}>
 					<Heading fontSize="25px">Invitations</Heading>
-					<Text fontSize="14px">Manage your invitations</Text>
+					<Text fontSize={{ base: '12px', md: '14px' }}>
+						Manage your invitations
+					</Text>
 				</Stack>
 				<Flex alignItems="center">
-					<Text fontWeight="semibold">{user?.username}</Text>
+					<Text fontWeight="semibold" fontSize="14px">
+						{user?.username}
+					</Text>
 					<Avatar
 						ml={2}
 						size="sm"
@@ -154,7 +158,7 @@ const Invitations = () => {
 				</Flex>
 			</Stack>
 			<hr />
-			<Stack my={4}>
+			<Stack my={{ base: 2, md: 4 }}>
 				<TableContainer>
 					<Table variant="unstyled">
 						<TableCaption>Invitations are listed above</TableCaption>
