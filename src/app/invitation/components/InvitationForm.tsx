@@ -6,6 +6,7 @@ import useCustomToast from '../../../hooks/useToastHook';
 import { useAppDispatch, useAppSelector } from '../../store';
 import supabase from '../../supabase';
 import { invitationActions } from '../slice';
+import { sendEmail } from './email/emailService';
 
 const InvitationForm = (props: {
 	// eslint-disable-next-line no-undef
@@ -52,6 +53,23 @@ const InvitationForm = (props: {
 			return;
 		}
 
+		// email options
+		const emailOptions = {
+			to: emailToInvited,
+			subject: 'Invitation form EcliptiQ',
+			text: `Hello ${emailToInvited} you are invited by ${
+				user?.email
+			} to be a part of his team in EcliptiQ. Please visit the link to join the team ${(
+				<a
+					href="https://ecliptiq.vercel.app/"
+					target="blank"
+					rel="noopener noreferrer"
+				>
+					Link
+				</a>
+			)}`,
+		};
+
 		const { data, error } = await supabase
 			.from('invitations')
 			.insert([
@@ -71,6 +89,7 @@ const InvitationForm = (props: {
 			});
 			dispatch(invitationActions.add_invitation({ invitation: data[0] }));
 			props.onClose;
+			await sendEmail(emailOptions);
 		} else if (data === null && error) {
 			customToast({
 				title: 'Error while sending invitation.',
