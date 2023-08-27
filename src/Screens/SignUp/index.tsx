@@ -91,7 +91,7 @@ const SignUp = () => {
 				w="full"
 				boxShadow="md"
 			>
-				<Logo size={16} />
+				<Logo size={{ base: 12, md: 16 }} />
 				<Flex justifyContent="space-around" alignItems="center">
 					<Text mr={{ base: 2, md: 6 }} fontSize={{ base: '14px', md: '16px' }}>
 						Already signed up?{' '}
