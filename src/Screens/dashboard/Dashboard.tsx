@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Route } from 'react-router';
 
 import { _fetchInvitations } from '../../app/invitation/service';
 import { invitationActions } from '../../app/invitation/slice';
@@ -6,11 +7,13 @@ import { useAppDispatch, useAppSelector } from '../../app/store';
 import supabase from '../../app/supabase';
 import { _fetchAllTasks } from '../../app/tasks/service';
 import { taskActions } from '../../app/tasks/slice';
+import CreateTeamForm from '../../app/team/components/CreateTeamForm';
 import { teamActions } from '../../app/team/slice';
 import { _fetchingUserProfileData } from '../../app/user_profile/services';
 import { userProfileActions } from '../../app/user_profile/slice';
 import Sidebar from '../../components/Sidebar';
 import useCustomToast from '../../hooks/useToastHook';
+import Routes from '../../Routes';
 import DashboardBody from './DashboardBody';
 
 const Dashboard = () => {
@@ -89,6 +92,13 @@ const Dashboard = () => {
 		};
 		fetchTeamsCreatedByUserOrIsMember();
 	}, []);
+
+	// for first time if user has no team
+	const teams = useAppSelector((state) => state.teams.teams);
+
+	if (!teams || teams.length === 0) {
+		return <Route path={Routes.DASHBOARD} component={CreateTeamForm} />;
+	}
 
 	return (
 		<>

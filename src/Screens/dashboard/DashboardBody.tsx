@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 
 import Invitations from '../../app/invitation/components/Invitations';
 import MembersList from '../../app/members/components/MembersList';
-import { useAppSelector } from '../../app/store';
 import AllTasks from '../../app/tasks/components';
 import TaskDetail from '../../app/tasks/components/TaskDetail';
 import TaskForm from '../../app/tasks/components/TaskForm';
@@ -16,15 +15,11 @@ import Routes from '../../Routes';
 import Settings from '../settings';
 
 const DashboardBody = () => {
-	const teams = useAppSelector((state) => state.teams.teams);
-
-	if (teams.length < 1) {
-		return <Route path={Routes.DASHBOARD} component={CreateTeamForm} />;
-	}
-
 	return (
 		<>
 			<Box ml={{ base: 0, md: '200px' }}>
+				<Route exact path={Routes.DASHBOARD} component={AllTasks} />
+
 				<Route exact path={Routes.TASKS} component={AllTasks} />
 				<Route exact path={Routes.NEWTASK} component={TaskForm} />
 				<Route exact path={Routes.TEAMS} component={TeamList} />
