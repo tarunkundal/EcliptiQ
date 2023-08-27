@@ -68,7 +68,7 @@ const Login = () => {
 				justifyContent="space-between"
 				alignItems="center"
 				p={2}
-				paddingX="4%"
+				paddingX={{ base: 2, md: '4%' }}
 				boxShadow="md"
 				w="full"
 			>
@@ -90,12 +90,12 @@ const Login = () => {
 				flexDirection="row"
 				alignItems="center"
 				justifyContent="space-between"
-				w={{ base: '90%', md: '80%' }}
+				w={{ base: '95%', md: '80%' }}
 				m="auto"
 				p={6}
 			>
 				<Stack
-					w={{ base: '80%', md: '40%' }}
+					w={{ base: '100%', md: '40%' }}
 					m={{ base: 'auto', md: 0 }}
 					gap={{ base: 9, md: 10 }}
 				>

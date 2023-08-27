@@ -86,7 +86,7 @@ const SignUp = () => {
 				justifyContent="space-between"
 				alignItems="center"
 				p={2}
-				paddingX="4%"
+				paddingX={{ base: 2, md: '4%' }}
 				marginX="auto"
 				w="full"
 				boxShadow="md"
@@ -105,14 +105,14 @@ const SignUp = () => {
 			</Flex>
 			<Stack>
 				<Flex
-					w={{ base: '90%', md: '80%' }}
+					w={{ base: '95%', md: '80%' }}
 					m="auto"
 					justifyContent="space-between"
 					p={6}
 					alignItems="center"
 				>
 					<Stack
-						w={{ base: '80%', md: '40%' }}
+						w={{ base: '100%', md: '40%' }}
 						m={{ base: 'auto', md: 0 }}
 						gap={{ base: 9, md: 12 }}
 					>
