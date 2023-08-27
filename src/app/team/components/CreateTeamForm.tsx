@@ -73,8 +73,8 @@ const CreateTeamForm = () => {
 
 	return (
 		<Center my={6}>
-			<Stack w={{ base: '80%', md: '40%' }}>
-				<Heading fontSize="2rem" mx="auto">
+			<Stack w={{ base: '95%', md: '40%' }}>
+				<Heading fontSize={{ base: '22px', md: '2rem' }} mx="auto">
 					Create a new workspace
 				</Heading>
 				<Text mt={{ base: 2, md: 6 }} textAlign="center">
@@ -84,7 +84,7 @@ const CreateTeamForm = () => {
 				<form onSubmit={createWorkspaceHandler}>
 					<Stack
 						mt={{ base: 6, md: 12 }}
-						boxShadow="2xl"
+						boxShadow={{ base: 'sm', md: 'md' }}
 						p={6}
 						gap={{ base: 4, md: 8 }}
 						rounded="lg"
@@ -133,7 +133,7 @@ const CreateTeamForm = () => {
 								</Stack>
 							</RadioGroup>
 						</Stack>
-						<Button type="submit" w="70%" m="auto" size="lg" variant="blue">
+						<Button type="submit" w="90%" m="auto" size="lg" variant="blue">
 							Create Workspace
 						</Button>
 					</Stack>
