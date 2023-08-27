@@ -1,6 +1,6 @@
 import { Box, Flex, Icon, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
-import { AiOutlineFullscreen } from 'react-icons/ai';
+import { AiFillStar, AiOutlineFullscreen, AiOutlineStar } from 'react-icons/ai';
 import { FaCheckCircle, FaRegCircle } from 'react-icons/fa';
 import { ImSpinner6 } from 'react-icons/im';
 import { PiUserFocus } from 'react-icons/pi';
@@ -22,9 +22,9 @@ const TasksBoardView = () => {
 	return (
 		<Box>
 			<Flex
-				display={{ base: 'block', md: 'flex' }}
+				display={{ base: 'grid-inline', md: 'flex' }}
 				justifyContent="space-between"
-				p={4}
+				p={2}
 				fontSize="14px"
 			>
 				<Box mx="auto" w={{ base: '80%', md: '24%' }} p={1}>
@@ -39,12 +39,10 @@ const TasksBoardView = () => {
 					</Flex>
 					<hr />
 
-					{completedTasks.length === 0 ? (
+					{completedTasks.length === 0 && (
 						<Text textAlign="center" w="full" p={2}>
 							.... No Tasks ....
 						</Text>
-					) : (
-						''
 					)}
 					<ul style={{ listStyle: 'none' }}>
 						{completedTasks.map((task) => (
@@ -64,7 +62,13 @@ const TasksBoardView = () => {
 									>
 										<Stack>
 											<Text>{task.title}</Text>
-											<Box p={1} rounded="5px" bg="blue1" width="max-content">
+											<Box
+												display="flex"
+												p={1}
+												rounded="5px"
+												bg="blue1"
+												width="max-content"
+											>
 												<Icon
 													as={
 														priorityIcons[
@@ -78,6 +82,13 @@ const TasksBoardView = () => {
 													}
 													fontSize="18px"
 												/>
+												<Box ml={2}>
+													{task.favourite === true ? (
+														<AiFillStar color="gold" fontSize="18px" />
+													) : (
+														<AiOutlineStar fontSize="18px" />
+													)}
+												</Box>
 											</Box>
 										</Stack>
 										<Stack gap={6}>
@@ -104,12 +115,10 @@ const TasksBoardView = () => {
 						<Text>{progressTasks.length}</Text>
 					</Flex>
 					<hr />
-					{progressTasks.length === 0 ? (
+					{progressTasks.length === 0 && (
 						<Text textAlign="center" w="full" p={2}>
 							.... No Tasks ....
 						</Text>
-					) : (
-						''
 					)}
 					<ul style={{ listStyle: 'none' }}>
 						{progressTasks.map((task) => (
@@ -129,7 +138,13 @@ const TasksBoardView = () => {
 									>
 										<Stack>
 											<Text>{task.title}</Text>
-											<Box p={1} rounded="5px" bg="pink1" width="max-content">
+											<Box
+												display="flex"
+												p={1}
+												rounded="5px"
+												bg="pink1"
+												width="max-content"
+											>
 												<Icon
 													as={
 														priorityIcons[
@@ -143,6 +158,13 @@ const TasksBoardView = () => {
 													}
 													fontSize="18px"
 												/>
+												<Box ml={2}>
+													{task.favourite === true ? (
+														<AiFillStar color="gold" fontSize="18px" />
+													) : (
+														<AiOutlineStar fontSize="18px" />
+													)}
+												</Box>
 											</Box>
 										</Stack>
 										<Stack gap={6}>
@@ -169,12 +191,10 @@ const TasksBoardView = () => {
 						<Text>{todoTasks.length}</Text>
 					</Flex>
 					<hr />
-					{todoTasks.length === 0 ? (
+					{todoTasks.length === 0 && (
 						<Text textAlign="center" w="full" p={2}>
 							.... No Tasks ....
 						</Text>
-					) : (
-						''
 					)}
 					<ul style={{ listStyle: 'none' }}>
 						{todoTasks.map((task) => (
@@ -194,7 +214,13 @@ const TasksBoardView = () => {
 									>
 										<Stack>
 											<Text>{task.title}</Text>
-											<Box p={1} rounded="5px" bg="gray.50" width="max-content">
+											<Box
+												p={1}
+												display="flex"
+												rounded="5px"
+												bg="gray.50"
+												width="max-content"
+											>
 												<Icon
 													as={
 														priorityIcons[
@@ -208,6 +234,13 @@ const TasksBoardView = () => {
 													}
 													fontSize="18px"
 												/>
+												<Box ml={2}>
+													{task.favourite === true ? (
+														<AiFillStar color="gold" fontSize="18px" />
+													) : (
+														<AiOutlineStar fontSize="18px" />
+													)}
+												</Box>
 											</Box>
 										</Stack>
 										<Stack gap={6}>
@@ -235,12 +268,10 @@ const TasksBoardView = () => {
 					</Flex>
 					<hr />
 
-					{backlogTasks.length === 0 ? (
+					{backlogTasks.length === 0 && (
 						<Text textAlign="center" w="full" p={2}>
 							.... No Tasks ....
 						</Text>
-					) : (
-						''
 					)}
 					<ul style={{ listStyle: 'none' }}>
 						{backlogTasks.map((task) => (
@@ -260,7 +291,13 @@ const TasksBoardView = () => {
 									>
 										<Stack>
 											<Text>{task.title}</Text>
-											<Box p={1} rounded="5px" bg="green1" width="max-content">
+											<Box
+												display="flex"
+												p={1}
+												rounded="5px"
+												bg="green1"
+												width="max-content"
+											>
 												<Icon
 													as={
 														priorityIcons[
@@ -274,6 +311,13 @@ const TasksBoardView = () => {
 													}
 													fontSize="18px"
 												/>
+												<Box ml={2}>
+													{task.favourite === true ? (
+														<AiFillStar color="gold" fontSize="18px" />
+													) : (
+														<AiOutlineStar fontSize="18px" />
+													)}
+												</Box>
 											</Box>
 										</Stack>
 										<Stack gap={6}>
