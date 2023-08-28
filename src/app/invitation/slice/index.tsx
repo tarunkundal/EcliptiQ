@@ -25,15 +25,14 @@ const invitationSlice = createSlice({
 		) => {
 			const { status, invitationId } = action.payload;
 
-			// Find the index of the invitation in the array
-			const invitationIndex = state.invitations.findIndex(
-				(invitation) => invitation.id === invitationId
-			);
-
-			if (invitationIndex !== -1) {
-				// Update the status of the invitation
-				state.invitations[invitationIndex].status = status;
-			}
+			return {
+				...state,
+				invitations: state.invitations.map((invitation) =>
+					invitation.id === invitationId
+						? { ...invitation, status: status }
+						: invitation
+				),
+			};
 		},
 		add_invitation: (
 			state,

@@ -20,7 +20,7 @@ export interface AddMemberActionPayload {
 
 export interface UpdateMemberActionPayload {
 	memberId: any;
-	role: string | any;
+	role: string;
 }
 
 export interface DeleteMemberActionPayload {
