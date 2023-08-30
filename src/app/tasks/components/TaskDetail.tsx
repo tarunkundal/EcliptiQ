@@ -187,7 +187,7 @@ const TaskDetail = () => {
 						<Text
 							ml={2}
 							fontWeight="semibold"
-							color={new Date(dueDate) < new Date() ? 'red' : 'inherit'}
+							color={dueDate < new Date() ? 'red' : 'inherit'}
 						>
 							{dueDate.toDateString()}
 						</Text>

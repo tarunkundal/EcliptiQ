@@ -19,8 +19,6 @@ const TasksListView = ({
 	handleCheckboxChange: (id: any, value: any) => void;
 	toggleFavorite: (taskId: string, favourite: boolean) => void;
 }) => {
-	const todayDate = new Date();
-
 	return (
 		<Box fontSize="14px">
 			{tasks.map((task) => (
@@ -68,15 +66,15 @@ const TasksListView = ({
 						<Flex alignItems="center">
 							<Text
 								color={
-									new Date(task.dueDate) < todayDate && task.stage !== 'done'
+									new Date(task.dueDate) < new Date() && task.stage !== 'done'
 										? 'red'
 										: 'inherit'
 								}
 								fontWeight={
-									new Date(task.dueDate) < todayDate ? 'bold' : 'inherit'
+									new Date(task.dueDate) < new Date() ? 'bold' : 'inherit'
 								}
 							>
-								{task.dueDate}
+								{new Date(task.dueDate).toDateString()}
 							</Text>
 							<Box mx={4} cursor="pointer">
 								{task.favourite === true ? (

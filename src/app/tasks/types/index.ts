@@ -20,7 +20,7 @@ export interface TaskTable {
 export interface NewTaskData {
 	title: string;
 	description: string;
-	dueDate: Date | any;
+	dueDate: Date;
 	stage: string;
 	priority: string;
 	team_id: string;
@@ -32,7 +32,7 @@ export interface NewTaskData {
 export interface UpdateTaskData {
 	title: string;
 	description: string;
-	dueDate: Date | any;
+	dueDate: Date | string;
 	stage: string;
 	priority: string;
 	updated_at: string | Date;

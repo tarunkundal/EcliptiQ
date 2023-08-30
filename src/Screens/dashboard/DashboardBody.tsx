@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/react';
+import React, { memo } from 'react';
 import { Route } from 'react-router-dom';
 
 import Invitations from '../../app/invitation/components/Invitations';
@@ -36,4 +37,4 @@ const DashboardBody = () => {
 	);
 };
 
-export default DashboardBody;
+export default memo(DashboardBody);

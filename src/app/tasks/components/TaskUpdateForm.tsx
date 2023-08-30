@@ -76,13 +76,15 @@ const TaskUpdateForm = () => {
 	const handleUpdateHandler = async (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 
+		const due_Date = new Date(dueDate).toUTCString();
+
 		const taskData = {
 			title: taskTitle,
 			description: taskDescription,
 			priority: taskPriorty,
 			stage: taskStatus,
-			dueDate: dueDate,
-			updated_at: new Date(),
+			dueDate: new Date(due_Date).toDateString(),
+			updated_at: new Date().toUTCString(),
 		};
 
 		const { data, error } = await _updateTask({

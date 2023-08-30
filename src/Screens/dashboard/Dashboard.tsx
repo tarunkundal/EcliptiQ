@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Route } from 'react-router';
 
 import { _fetchInvitations } from '../../app/invitation/service';
@@ -108,4 +108,4 @@ const Dashboard = () => {
 	);
 };
 
-export default Dashboard;
+export default memo(Dashboard);
