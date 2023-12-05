@@ -9,7 +9,6 @@ import SignUp from './Screens/SignUp';
 
 const App = () => {
 	return (
-		<>
 			<Auth>
 				<Switch>
 					<Route exact path={Routes.LOGIN} component={Login} />
@@ -20,7 +19,6 @@ const App = () => {
 					</ProtectedRoutes>
 				</Switch>
 			</Auth>
-		</>
 	);
 };
 
