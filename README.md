@@ -52,7 +52,7 @@ EcliptiQ exemplifies the fusion of technological innovation, user-centered desig
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/tarunkundal/ecliptiq.git
+   git clone https://github.com/tarunkundal/EcliptiQ.git
    cd ecliptiq
 
    npm install
