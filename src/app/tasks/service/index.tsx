@@ -17,8 +17,7 @@ export const _fetchAllTasksOfTeam = async (
 };
 
 // updating taskStatus
-export const _updateTaskStatus = async ({
-	taskId,
+export const _updateTaskStatus = async ({     taskId,
 	taskStatus,
 }: {
 	taskId: any;
